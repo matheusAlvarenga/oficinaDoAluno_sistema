@@ -1,0 +1,10 @@
+/* CALENDÁRIO */
+
+.calendario {}
+.calendario_title {
+    text-align: center;
+    font-size: 25px;
+}
+.calendario_dia_sem {
+    text-align: center;
+}
