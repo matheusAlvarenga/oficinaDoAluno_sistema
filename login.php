@@ -14,22 +14,34 @@ require_once('db.class.php');
 
 $objDb = new db();
 $link = $objDb->conecta_mysql();
-    
-$sql = "SELECT sisoda_adm_senha FROM sisoda_adm WHERE sisoda_adm_login = '$login'";
 
-$resultado = mysqli_query($link, $sql);
+ $sql = "SELECT * FROM sisoda_adm WHERE sisoda_adm_login = '$login' AND sisoda_adm_senha = '$senha'";
 
-if ($resultado) {
-	$string = mysqli_fetch_assoc($resultado);
-	$senha_admin = $string['sisoda_adm_senha'];
-	if ($senha == $senha_admin) {
-		echo "ADM";
-	}
-	else{
-		echo "Senha errada";
-	}
-}
+    $resultado_id = mysqli_query($link, $sql);
 
+    if($resultado_id){
+
+        $dados_usuario = mysqli_fetch_array($resultado_id);
+
+        if(isset($dados_usuario['sisoda_adm_login'])){
+
+            session_start();
+
+            $_SESSION['login_admin'] = $login;
+            $_SESSION['senha_admin'] = $senha;
+
+            header('Location: _admin/');
+
+        }else{
+
+            header('Location: index.php?erro=1');
+
+        }
+
+    }else{
+        
+        echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
+    }
 ?>
 
 </body>

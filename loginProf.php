@@ -15,24 +15,29 @@ require_once('db.class.php');
 
 $objDb = new db();
 $link = $objDb->conecta_mysql();
-    
-$sql = "SELECT sisoda_professores_senha FROM sisoda_professores WHERE sisoda_professores_login = '$login'";
 
-$resultado = mysqli_query($link, $sql);
+ $sql = "SELECT * FROM sisoda_professores WHERE sisoda_professores_login = '$login' AND sisoda_professores_senha = '$senha'";
 
-if ($resultado) {
-    $string = mysqli_fetch_assoc($resultado);
-    $senha_admin = $string['sisoda_professores_senha'];
-    if ($senha == $senha_admin) {
-        echo "PROF";
+    $resultado_id = mysqli_query($link, $sql);
+
+    if($resultado_id){
+
+        $dados_usuario = mysqli_fetch_array($resultado_id);
+
+        if(isset($dados_usuario['sisoda_professores_login'])){
+
+            header('Location: _professor/');
+
+        }else{
+
+            header('Location: professor.php?erro=1');
+
+        }
+
+    }else{
+        
+        echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
     }
-    else{
-        echo "Senha errada";
-    }
-}else{
-    echo "Usuário Errado";
-}
-
 ?>
 </body>
 

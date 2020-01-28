@@ -21,6 +21,15 @@
                             <input type="text" name="login">
                             <input type="password" name="senha"><br>
                             <input type="submit" value="LOGIN">
+                            <?php 
+
+                                if (isset($_GET['erro'])) {
+                                    if ($_GET['erro'] == '1') {
+                                        echo "<p align='center'>Login ou senha não encontrados.</p>";
+                                    }
+                                }
+
+                             ?>
                         </form>
                     </div>
                 </div> 
