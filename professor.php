@@ -17,7 +17,7 @@
                         <img src="_imagens/logo.png">
                     </div>
                     <div class="row">
-                        <form action="login.php" method="POST">
+                        <form action="loginProf.php" method="POST">
                             <input type="text" name="login">
                             <input type="password" name="senha"><br>
                             <input type="submit" value="LOGIN">
@@ -25,7 +25,6 @@
                     </div>
                 </div> 
                 <div class="col-md-4">
-                    <a href="professor.php">Entrada de professor</a>
                 </div>  
             </div>          
         </div>
