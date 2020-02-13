@@ -30,7 +30,7 @@ $link = $objDb->conecta_mysql();
             $_SESSION['login_admin'] = $login;
             $_SESSION['senha_admin'] = $senha;
 
-            header('Location: _admin/');
+            header('Location: _admin/?page=1');
 
         }else{
 
