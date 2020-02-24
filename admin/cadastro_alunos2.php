@@ -5,6 +5,71 @@
   }
 
 ?>
+<?php
+
+  require_once('../db.class.php');
+
+  $nome_aluno = $_POST['nome_aluno'];
+  $sobrenome_aluno = $_POST['sobrenome_aluno'];
+  $dataNascimento_aluno = $_POST['dataNascimento_aluno'];
+  $email_aluno = $_POST['email_aluno'];
+  $colegio_aluno = $_POST['colegio_aluno'];
+  $ano_aluno = $_POST['ano_aluno'];
+  $cep_aluno = $_POST['cep_aluno'];
+  $rua_aluno = $_POST['rua_aluno'];
+  $num_aluno = $_POST['num_aluno'];
+  $bairro_aluno = $_POST['bairro_aluno'];
+  $cidade_aluno = $_POST['cidade_aluno'];
+  $estado_aluno = $_POST['estado_aluno'];
+  $complemento_aluno = $_POST['complemento_aluno'];
+  $obs_aluno = $_POST['obs_aluno'];
+  $nome_rep1_aluno = $_POST['nome_rep1_aluno'];
+  $email_rep1_aluno = $_POST['email_rep1_aluno'];
+  $tel_rep1_aluno = $_POST['tel_rep1_aluno'];
+  $nome_rep2_aluno = $_POST['nome_rep2_aluno'];
+  $email_rep2_aluno = $_POST['email_rep2_aluno'];
+  $tel_rep2_aluno = $_POST['tel_rep2_aluno'];
+  $financeiro_aluno = $_POST['financeiro_aluno'];
+  $valor_aluno = $_POST['valor_aluno'];
+  $unidade_aluno = $_POST['unidade_aluno'];
+  $rg_aluno = $_POST['rg_aluno'];
+  $tel_aluno = $_POST['tel_aluno'];
+
+    $sql = "INSERT INTO `sisoda_alunos`(`sisOda_alunos_nome`, `sisOda_alunos_sobrenome`, `sisoda_alunos_email`, `sisOda_alunos_dataNascimento`, `sisOda_alunos_colegio`, `sisOda_alunos_anoId`, `sisOda_alunos_rua`, `sisOda_alunos_numero`, `sisOda_alunos_bairro`, `sisOda_alunos_cidade`, `sisOda_alunos_estado`, `sisOda_alunos_complemento`, `sisOda_alunos_cep`, `sisOda_alunos_nomeRepUm`, `sisOda_alunos_emailRepUm`, `sisOda_alunos_telRepUm`, `sisOda_alunos_nomeRepDois`, `sisOda_alunos_emailRepDois`, `sisOda_alunos_financeiro`, `sisOda_alunos_telRepDois`, `sisOda_alunos_tipoDePlano`, `sisOda_alunos_unidade`, `sisOda_alunos_ativo`, `sisOda_alunos_obs`, `sisOda_alunos_rg`, `sisOda_alunos_telefone`) VALUES ('$nome_aluno','$sobrenome_aluno','$email_aluno', '$dataNascimento_aluno','$colegio_aluno','$ano_aluno','$rua_aluno','$num_aluno','$bairro_aluno','$cidade_aluno','$estado_aluno','$complemento_aluno','$cep_aluno','$nome_rep1_aluno','$email_rep1_aluno','$tel_rep1_aluno','$nome_rep2_aluno','$email_rep2_aluno','$financeiro_aluno','$tel_rep2_aluno','$valor_aluno','$unidade_aluno','1','$obs_aluno', '$rg_aluno', '$tel_aluno')";
+
+    $objDb = new db();
+    $link = $objDb->conecta_mysql();
+
+    $resultado_id = mysqli_query($link, $sql);
+
+    if($resultado_id){
+
+        $sql2 = "SELECT * FROM sisoda_alunos WHERE sisoda_alunos_rg='$rg_aluno'";
+
+        $resultado_id2 = mysqli_query($link, $sql2);
+
+        if($resultado_id2){
+
+          $dados_login = mysqli_fetch_array($resultado_id2);
+
+            if(isset($dados_login['sisOda_alunos_id'])){
+              session_start();
+              $_SESSION['id_aluno']=$dados_login['sisOda_alunos_id'];
+
+            }
+            else{
+              echo "erro 3";
+            }
+        }
+        else{
+          echo "Erro 2";
+        }
+    }
+    else{
+      echo "Houve um Erro.";
+    }
+
+?>
 <html lang="pt-br">
 
 <head>
@@ -37,12 +102,7 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-  <!-- =======================================================
-    Theme Name: NiceAdmin
-    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
+
 </head>
 
 <body>
@@ -140,13 +200,13 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-          <li class="active">
+          <li class="">
             <a class="" href="index.php">
               <i class="icon_house_alt"></i>
               <span>Dashboard</span>
             </a>
           </li>
-          <li class="sub-menu">
+          <li class="sub-menu active">
             <a href="javascript:;" class="">
               <i class="icon_document_alt"></i>
               <span>Alunos</span>
@@ -200,85 +260,47 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Ínicio</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
+              <li><i class="fa fa-home"></i><a href="index.php">Ínicio</a></li>
+              <li><i class="icon_document_alt"></i>Alunos</li>
+              <li><i class="icon_document_alt"></i>Cadastro de Alunos</li>
             </ol>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <i class="fa fa-user"></i>
-              <div class="count">6.674</div>
-              <div class="title">Alunos</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-down"></i>
-              <div class="count">4.362</div>
-              <div class="title">Alunos com Pendências</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <i class="fa fa-clipboard-list"></i>
-              <div class="count">1.426</div>
-              <div class="title">Aulas essa Semana</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-chalkboard-teacher"></i>
-              <div class="count">7.538</div>
-              <div class="title">Professores</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-        </div>
-        <!--/.row-->
-        <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Gráficos</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
+          <div class="col-lg-12">
+            <section style="margin-top: -17px;" class="panel">
               <div class="panel-body">
-                
-                
+                <form style="margin-left: -30px; margin-right: 20px;" class="form-horizontal" method="POST" action="foto_alunos.php"  enctype="multipart/form-data">
+                  <div class="form-group">
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Foto do Aluno</h3>
+                    <label class="col-sm-2 control-label">Foto</label>
+                    <div style="margin-right: -50px;" class="col-sm-9">
+                      <input type="hidden" name="id_aluno" value=
+
+
+                          <?php
+
+                              echo $_SESSION['id_aluno'];
+
+                          ?>
+
+
+                      >
+                      <input type="file" name="foto" class="form-control" required>
+                      <span class="help-block">A foto deve estar em formato .jpg ou .png , ter tamanho máximo 500x500 e no máximo 100 kB.</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div style="margin-right: -50px;" class="col-sm-9">
+                      <input type="submit" name="cadastrar" class="form-control btn btn-primary" value="ENVIAR">
+                    </div>
+                  </div>
+                </form>
               </div>
-            </div>
+            </section>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Calendário</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                <div id="calendar"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- project team & activity end -->
       </section>
     </section>
     <!--main content end-->
@@ -297,73 +319,7 @@
   <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />
 <script type='text/javascript' src='assets/fullcalendar/fullcalendar/fullcalendar.min.js'></script>
-<script type='text/javascript'>
 
-  $(document).ready(function() {
-  
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,basicWeek,basicDay'
-      },
-      editable: true,
-      events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1)
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d-5),
-          end: new Date(y, m, d-2)
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d-3, 16, 0),
-          allDay: false
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d+4, 16, 0),
-          allDay: false
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d+1, 19, 0),
-          end: new Date(y, m, d+1, 22, 30),
-          allDay: false
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
-        }
-      ]
-    });
-    
-  });
-
-</script>
     <script src="js/jquery.rateit.min.js"></script>
   <!-- charts scripts -->
   <script src="assets/jquery-knob/js/jquery.knob.js"></script>

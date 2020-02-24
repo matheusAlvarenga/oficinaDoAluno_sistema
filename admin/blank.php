@@ -200,85 +200,17 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Ínicio</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
+              <li><i class="fa fa-home"></i><a href="index.php">Ínicio</a></li>
+              <li><i class="icon_document_alt"></i>Alunos</li>
+              <li><i class="icon_document_alt"></i>Lista de Alunos</li>
             </ol>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <i class="fa fa-user"></i>
-              <div class="count">6.674</div>
-              <div class="title">Alunos</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-down"></i>
-              <div class="count">4.362</div>
-              <div class="title">Alunos com Pendências</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <i class="fa fa-clipboard-list"></i>
-              <div class="count">1.426</div>
-              <div class="title">Aulas essa Semana</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-chalkboard-teacher"></i>
-              <div class="count">7.538</div>
-              <div class="title">Professores</div>
-            </div>
-            <!--/.info-box-->
+          <div class="col-lg-12">
+            
           </div>
         </div>
-        <!--/.row-->
-        <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Gráficos</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Calendário</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                <div id="calendar"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- project team & activity end -->
       </section>
     </section>
     <!--main content end-->
@@ -297,73 +229,7 @@
   <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />
 <script type='text/javascript' src='assets/fullcalendar/fullcalendar/fullcalendar.min.js'></script>
-<script type='text/javascript'>
 
-  $(document).ready(function() {
-  
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,basicWeek,basicDay'
-      },
-      editable: true,
-      events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1)
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d-5),
-          end: new Date(y, m, d-2)
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d-3, 16, 0),
-          allDay: false
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d+4, 16, 0),
-          allDay: false
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d+1, 19, 0),
-          end: new Date(y, m, d+1, 22, 30),
-          allDay: false
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
-        }
-      ]
-    });
-    
-  });
-
-</script>
     <script src="js/jquery.rateit.min.js"></script>
   <!-- charts scripts -->
   <script src="assets/jquery-knob/js/jquery.knob.js"></script>

@@ -140,13 +140,13 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-          <li class="active">
+          <li class="">
             <a class="" href="index.php">
               <i class="icon_house_alt"></i>
               <span>Dashboard</span>
             </a>
           </li>
-          <li class="sub-menu">
+          <li class="sub-menu active">
             <a href="javascript:;" class="">
               <i class="icon_document_alt"></i>
               <span>Alunos</span>
@@ -201,84 +201,130 @@
             <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.html">Ínicio</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
+              <li><i class="icon_document_alt"></i>Alunos</li>
+              <li><i class="icon_document_alt"></i>Lista de Alunos</li>
             </ol>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <i class="fa fa-user"></i>
-              <div class="count">6.674</div>
-              <div class="title">Alunos</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-down"></i>
-              <div class="count">4.362</div>
-              <div class="title">Alunos com Pendências</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <i class="fa fa-clipboard-list"></i>
-              <div class="count">1.426</div>
-              <div class="title">Aulas essa Semana</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-chalkboard-teacher"></i>
-              <div class="count">7.538</div>
-              <div class="title">Professores</div>
-            </div>
-            <!--/.info-box-->
+          <div class="col-lg-12">
+            <table class="table table-striped table-advance table-hover">
+                <tbody>
+                  <tr>
+                    <th><i class="icon_profile"></i> Nome</th>
+                    <th><i class="icon_calendar"></i> Saldo</th>
+                    <th><i class="icon_mail_alt"></i> E-mail</th>
+                    <th><i class="icon_pin_alt"></i> Unidade</th>
+                    <th><i class="icon_mobile"></i> Celular</th>
+                    <th><i class="icon_cogs"></i> Ações</th>
+                  </tr>
+                  <?php 
+
+  require_once('../db.class.php');
+
+  $sql = "SELECT * FROM sisoda_alunos";
+    $objDb = new db();
+    $link = $objDb->conecta_mysql();
+
+    $resultado_id = mysqli_query($link, $sql);
+
+    if($resultado_id){
+
+      $dados_login = mysqli_fetch_array($resultado_id);
+
+        if(isset($dados_login['sisOda_alunos_id'])){
+            echo "<tr style='background-color:#dcdcdc;'>
+                    <td>".$dados_login['sisOda_alunos_nome']." ".$dados_login['sisOda_alunos_sobrenome']."</td>
+                    <td>Saldo</td>
+                    <td>".$dados_login['sisoda_alunos_email']."</td>
+                    <td>".$dados_login['sisOda_alunos_unidade']."</td>
+                    <td>".$dados_login['sisoda_alunos_telefone']."</td>
+                    <td>
+                      <div class='btn-group'>
+                        <a class='btn btn-primary' href='#myModal' data-toggle='modal'><i class='icon_zoom-in_alt'></i></a>
+                        <a class='btn btn-success' href='#'><i class='icon_pencil-edit'></i></a>
+                        <a class='btn btn-danger' href='#'><i class='icon_close_alt2'></i></a>
+                      </div>
+                    </td>
+                  </tr>";
+        }
+        else
+        {
+
+        }
+
+    }else{
+        
+        echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
+
+    }
+
+?>
+                </tbody>
+              </table>
           </div>
         </div>
-        <!--/.row-->
-        <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Gráficos</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Form Tittle</h4>
+              </div>
+              <div style="text-align: center;" class="modal-body">
+                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
+                  <h3>Informações Pessoais</h3>
+                  <br>
+                  <p style="font-size:17px;">Nome Sobrenome</p>  
+                  <br>
+                  <p style="font-size:17px;">RG</p>  
+                  <br>
+                  <p style="font-size:17px;">Email</p>  
+                  <br>
+                  <p style="font-size:17px;">Idade</p>  
+                  <br>
+                  <p style="font-size:17px;">Colégio</p>     
+                  <br>
+                  <p style="font-size:17px;">Ano</p>     
+                  <br>
+                  <p style="font-size:17px;">Endereço</p>     
+                  <br>
+                  <p style="font-size:17px;">OBS</p>     
+                  <br>
+                    
                 </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                
-                
+                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
+                  <h3>Informações Responsável 1</h3>
+                  <br>
+                  <p style="font-size:17px;">Nome</p>     
+                  <br>
+                  <p style="font-size:17px;">Email</p>     
+                  <br>
+                  <p style="font-size:17px;">Telefone</p>     
+                  <br>
+                </div>
+                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
+                  <h3>Informações Responsável 2 (Financeiro)</h3>
+                  <br>
+                  <p style="font-size:17px;">Nome</p>     
+                  <br>
+                  <p style="font-size:17px;">Email</p>     
+                  <br>
+                  <p style="font-size:17px;">Telefone</p>     
+                  <br>
+                </div>              
+                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
+                  <h3>Informações Institucionais</h3>
+                  <br>
+                  <p style="font-size:17px;">Valor da Aula</p>     
+                  <br>
+                  <p style="font-size:17px;">Unidade</p>         
+                  <br>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Calendário</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                <div id="calendar"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- project team & activity end -->
       </section>
     </section>
     <!--main content end-->
@@ -297,73 +343,7 @@
   <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />
 <script type='text/javascript' src='assets/fullcalendar/fullcalendar/fullcalendar.min.js'></script>
-<script type='text/javascript'>
 
-  $(document).ready(function() {
-  
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,basicWeek,basicDay'
-      },
-      editable: true,
-      events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1)
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d-5),
-          end: new Date(y, m, d-2)
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d-3, 16, 0),
-          allDay: false
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d+4, 16, 0),
-          allDay: false
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d+1, 19, 0),
-          end: new Date(y, m, d+1, 22, 30),
-          allDay: false
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
-        }
-      ]
-    });
-    
-  });
-
-</script>
     <script src="js/jquery.rateit.min.js"></script>
   <!-- charts scripts -->
   <script src="assets/jquery-knob/js/jquery.knob.js"></script>
