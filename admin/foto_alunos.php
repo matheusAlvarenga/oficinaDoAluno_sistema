@@ -63,7 +63,8 @@ if (isset($_POST['cadastrar'])) {
             move_uploaded_file($foto["tmp_name"], $caminho_imagem);
         
             // Insere os dados no banco
-            $sql = "UPDATE produtos SET $coluna = '$nome_imagem' WHERE id='$nome';";
+            $sql = "UPDATE sisOda_alunos SET $coluna = '$nome_imagem' WHERE sisOda_alunos_id='$nome'";
+            echo $sql;
         
             $resultado_id = mysqli_query($link, $sql);
             if($resultado_id){

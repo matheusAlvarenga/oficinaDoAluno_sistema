@@ -3,7 +3,6 @@
   if(!isset($_SESSION['id_admin'])){
     header('Location: ../sem_login.html');
   }
-
 ?>
 <html lang="pt-br">
 
@@ -43,6 +42,47 @@
     Author: BootstrapMade
     Author URL: https://bootstrapmade.com
   ======================================================= -->
+  <script type="text/javascript">
+    function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+} 
+
+
+    function cookies(varr){
+      var myCookie = getCookie("pagina");
+      if (myCookie == null) {
+        document.cookie='pagina='+varr+'';
+        alert('n existe')
+    }
+    else {
+        document.cookie = "pagina=";
+        alert('apaguei')
+
+        document.cookie='pagina='+varr+'';
+        alert('criei')
+
+    }
+
+      
+    }
+  </script>
 </head>
 
 <body>
@@ -230,35 +270,44 @@
 
     if($resultado_id){
 
-      $dados_login = mysqli_fetch_array($resultado_id);
+      if($resultado_id){
 
-        if(isset($dados_login['sisOda_alunos_id'])){
-            echo "<tr style='background-color:#dcdcdc;'>
-                    <td>".$dados_login['sisOda_alunos_nome']." ".$dados_login['sisOda_alunos_sobrenome']."</td>
-                    <td>Saldo</td>
+        while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+          
+          echo "<tr style='background-color:#dcdcdc;'>
+                    <td>".$dados_login['sisOda_alunos_nome']." ".$dados_login['sisOda_alunos_sobrenome']."</td>";
+
+            if ($dados_login['sisOda_alunos_saldo']>0) {
+              echo "<td class='success' style='color:green;'>R$".$dados_login['sisOda_alunos_saldo']."</td>";
+            }elseif ($dados_login['sisOda_alunos_saldo']==0) {
+              echo "<td class='active' style='color:grey;'>R$".$dados_login['sisOda_alunos_saldo']."</td>";
+            }else{
+              echo "<td class='danger' style='color:red;'>R$".$dados_login['sisOda_alunos_saldo']."</td>";
+            }
+            $celular0=$dados_login['sisoda_alunos_telefone']/10000;
+            $celular=number_format($celular0, 4, '-', '');
+            echo "
+                    
                     <td>".$dados_login['sisoda_alunos_email']."</td>
                     <td>".$dados_login['sisOda_alunos_unidade']."</td>
-                    <td>".$dados_login['sisoda_alunos_telefone']."</td>
+                    <td>".$celular."</td>
                     <td>
                       <div class='btn-group'>
-                        <a class='btn btn-primary' href='#myModal' data-toggle='modal'><i class='icon_zoom-in_alt'></i></a>
+                        <a class='btn btn-primary' onclick='cookies(".$dados_login['sisOda_alunos_id'].")' href='#myModal' data-toggle='modal'><i class='icon_zoom-in_alt'></i></a>
                         <a class='btn btn-success' href='#'><i class='icon_pencil-edit'></i></a>
                         <a class='btn btn-danger' href='#'><i class='icon_close_alt2'></i></a>
                       </div>
                     </td>
                   </tr>";
-        }
-        else
-        {
 
         }
 
-    }else{
-        
-        echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
+      }else{
+      
+          echo 'Erro na consulta de tweets no banco de dados!';
 
+      }
     }
-
 ?>
                 </tbody>
               </table>
@@ -269,58 +318,151 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Form Tittle</h4>
+                <h4 align="center" class="modal-title">Mais Detalhes</h4>
               </div>
               <div style="text-align: center;" class="modal-body">
-                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
-                  <h3>Informações Pessoais</h3>
-                  <br>
-                  <p style="font-size:17px;">Nome Sobrenome</p>  
-                  <br>
-                  <p style="font-size:17px;">RG</p>  
-                  <br>
-                  <p style="font-size:17px;">Email</p>  
-                  <br>
-                  <p style="font-size:17px;">Idade</p>  
-                  <br>
-                  <p style="font-size:17px;">Colégio</p>     
-                  <br>
-                  <p style="font-size:17px;">Ano</p>     
-                  <br>
-                  <p style="font-size:17px;">Endereço</p>     
-                  <br>
-                  <p style="font-size:17px;">OBS</p>     
-                  <br>
-                    
-                </div>
-                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
-                  <h3>Informações Responsável 1</h3>
-                  <br>
-                  <p style="font-size:17px;">Nome</p>     
-                  <br>
-                  <p style="font-size:17px;">Email</p>     
-                  <br>
-                  <p style="font-size:17px;">Telefone</p>     
-                  <br>
-                </div>
-                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
-                  <h3>Informações Responsável 2 (Financeiro)</h3>
-                  <br>
-                  <p style="font-size:17px;">Nome</p>     
-                  <br>
-                  <p style="font-size:17px;">Email</p>     
-                  <br>
-                  <p style="font-size:17px;">Telefone</p>     
-                  <br>
-                </div>              
-                <div style="border-bottom: 1px lightgrey solid;" class="form-group">
-                  <h3>Informações Institucionais</h3>
-                  <br>
-                  <p style="font-size:17px;">Valor da Aula</p>     
-                  <br>
-                  <p style="font-size:17px;">Unidade</p>         
-                  <br>
-                </div>
+                  <?php
+
+                    require_once('../db.class.php');
+
+                    $a=$_COOKIE['pagina'];
+
+                    $sql = "SELECT * FROM sisoda_alunos WHERE sisOda_alunos_id='$a'";
+                      $objDb = new db();
+                      $link = $objDb->conecta_mysql();
+
+                      $resultado_id = mysqli_query($link, $sql);
+
+                      if($resultado_id){
+
+                        $dados_login = mysqli_fetch_array($resultado_id);
+
+                          if(isset($dados_login['sisOda_alunos_id'])){
+
+                              $from = new DateTime($dados_login['sisOda_alunos_dataNascimento']);
+                              $to   = new DateTime('today');
+                              $age = $from->diff($to)->y;
+                              
+                              $end=$dados_login['sisOda_alunos_rua'].", ".$dados_login['sisOda_alunos_numero']." - ".$dados_login['sisOda_alunos_bairro']." - ".$dados_login['sisOda_alunos_cidade']." - ".$dados_login['sisOda_alunos_estado'];
+
+                              $rg0=$dados_login['sisoda_alunos_rg']/10;
+                              $rg=number_format($rg0, 1, '-', '.');
+                              $celular0=$dados_login['sisoda_alunos_telefone']/10000;
+                              $celular=number_format($celular0, 4, '-', '');
+                              $celular01=$dados_login['sisOda_alunos_telRepUm']/10000;
+                              $celular1=number_format($celular01, 4, '-', '');
+                              $celular02=$dados_login['sisOda_alunos_telRepDois']/10000;
+                              $celular2=number_format($celular02, 4, '-', '');
+
+                              if ($dados_login['sisOda_alunos_saldo'] > 0) {
+                                $div_saldo="
+
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: #48C445; margin: 0 0 0 0;' class='form-group'>
+                                    <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisOda_alunos_saldo']."</p>
+                                  </div>
+
+                                ";
+                              }
+                              elseif ($dados_login['sisOda_alunos_saldo'] == 0) {
+                                $div_saldo="
+
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: lightgray; margin: 0 0 0 0;' class='form-group'>
+                                    <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisOda_alunos_saldo']."</p>
+                                  </div>
+
+                                ";
+                              }else{
+                                $div_saldo="
+
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: #C44545; margin: 0 0 0 0;' class='form-group'>
+                                    <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisOda_alunos_saldo']."</p>
+                                  </div>
+
+                                ";
+                              }
+
+                              echo "
+
+                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
+                                  <div style='border-radius: 200px; border: 2px black solid; width: 250px; height:250px; overflow:hidden; margin-left:150px; margin-bottom: 25px;'>
+                                      <img style='margin-left:-7px;' height='250' src='img/alunos/".$dados_login['sisOda_alunos_foto']."'>
+                                  </div>
+                                </div>".
+                                $div_saldo
+                                ."<div style='border-bottom: 1px lightgrey solid;' class='form-group'>
+                                  <h3>Informações Pessoais</h3>
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_nome']." ".$dados_login['sisOda_alunos_sobrenome']."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>RG: ".$rg."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>".$celular."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisoda_alunos_email']."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>".$age."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_dataNascimento']."</p>  
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_colegio']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_anoId']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$end."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_obs']."</p>     
+                                  <br>
+                                    
+                                </div>
+
+                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
+                                  <h3>Informações Responsável 1</h3>
+                                  <br>  
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_nomeRepUm']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_emailRepUm']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$celular1."</p>     
+                                  <br>
+                                </div>
+
+                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
+                                  <h3>Informações Responsável 2</h3>
+                                  <br>  
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_nomeRepDois']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$dados_login['sisOda_alunos_emailRepDois']."</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>".$celular2."</p>     
+                                  <br>
+                                </div>          
+
+                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
+                                  <h3>Informações Institucionais</h3>
+                                  <br>
+                                  <p style='font-size:17px;'> R$".$dados_login['sisOda_alunos_tipoDePlano']." p/ aula</p>     
+                                  <br>
+                                  <p style='font-size:17px;'>Unidade ".$dados_login['sisOda_alunos_unidade']."</p>         
+                                  <br>
+                                </div>
+                              ";
+
+
+                          }
+                          else
+                          {
+
+                          }
+
+                      }else{
+                          
+                          echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
+
+                      }
+
+                  ?>
+                  
+                
               </div>
             </div>
           </div>
