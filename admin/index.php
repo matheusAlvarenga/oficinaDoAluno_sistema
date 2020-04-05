@@ -1,9 +1,8 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_admin'])){
+  if(!isset($_SESSION['id_admin']) or $_SESSION['id_admin']==''){
     header('Location: ../sem_login.html');
   }
-
 ?>
 <html lang="pt-br">
 
@@ -37,6 +36,15 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  <link href='../packages/core/main.css' rel='stylesheet' />
+<link href='../packages/daygrid/main.css' rel='stylesheet' />
+<link href='../packages/timegrid/main.css' rel='stylesheet' />
+<link href='../packages/list/main.css' rel='stylesheet' />
+<script src='../packages/core/main.js'></script>
+<script src='../packages/interaction/main.js'></script>
+<script src='../packages/daygrid/main.js'></script>
+<script src='../packages/timegrid/main.js'></script>
+<script src='../packages/list/main.js'></script>
   <!-- =======================================================
     Theme Name: NiceAdmin
     Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -48,149 +56,18 @@
 <body>
   <!-- container section start -->
   <section id="container" class="">
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-      <!--logo start-->
-      <a style="margin-top: 8px" href="index.html" class="logo"><img height="45" src="img/logo.png"></a>
-      <!--logo end-->
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-          <!-- alert notification start-->
-          <li id="alert_notificatoin_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <i class="icon-bell-l"></i>
-              <span class="badge bg-important">7</span> 
-            </a>
-            <ul class="dropdown-menu extended notification">
-              <div class="notify-arrow notify-arrow-blue"></div>
-              <li>
-                <p class="blue">You have 4 new notifications</p>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-primary"><i class="icon_profile"></i></span>
-                  Friend Request
-                  <span class="small italic pull-right">5 mins</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-warning"><i class="icon_pin"></i></span>
-                  John location.
-                  <span class="small italic pull-right">50 mins</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-danger"><i class="icon_book_alt"></i></span>
-                  Project 3 Completed.
-                  <span class="small italic pull-right">1 hr</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-success"><i class="icon_like"></i></span>
-                  Mick appreciated your work.
-                  <span class="small italic pull-right"> Today</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">See all notifications</a>
-              </li>
-            </ul>
-          </li>
-          <!-- alert notification end-->
-          <!-- user login dropdown start-->
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="profile-ava">
-                <img style="margin-top: -5px;" height="35" alt="" src="img/avatar1_small.jpg">
-              </span>
-              <span style="margin-top: -5px;" class="username">
-                
+    <?php
 
-                <?php 
+    include('header.php');
 
-                    echo $_SESSION['nome_admin'];
-
-                 ?>
-
-
-              </span>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-              <div class="log-arrow-up"></div> 
-              <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
-              </li>
-            </ul>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
+    ?>
     <!--header end-->
     <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="index.php">
-              <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Alunos</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="lista_alunos.php">Listagem de Alunos</a></li>
-              <li><a class="" href="cadastro_alunos.php">Cadastro de Alunos</a></li>
-              <li><a class="" href="form_validation.html">Adicinar Pagamento</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_desktop"></i>
-              <span>Professores</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="general.html">Listagem de Prof.</a></li>
-              <li><a class="" href="buttons.html">Cadastro de Prof.</a></li>
-              <li><a class="" href="buttons.html">Categorias de Prof.</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Aulas</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="basic_table.html">Listagem de Aulas</a></li>
-              <li><a class="" href="basic_table.html">Cadastro de Aulas</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="" class="">
-              <i class="fa fa-cash-register"></i>
-              <span>Fechar Pagamentos</span>
-            </a>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+    <?php
+
+      include("menu.php");
+
+    ?>
     <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
@@ -209,8 +86,25 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
               <i class="fa fa-user"></i>
-              <div class="count">6.674</div>
-              <div class="title">Alunos</div>
+              <div class="count">
+                
+                <?php
+
+                  require_once('../db.class.php');
+
+                  $sql = "SELECT `sisOda_alunos_id` FROM sisoda_alunos";
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $resultado_id = mysqli_query($link, $sql);
+                  $cont=mysqli_num_rows($resultado_id);
+
+                  echo "$cont";
+
+                ?>
+
+              </div>
+              <div class="title">Alunos Ativos</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -218,7 +112,24 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
               <i class="fa fa-thumbs-down"></i>
-              <div class="count">4.362</div>
+              <div class="count">
+
+                <?php
+
+                  require_once('../db.class.php');
+
+                  $sql = "SELECT `sisOda_alunos_id` FROM sisoda_alunos WHERE `sisOda_alunos_saldo` < 0";
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $resultado_id = mysqli_query($link, $sql);
+                  $cont=mysqli_num_rows($resultado_id);
+
+                  echo "$cont";
+
+                ?>
+
+              </div>
               <div class="title">Alunos com Pendências</div>
             </div>
             <!--/.info-box-->
@@ -227,7 +138,29 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
               <i class="fa fa-clipboard-list"></i>
-              <div class="count">1.426</div>
+              <div class="count">
+
+                <?php
+
+                  require_once('../db.class.php');
+
+                  date_default_timezone_set('America/Sao_Paulo');
+
+                  $date = date('Y/m/d', time());
+
+                  $sql = "SELECT `sisOda_aulas_id` FROM sisoda_aulas WHERE WEEK(`sisOda_aulas_data`,0) = WEEK('$date',0)";
+
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $resultado_id = mysqli_query($link, $sql);
+                  $cont=mysqli_num_rows($resultado_id);
+
+                  echo "$cont";
+
+                ?>
+
+              </div>
               <div class="title">Aulas essa Semana</div>
             </div>
             <!--/.info-box-->
@@ -237,7 +170,24 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
               <i class="fa fa-chalkboard-teacher"></i>
-              <div class="count">7.538</div>
+              <div class="count">
+
+                <?php
+
+                  require_once('../db.class.php');
+
+                  $sql = "SELECT `sisoda_professores_id` FROM sisoda_professores";
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $resultado_id = mysqli_query($link, $sql);
+                  $cont=mysqli_num_rows($resultado_id);
+
+                  echo "$cont";
+
+                ?>
+
+              </div>
               <div class="title">Professores</div>
             </div>
             <!--/.info-box-->
@@ -257,7 +207,20 @@
               </div><br><br><br>
               <div class="panel-body">
                 
-                
+                <div class="row">
+                  
+                  <div class="col-md-6">
+                    <canvas></canvas>  
+                  </div>
+                  <div class="col-md-6">
+                    
+                  </div>
+
+                </div>
+                <div class="row">
+                  
+                </div>
+
               </div>
             </div>
           </div>
@@ -273,7 +236,7 @@
                 </div>
               </div><br><br><br>
               <div class="panel-body">
-                <div id="calendar"></div>
+                <div id="calendar" class="fc fc-ltr fc-bootstrap" style></div>
               </div>
             </div>
           </div>
@@ -297,70 +260,92 @@
   <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />
 <script type='text/javascript' src='assets/fullcalendar/fullcalendar/fullcalendar.min.js'></script>
-<script type='text/javascript'>
+<script>
 
-  $(document).ready(function() {
-  
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    
-    $('#calendar').fullCalendar({
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,basicWeek,basicDay'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
-      editable: true,
+      allDayText:'Aniversários',
+      noEventsMessage:'Sem Eventos',
+      locale:'pt-br',
+      buttonText:{
+
+        today:    'Hoje',
+        month:    'Mês',
+        week:     'Semana',
+        day:      'Dia',
+        list:     'Lista'
+
+      },
+      defaultView: 'dayGridMonth',
+      navLinks: true, // can click day/week names to navigate views
+      eventLimit: true, // allow "more" link when too many events
       events: [
         {
           title: 'All Day Event',
-          start: new Date(y, m, 1)
+          start: '2020-02-01',
         },
         {
           title: 'Long Event',
-          start: new Date(y, m, d-5),
-          end: new Date(y, m, d-2)
+          start: '2020-02-07',
+          end: '2020-02-10'
         },
         {
-          id: 999,
+          groupId: 999,
           title: 'Repeating Event',
-          start: new Date(y, m, d-3, 16, 0),
-          allDay: false
+          start: '2020-02-09T16:00:00'
         },
         {
-          id: 999,
+          groupId: 999,
           title: 'Repeating Event',
-          start: new Date(y, m, d+4, 16, 0),
-          allDay: false
+          start: '2020-02-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-02-11',
+          end: '2020-02-13'
         },
         {
           title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
+          start: '2020-02-12T10:30:00',
+          end: '2020-02-12T12:30:00'
         },
         {
           title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
+          start: '2020-02-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-02-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2020-02-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2020-02-12T20:00:00'
         },
         {
           title: 'Birthday Party',
-          start: new Date(y, m, d+1, 19, 0),
-          end: new Date(y, m, d+1, 22, 30),
-          allDay: false
+          start: '2020-02-13T07:00:00'
         },
         {
           title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
+          url: 'http://google.com/',
+          start: '2020-02-28'
         }
       ]
     });
-    
+
+    calendar.render();
   });
 
 </script>
