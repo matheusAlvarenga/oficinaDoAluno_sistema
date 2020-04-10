@@ -8,143 +8,162 @@
 	$id_aluno=$_GET['aluno_selec'];
 	$valor=$_GET['valor_aluno'];
 	$saldo=$_GET[$id_aluno];
-	$valor_aula=$_GET['valor_aula'];
 
-	if ($saldo > 0) {
-		$valor=$saldo+$valor;
-	}
 
-	// ATUALIZAR AULAS COM PENDÊNCIA
+    $resultado_id12=mysqli_query($link, "SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='$id_aluno'");
 
-		$sql="SELECT * FROM sisoda_aulas WHERE `sisoda_aulas_idAluno`='$id_aluno' AND `sisoda_aulas_recebida`='0'";
+        while($dados_login12 = mysqli_fetch_array($resultado_id12, MYSQLI_ASSOC)){
 
-        $resultado_id = mysqli_query($link, $sql);
+            $valor_aula=$dados_login12['sisOda_alunos_tipoDePlano'];
 
-        $aulas_p_pagar=mysqli_num_rows($resultado_id);
+        }
 
-	    echo "Aulas não-pagas: $aulas_p_pagar <br>";
 
-	    $aulas_possiveis_pag=$valor/$valor_aula;
+	$hoje=date("Y-m-d");
 
-	    echo "Aulas Possiveis de Pagar: $aulas_possiveis_pag<br>";
+	// ADICIONAR PAGAMENTO À TABELA DE PAGAMENTOS
 
-	    if ($aulas_possiveis_pag >= $aulas_p_pagar) {
-	    	
-	    	$sql2="UPDATE `sisoda_aulas` SET `sisoda_aulas_recebida`='1' WHERE `sisoda_aulas_idAluno`='$id_aluno'";
+		$sql="INSERT INTO `sisoda_pagamentos`(`sisoda_pagamentos_idAluno`, `sisoda_pagamentos_valor`, `sisoda_pagamentos_paga`, `sisoda_pagamentos_data`) VALUES ('$id_aluno','$valor','0','$hoje')";
+		$objDb = new db();
+	    $link = $objDb->conecta_mysql();
 
-	    	$resultado_id2 = mysqli_query($link, $sql2);
+	    $resultado_id = mysqli_query($link, $sql);
 
-	    	if ($resultado_id2) {
-	    		echo"Aulas Pagas.<br>";
-	    	}
+	    if($resultado_id){
 
-	    	$resto_aulas=$valor-($aulas_p_pagar*$valor_aula);
-
-	    }else{
-
-	    	for ($i=1; $i <= $aulas_possiveis_pag; $i++) { 
-	    		
-	    		$sql2="UPDATE `sisoda_aulas` SET `sisoda_aulas_recebida`='1' WHERE `sisoda_aulas_idAluno`='$id_aluno' AND `sisoda_aulas_recebida`='0' ORDER BY `sisoda_aulas_data` LIMIT 1 ";
-
-				$resultado_id2 = mysqli_query($link, $sql2);
-
-				if ($resultado_id2) {
-	    			echo"Aulas Pagas.<br>";
-	    		}else{
-	    			echo "Aulas Não Pagas<br>";
-	    		}
-
-	    	}
-
-	    	$resto_aulas=$valor%$valor_aula;
-	    	echo "$resto_aulas<br>";
+	        	echo "<h4 align='center'>Pagamento Adicionado</h4>";
 
 	    }
 
+	// CHECAR SE ALGUMA AULA PODE SER PAGA
 
+	    $aulas_pagas=0;
+	    $valor_sobra_aulas=$valor;
 
-	// ATUALIZAR OUTRAS PENDÊNCIAS
+    	$resultado_id8 = mysqli_query($link,"SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_idAluno`='$id_aluno' AND `sisoda_aulas_paga`='0'");
+    	if ($resultado_id8) {
 
-	    if ($resto_aulas==0) {
-	    	echo"<script>alert('O pagamento foi utilizado apenas para aulas pendentes.'); window.history.back();</script>";
-	    }else{
-	    	$soma_pendencias=0;
-	    	$sql3="SELECT * FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno' AND `sisoda_pendencias_paga`='0'";
+            echo "<script>alert('Aula Achada')</script>";
+    		
+    		while($dados_login8 = mysqli_fetch_array($resultado_id8, MYSQLI_ASSOC)){
 
-	    	$resultado_id3 = mysqli_query($link, $sql3);
+    			if ($valor_sobra_aulas >= $valor_aula) {
+   				
+    				$resultado_id10=mysqli_query($link,"UPDATE `sisoda_aulas` SET `sisoda_aulas_recebida`='1' WHERE `sisoda_aulas_id`='".$dados_login8['sisoda_aulas_id']."'");
 
-	    	if ($resultado_id3) {
-	    		
-	    		while($dados_login = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+    				if ($resultado_id10) {
+                        echo "<script>alert('Aula Paga')</script>";
+    					$valor_sobra_aulas=$valor_sobra_aulas-$valor_aula;
+    					$aulas_pagas=$aulas_pagas+1;
+    				}
 
-	    			$a=$dados_login['sisoda_pendencias_valor'];
+    			}
 
-	    			$soma_pendencias=$soma_pendencias+$a;
+    		}
 
-	    		}
+    		echo "Aulas Pagas: $aulas_pagas<br>";
 
-	    	if ($resto_aulas >= $soma_pendencias) {
-	    		
-	    		$sql4="UPDATE `sisoda_pendencias` SET `sisoda_pendencias_paga`='1' WHERE `sisoda_pendencias_idAluno`='$id_aluno'";
+    	}
 
-		    	$resultado_id4 = mysqli_query($link, $sql4);
+	// CHECAR SE ALGUMA PENDENCIA PODE SER PAGA
 
-		    	if ($resultado_id4) {
-		    		echo"Pendências Pagas.<br>";
-		    	}
+    	$valor_sobra_pend=$valor_sobra_aulas;
+    	$pend_pagas=0;
 
-		    	$resto_pendencias=$resto_aulas-$soma_pendencias;
+    	$resultado_id9 = mysqli_query($link,"SELECT * FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno' AND `sisoda_pendencias_paga`='0'");
+    	if ($resultado_id9) {
+    		
+    		echo "<script>alert('Pendencia Achada')</script>";
 
-	    		}else{
+    		while($dados_login9 = mysqli_fetch_array($resultado_id9, MYSQLI_ASSOC)){
 
-	    			$resto_pendencias=$resto_aulas;
+    			$valor_pend=$dados_login9['sisoda_pendencias_valor'];
 
-	    			$sql5="SELECT * FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno' AND `sisoda_pendencias_paga`='0'";
+    			if ($valor_sobra_pend >= $valor_pend) {
+    				
+    				$resultado_id11=mysqli_query($link,"UPDATE `sisoda_pendencias` SET `sisoda_pendencias_paga`='1' WHERE `sisoda_pendencias_id`='".$dados_login9['sisoda_pendencias_id']."'");
 
-			    	$resultado_id5 = mysqli_query($link, $sql5);
+    				echo "UPDATE `sisoda_pendencias` SET `sisoda_pendencias_paga`='1' WHERE `sisoda_pendencias_id`='".$dados_login9['sisoda_pendencias_id']."'";
 
-			    	if ($resultado_id5) {
-			    		
-			    		while($dados_login = mysqli_fetch_array($resultado_id5, MYSQLI_ASSOC)){
+    				if ($resultado_id11) {
+    					echo "<script>alert('Pendencia Achada 2')</script>";
+    					$valor_sobra_pend=$valor_sobra_pend-$valor_pend;
+    					$pend_pagas = $pend_pagas + 1;
+    				}
 
-			    			$valor_pend=$dados_login['sisoda_pendencias_valor'];
+    			}
 
-			    			if ($resto_pendencias >= $valor_pend) {
-			    				
-			    				$sql6="UPDATE `sisoda_pendencias` SET `sisoda_pendencias_paga`='1' WHERE `sisoda_pendencias_idAluno`='$id_aluno' AND `sisoda_pendencias_paga`='0' ORDER BY `sisoda_pendencias_id` LIMIT 1";
+    		}
 
-						    	$resultado_id6 = mysqli_query($link, $sql6);
+    		echo "Pendencias Pagas: $pend_pagas<br>";
 
-						    	if ($resultado_id6) {
-						    		echo"Pendências Pagas.<br>";
-						    	}
+    	}
 
-						    	$resto_pendencias=$resto_pendencias-$valor_pend;
-
-			    			}
-
-			    		}
-
-	    		}
-
-	    	}
-
-	    }
-	}
-		
 	// ATUALIZAR SALDO
 
-			$valor2 = $resto_pendencias + $saldo;
+	// VALOR DAS AULAS
 
-		$sql3 = "UPDATE `sisoda_alunos` SET `sisOda_alunos_saldo` = '$valor2' WHERE `sisoda_alunos`.`sisOda_alunos_id` = $id_aluno;
-";
-	    $resultado_id3 = mysqli_query($link, $sql3);
+        $sql3="SELECT `sisOda_alunos_tipoDePlano` FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='$id_aluno'";
 
-	    if($resultado_id3){
-	    	echo "Saldo Atualizado";
-	    }
-	  	else{
-	  		echo "Saldo Não Atualizado";
-	  	}
+        $resultado_id3 = mysqli_query($link, $sql3);
+
+        	if($resultado_id3){
+
+        		while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+
+        			$valor_aula=$dados_login3['sisOda_alunos_tipoDePlano'];
+
+        		}
+
+        	}
+
+        $resultado_id4 = mysqli_query($link,"SELECT COUNT(1) FROM `sisoda_aulas` WHERE `sisoda_aulas_idAluno`='$id_aluno'");
+        $row = mysqli_fetch_array($resultado_id4);
+        $num_aulas = $row[0];
+
+        $valor_total_aulas=$num_aulas*$valor_aula;
+
+        echo "Valor das Aulas: $valor_total_aulas<br>";
+
+        // VALOR DAS PENDÊNCIAS
+
+        $resultado_id5 = mysqli_query($link,"SELECT SUM(`sisoda_pendencias_valor`) FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno'");
+        $row2= mysqli_fetch_array($resultado_id5);
+
+        $valor_total_pend=$row2[0];
+
+        echo "Valor das Pendencias: $valor_total_pend<br>";
+
+        // VALOR DOS PAGAMENTOS
+
+        $resultado_id6 = mysqli_query($link,"SELECT SUM(`sisoda_pagamentos_valor`) FROM `sisoda_pagamentos` WHERE `sisoda_pagamentos_idAluno`='$id_aluno'");
+        $row3= mysqli_fetch_array($resultado_id6);
+
+        $valor_total_pag=$row3[0];
+
+        echo "Valor dos Pagamentos: $valor_total_pag<br>";
+
+        // ATT VALOR DO SALDO
+
+        echo "Saldo Anterior: $saldo<br>";
+
+        $saldo_final=$valor_total_pag-$valor_total_aulas-$valor_total_pend;
+
+        echo "Saldo Final: $saldo_final";
+
+        $resultado_id7 = mysqli_query($link,"UPDATE `sisoda_alunos` SET `sisOda_alunos_saldo`='$saldo_final' WHERE `sisOda_alunos_id`='$id_aluno'");
+
+        if ($resultado_id7) {
+        	
+        	echo "
+
+        		<script>
+        			alert('Pagamento adicionado com sucesso');
+        			window.history.back();
+        		</script>
+
+        	";
+
+        }
 
 ?>

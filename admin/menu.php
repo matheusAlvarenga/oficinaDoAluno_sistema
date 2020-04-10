@@ -54,12 +54,6 @@
             </a>
           </li>
           <li class="sub-menu">
-            <a href="" class="">
-              <i class="fa fa-cash-register"></i>
-              <span>Fechar Pagamentos</span>
-            </a>
-          </li>
-          <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_folder-open_alt"></i>
               <span>Não Listados</span>
@@ -70,6 +64,12 @@
               <li><a class="" href="prof_ln.php">Professores NL</a></li>
               <li><a class="" href="aulas_ln.php">Aulas NL</a></li>
             </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="" class="">
+              <i class="fa fa-cash-register"></i>
+              <span>Finânceiro</span>
+            </a>
           </li>
         </ul>
         <!-- sidebar menu end-->

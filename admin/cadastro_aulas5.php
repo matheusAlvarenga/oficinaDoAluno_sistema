@@ -129,68 +129,68 @@ function(){
                 <form style="margin-left: -30px; margin-right: 20px;" class="form-horizontal" method="POST" action="cadastro_aulas6.php">
                    <?php
 
-                    $url='';
-                    $url2='';
+                    require_once('../db.class.php');
+                    $objDb = new db();
+                    $link = $objDb->conecta_mysql();
 
-                    if (isset($_GET['saldo_aluno'])) {
-                      $saldo_aluno=$_GET['saldo_aluno'];
-                      echo "<input type='text' name='saldo_aluno' value='$saldo_aluno'>";
+                    $url_aluno='';
+                    $url_prof='';
 
-                    }
-
-                    if (isset($_GET['valor_aluno'])) {
-                      $valor_aluno=$_GET['valor_aluno'];
-                      echo "<input type='text' name='valor_aluno' value='$valor_aluno'>";
-
-                    }
-
-                    if (isset($_GET['saldo_prof'])) {
-                      $saldo_prof=$_GET['saldo_prof'];
-                      echo "<input type='text' name='saldo_prof' value='$saldo_prof'>";
-
-                    }
-
-                    if (isset($_GET['valor_prof'])) {
-                      $valor_prof=$_GET['valor_prof'];
-                      echo "<input type='text' name='valor_prof' value='$valor_prof'>";
-
-                    }
-
-                    if (isset($_GET['id_aluno'])) {
-
+                    if (isset($_GET['id_aluno']) and $_GET['id_aluno']!=='') {
+                      
                       $id_aluno=$_GET['id_aluno'];
-                      $nome_aluno=$_GET['nome_aluno2'];
+                      $nome_aluno=$_GET['a'.$id_aluno];
+                      $url_aluno='id_aluno='.$id_aluno.'&a'.$id_aluno.'='.$nome_aluno;
 
-                      $url=$url."id_aluno=$id_aluno&nome_aluno2=$nome_aluno";
-                    }else{
-                      $url=$url."id_aluno=&nome_aluno2=";
+                      $resultado_id2=mysqli_query($link,"SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='$id_aluno'");
+
+                      while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                        $valor_aluno=$dados_login2['sisOda_alunos_tipoDePlano'];
+                        $saldo_aluno=$dados_login2['sisOda_alunos_saldo'];
+
+                      }
+
                     }
-                    if (isset($_GET['id_prof'])) {
 
+                    if (isset($_GET['id_prof']) and $_GET['id_prof']!=='') {
+                      
                       $id_prof=$_GET['id_prof'];
-                      $nome_prof=$_GET['nome_prof2'];
+                      $nome_prof=$_GET['p'.$id_prof];
+                      $url_prof='id_prof='.$id_prof.'&p'.$id_prof.'='.$nome_prof;
 
-                      $url2=$url2."id_prof=$id_prof&nome_prof2=$nome_prof";
-                    }else{
-                      $url2=$url2."id_prof=&nome_prof2=";
+                      $resultado_id=mysqli_query($link,"SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_id`='$id_prof'");
+
+                      while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+
+                        $valor_prof=$dados_login['sisoda_professores_valor'];
+                        $saldo_prof=$dados_login['sisoda_professores_saldo'];
+
+                      }
+                      
+
                     }
 
-                    if (isset($_GET['id_aluno'])) {
-                      echo "<h4 align='center'>Aluno selecionado: $nome_aluno ($id_aluno)</h4>";
-                      echo "<a align='center' href='cadastro_aulas.php?".$url."&".$url2."'><h5>Modificar Aluno</h5></a>";
+                    if (isset($_GET['id_aluno']) and $_GET['id_aluno']!=='') {
+
+                      echo "<h5 align='center'>Aluno selecionado: $nome_aluno ($id_aluno)</h5>";
+                      echo "<a align='center' href='cadastro_aulas.php?$url_aluno'><h6>Modificar Aluno</h6></a>";
                       echo "<input type='hidden' name='id_aluno' value='$id_aluno'>";
-                      echo "<input type='hidden' name='nome_aluno2' value='$nome_aluno'>";
+                      echo "<input type='hidden' name='saldo_aluno' value='$saldo_aluno'>";
+                      echo "<input type='hidden' name='valor_aluno' value='$valor_aluno'>";
 
                     }
-                    if (isset($_GET['id_prof'])) {
-                      echo "<h4 align='center'>Professor selecionado: $nome_prof ($id_prof)</h4>";
-                      echo "<a align='center' href='cadastro_aulas3.php?".$url."&".$url2."'><h5>Modificar Professor</h5></a>";
+
+                    if (isset($_GET['id_prof']) and $_GET['id_prof']!=='') {
+
+                      echo "<h5 align='center'>Professor selecionado: $nome_prof ($id_prof)</h5>";
+                      echo "<a align='center' href='cadastro_aulas3.php?$url_aluno'><h6>Modificar</h6></a>";
                       echo "<input type='hidden' name='id_prof' value='$id_prof'>";
-                      echo "<input type='hidden' name='nome_prof2' value='$nome_prof'>";
+                      echo "<input type='hidden' name='saldo_prof' value='$saldo_prof'>";
+                      echo "<input type='hidden' name='valor_prof' value='$valor_prof'>";
 
                     }
-
-                  ?><br><br>
+                    ?><br><br>
                   <div class="form-group">
                     <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Matéria</h3>
                     <div class="col-sm-1"></div>
@@ -235,7 +235,7 @@ function(){
                       </div>
                     </div><br>
                     <div class="row">
-                      <label style="margin-left: 0px;" class="col-sm-2 control-label">Rua</label>
+                      <label style="margin-left: 0px;" class="col-sm-2 control-label">Data</label>
                       <div class="col-sm-4">
                         <input type="datetime-local" name="data" class="form-control">
                       </div>

@@ -77,7 +77,7 @@
 
             echo "$month";
 
-            $sql3="SELECT * FROM `sisoda_aulas` WHERE MONTH(`sisoda_aulas_data`) = '$month'";
+            $sql3="SELECT * FROM `sisoda_alunos` WHERE MONTH(`sisOda_alunos_dataNascimento`) = '$month'";
 
             $resultado_id3 = mysqli_query($link, $sql3);
 

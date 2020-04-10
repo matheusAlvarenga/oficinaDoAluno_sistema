@@ -47,6 +47,15 @@
       window.history.back();
     }
 
+    function showAulas(){
+      document.getElementById('aulas').style='display: block';
+      document.getElementById('extras').style='display: none';
+    }
+
+    function showExtras(){
+      document.getElementById('aulas').style='display: none';
+      document.getElementById('extras').style='display: block';
+    }
   </script>
 </head>
 
@@ -68,49 +77,29 @@
     <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
+      
       <section class="wrapper">
-        <!--overview start-->
-        <div>
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-              <h3  onclick="back()" style="position: absolute; margin-top: 0px;"><i class="far fa-arrow-alt-circle-left"></i></h3>
-              <h4 align="center" class="modal-title">Mais Detalhes</h4>
-              </div>
-              <div style="text-align: center;" class="modal-body">
-                  <?php
+        
+        <?php
 
-                    require_once('../db.class.php');
+          $id=$_GET['id'];
 
-                    $a=$_GET['id'];
+          require_once('../db.class.php');
+          $objDb = new db();
+          $link = $objDb->conecta_mysql();
 
-                    $sql = "SELECT * FROM sisoda_professores WHERE sisoda_professores_id='$a'";
-                      $objDb = new db();
-                      $link = $objDb->conecta_mysql();
+          $resultado_id=mysqli_query($link,"SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_id`='$id'");
 
-                      $resultado_id = mysqli_query($link, $sql);
+          if ($resultado_id) {
+            
+            $dados_login = mysqli_fetch_array($resultado_id);
 
-                      if($resultado_id){
+            if (isset($dados_login['sisoda_professores_id'])) {
 
-                        $dados_login = mysqli_fetch_array($resultado_id);
-
-                          if(isset($dados_login['sisoda_professores_id'])){
-
-                              $from = new DateTime($dados_login['sisoda_professores_data']);
-                              $to   = new DateTime('today');
-                              $age = $from->diff($to)->y;
-                              
-                              $end=$dados_login['sisoda_professores_rua'].", ".$dados_login['sisoda_professores_numero']." - ".$dados_login['sisoda_professores_bairro']." - ".$dados_login['sisoda_professores_cidade']." - ".$dados_login['sisoda_professores_estado'];
-
-                              $rg0=$dados_login['sisoda_professores_cpf']/100;
-                              $rg=number_format($rg0, 2, '-', '.');
-                              $celular0=$dados_login['sisoda_professores_telefone']/10000;
-                              $celular=number_format($celular0, 4, '-', '');
-
-                              if ($dados_login['sisoda_professores_saldo'] > 0) {
+              if ($dados_login['sisoda_professores_saldo'] > 0) {
                                 $div_saldo="
 
-                                  <div style='border-bottom: 1px lightgrey solid; background-color: #48C445; margin: 0 0 0 0;' class='form-group'>
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: #48C445; margin: 0 0 0 0; margin-bottom:20px;' class='text-center'>
                                     <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisoda_professores_saldo']."</p>
                                   </div>
 
@@ -119,7 +108,7 @@
                               elseif ($dados_login['sisoda_professores_saldo'] == 0) {
                                 $div_saldo="
 
-                                  <div style='border-bottom: 1px lightgrey solid; background-color: lightgray; margin: 0 0 0 0;' class='form-group'>
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: lightgray; margin: 0 0 0 0; margin-bottom:20px;' class='text-center'>
                                     <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisoda_professores_saldo']."</p>
                                   </div>
 
@@ -127,91 +116,302 @@
                               }else{
                                 $div_saldo="
 
-                                  <div style='border-bottom: 1px lightgrey solid; background-color: #C44545; margin: 0 0 0 0;' class='form-group'>
+                                  <div style='border-bottom: 1px lightgrey solid; background-color: #C44545; margin: 0 0 0 0; margin-bottom:20px;' class='text-center'>
                                     <p style='color:black; font-size: 30px;'>SALDO: R$".$dados_login['sisoda_professores_saldo']."</p>
                                   </div>
 
                                 ";
                               }
 
-                              echo "
+              if ($dados_login['sisoda_professores_login']==NULL) {
+                $login='Ainda não criado.';
+              }else{
+                $login=$dados_login['sisoda_professores_login'];
+              }
 
-                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
-                                  <div style='border-radius: 200px; border: 2px black solid; width: 250px; height:250px; overflow:hidden; margin-left:150px; margin-bottom: 25px;'>
-                                      <img style='margin-left:-7px;' height='250' src='img/prof/".$dados_login['sisoda_professores_foto']."'>
-                                  </div>
-                                </div>".
-                                $div_saldo
-                                ."<div style='border-bottom: 1px lightgrey solid;' class='form-group'>
-                                  <h3>Informações Pessoais</h3>
-                                  <br>
-                                  <p style='font-size:17px;'>".$dados_login['sisoda_professores_nome']." ".$dados_login['sisoda_professores_sobrenome']."</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>(11) ".$celular."</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>".$dados_login['sisoda_professores_email']."</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>".$age." anos</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>Data de Nascimento: ".$dados_login['sisoda_professores_data']."</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>".$end."</p>     
-                                  <br>
-                                  <p style='font-size:17px;'>Observação: ".$dados_login['sisoda_professores_obs']."</p>     
-                                  <br>
-                                    
-                                </div>
-                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
-                                  <h3>Informações Bancárias</h3>
-                                  <br>
-                                  <p style='font-size:17px;'>CPF: ".$rg."</p>  
-                                  <br>
-                                  <p style='font-size:17px;'>Banco:".$dados_login['sisoda_professores_banco']."</p>     
-                                  <br>
-                                  <p style='font-size:17px;'>Tipo de conta: ".$dados_login['sisoda_professores_tipoConta']."</p>         
-                                  <br>
-                                  <p style='font-size:17px;'>Agência: ".$dados_login['sisoda_professores_agencia']."</p>         
-                                  <br>
-                                  <p style='font-size:17px;'>Conta: ".$dados_login['sisoda_professores_conta']."</p>         
-                                  <br>
+              $celular0=$dados_login['sisoda_professores_telefone']/10000;
+              $celular=number_format($celular0, 4, '-', '');
 
-                                </div>
-                                  
+              $cpf1=$dados_login['sisoda_professores_cpf']/100;
+              $cpf=number_format($cpf1, 2, '-', '.');
 
-                                <div style='border-bottom: 1px lightgrey solid;' class='form-group'>
-                                  <h3>Informações Institucionais</h3>
-                                  <br>
-                                  <p style='font-size:17px;'>Valor por Aula: R$".$dados_login['sisoda_professores_valor']." p/ aula</p>     
-                                  <br>
-                                  <p style='font-size:17px;'>Valor Mensal: R$".$dados_login['sisoda_professores_mensal']." p/ mês</p>     
-                                  <br>
-                                  <p style='font-size:17px;'>Unidade ".$dados_login['sisoda_professores_unidade']."</p>         
-                                  <br>
+              $from = new DateTime($dados_login['sisoda_professores_data']);
+              $to   = new DateTime('today');
+              $age = $from->diff($to)->y;
 
-                                </div>
-                              ";
+              $data_nasc=date_format(date_create($dados_login['sisoda_professores_data']),'d/m/Y');
 
+              $end=$dados_login['sisoda_professores_rua']." ".$dados_login['sisoda_professores_numero'].", ".$dados_login['sisoda_professores_bairro']." - ".$dados_login['sisoda_professores_cidade']."/".$dados_login['sisoda_professores_estado']." - Complemento:".$dados_login['sisoda_professores_complemento'];
 
-                          }
-                          else
-                          {
+              $materias=explode(',', $dados_login['sisoda_professores_materias']);
+              $str_materias='';
 
-                          }
-
-                      }else{
-                          
-                          echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
-
-                      }
-
-                  ?>
-                  
+              foreach ($materias as $key => $value) {
                 
-              </div>
+                $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_materias` WHERE `sisoda_materias_id`='$value'");
+
+                while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                  $str_materias=$str_materias.$dados_login2['sisoda_materias_nome'].", ";
+
+                }
+
+              }
+
+              
+              echo "
+
+                <div class='col-xs-5'>
+                  <div class='row'>
+                    <h3 style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Página da Aula</h3>
+                      <div class='row text-center' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
+                        <a href='#myModal' data-toggle='modal'><button style='margin-bottom: 15px;' class='btn btn-primary'><h4 style='padding: 0px 0px 0px 0px'>Ver Foto</h4></button></a>
+                        <a href='adicionar_pag_prof2.php?id=$id'><button style='margin-bottom: 15px;' class='btn btn-success'><h4 style='padding: 0px 0px 0px 0px'>Adc. Pagamento</h4></button></a>
+                        <a href='cadastro_aulas.php?id_prof=$id&p$id=".$dados_login['sisoda_professores_nome']."'><button style='margin-bottom: 15px;' class='btn btn-warning'><h4 style='padding: 0px 0px 0px 0px'>Adc. Aula</h4></button></a>
+                        <a href='editar_prof.php?id=$id'><button style='margin-bottom: 15px;' class='btn btn-primary'><h4 style='padding: 0px 0px 0px 0px'>Editar</h4></button></a>
+                        <a href='#myModal2' data-toggle='modal'><button style='margin-bottom: 15px;' class='btn btn-info'><h4 style='padding: 0px 0px 0px 0px'>Ver Feedbacks</h4></button></a>
+                        <a href='apagar_prof.php?id=$id'><button style='margin-bottom: 15px;' class='btn btn-danger'><h4 style='padding: 0px 0px 0px 0px'>Não Listar</h4></button></a>
+                    </div>
+                    <div style='overflow-x: hidden; overflow-y: scroll; height: 54%; padding-right:23px;'>
+                    <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Dados do Professor</h3>
+                    $div_saldo
+                      <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
+                      
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
+                          <p>Nome: ".$dados_login['sisoda_professores_nome']." ".$dados_login['sisoda_professores_sobrenome']."</p>
+                          <p>Telefone: (11) $celular</p>
+                          <p>E-mail: ".$dados_login['sisoda_professores_email']."</p>
+                          <p>Idade: $age Anos</p>
+                          <p>Data de Nascimento: $data_nasc</p>
+                          <p>Endereço: $end</p>
+                          <p>Observações: ".$dados_login['sisoda_professores_obs']."</p>
+                        </div>
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
+                          <p>Matérias: $str_materias</p>
+                          <p>Login: $login</p>
+                          <p>Unidade: ".$dados_login['sisoda_professores_unidade']."</p>
+                          <p>Valor Mensal: R$".$dados_login['sisoda_professores_mensal']."</p>
+                          <p>Valor por Aula: R$".$dados_login['sisoda_professores_valor']."</p>
+
+                        </div>
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
+                          <h4>Finânceiro</h4>
+                          <p>CPF: $cpf</p>
+                          <p>Banco: ".$dados_login['sisoda_professores_banco']."</p>
+                          <p>Tipo de Conta: ".$dados_login['sisoda_professores_tipoConta']."</p>
+                          <p>Agência: ".$dados_login['sisoda_professores_agencia']."</p>
+                          <p>Conta: ".$dados_login['sisoda_professores_conta']."</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+             </div>
+
+              ";
+
+            }
+
+          }
+
+        ?>
+                
+
+
+
+            <div style='border-right: 2px lightgrey solid; height: 76%; margin-left: -5px;' class='col-xs-1'>
+                  
             </div>
-          </div>
-        </div>
+            <div style='margin-right: -5px;' class='col-xs-1'>
+                  
+            </div>
+
+             <div class='col-xs-5'>
+              <div style='height: 43%;' class='row'>
+                    <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Próximas Aulas</h3>
+                    <div style='overflow-x: hidden;overflow-y: scroll; height: 78%;'>
+
+              <?php
+
+                $hoj=date('Y-m-d H:i:s');
+
+                $resultado_id3=mysqli_query($link, "SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_data` > '$hoj' AND `sisoda_aulas_idProfessor`='$id'");
+
+                if ($resultado_id3) {
+                  
+                  while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+
+                    $resultado_id4=mysqli_query($link,"SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$dados_login3['sisoda_aulas_idAluno']."'");
+
+                    while($dados_login4 = mysqli_fetch_array($resultado_id4, MYSQLI_ASSOC)){
+
+                      $aluno=$dados_login4['sisOda_alunos_nome'];
+
+                    }
+
+                    $data_aula=date_format(date_create($dados_login3['sisoda_aulas_data']),'d/m/Y');
+                    $hora_aula=date_format(date_create($dados_login3['sisoda_aulas_data']),'H:i');
+
+                    echo "
+
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px;'>
+                          <div class='col-sm-10'>
+                            <p>Aula com o aluno(a) <a href='aluno_ind.php?id=".$dados_login3['sisoda_aulas_idAluno']."'>$aluno</a></p>
+                            <p>Dia $data_aula às $hora_aula</p>
+                          </div>
+                          <div class='col-sm-2'>
+                            <a href='aula_ind.php?id=".$dados_login3['sisoda_aulas_id']."'>
+                              <button style='margin-top: 10px;' class='btn btn-primary'>
+                                <span class='arrow_triangle-right_alt2'></span>
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+
+                    ";
+
+                  }
+
+                }
+
+              ?>
+
+                    </div>
+                  </div>
+
+
+                  <div style='height: 43%;' class='row'>
+                    <div style='border-bottom: 2px lightgrey solid; margin-bottom: 10px;' class='row'>
+                      <div class='col-sm-6'>
+                        <h3 style=' padding-bottom: -7px;'>Aulas</h3>
+                      </div>
+
+                      <div class='col-sm-6'>
+                        <h3 align='right'>Pagamentos</h3>
+                      </div>
+                        
+                    </div>
+                    <div style='overflow-x: hidden;overflow-y: scroll; height: 78%;'>
+                      <div class='col-sm-6' style="border-right: 1px solid lightgrey;">
+
+              <?php
+                $resultado_id5=mysqli_query($link, "SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_idProfessor`='$id'");
+
+                if ($resultado_id5) {
+                  
+                  while($dados_login5 = mysqli_fetch_array($resultado_id5, MYSQLI_ASSOC)){
+
+                    $resultado_id6=mysqli_query($link,"SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$dados_login5['sisoda_aulas_idAluno']."'");
+
+                    while($dados_login6 = mysqli_fetch_array($resultado_id6, MYSQLI_ASSOC)){
+
+                      $aluno=$dados_login6['sisOda_alunos_nome'];
+
+                    }
+
+                    if ($dados_login5['sisoda_aulas_paga']==1) {
+                      $paga='Paga';
+                    }else{
+                      $paga='Não Paga';
+                    }
+
+                    $data_aula=date_format(date_create($dados_login5['sisoda_aulas_data']),'d/m/Y');
+                    $hora_aula=date_format(date_create($dados_login5['sisoda_aulas_data']),'H:i');
+
+                    echo "
+
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: -20px;'>
+                                    <p>Valor R$".$dados_login['sisoda_professores_valor']."</p>
+                                    <p>$paga</p>
+                                    <p><a href='aula_ind.php?id=".$dados_login5['sisoda_aulas_id']."'>Aula com o aluno(a) $aluno</a></p>
+                                    <p>$data_aula às $hora_aula</p>
+                        </div>
+
+                    ";
+
+                  }
+
+                }
+
+              ?>
+
+                        
+                      </div>
+                      <div class='col-sm-6'>
+
+              <?php
+
+                $resultado_id7=mysqli_query($link,"SELECT * FROM `sisoda_pagamentos_prof` WHERE `sisoda_pagamentos_prof_idProfessor`='$id'");
+
+                if ($resultado_id7) {
+                  
+                  while($dados_login7 = mysqli_fetch_array($resultado_id7, MYSQLI_ASSOC)){
+
+                    $data_pag=date_format(date_create($dados_login7['sisoda_pagamentos_prof_data']),'d/m/Y');
+
+                    echo "
+
+                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-right: 10px; text-align: right;'>
+                          <p>Valor R$".$dados_login7['sisoda_pagamentos_prof_valor']."</p>
+                          <p>Pago Dia $data_pag</p>                        
+                        </div>
+
+                    ";
+
+                  }
+
+                }
+
+              ?>
+                       
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+
+              <div aria-hidden='true' aria-labelledby='myModalLabel' role='dialog' tabindex='-1' id='myModal' class='modal fade'>
+                  <div class='modal-dialog'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button>
+                        <h4 class='modal-title'>Foto do Professor</h4>
+                      </div>
+                      <div class='modal-body text-center'>
+
+                        <img src='img/alunos/'>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div aria-hidden='true' aria-labelledby='myModalLabel' role='dialog' tabindex='-1' id='myModal2' class='modal fade'>
+                      <div class='modal-dialog'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button>
+                            <h4 class='modal-title'>Feedbacks</h4>
+                          </div>
+                          <div class='modal-body text-center'>
+                            <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px;'>
+                                <h4><a href=''>Aula com o aluno Matheus</a></h4>
+                                <h4>24/04/2020 às 20:30</h4>
+                                <div class='col-md-3'>
+                                  
+                                </div>
+                                <div class='col-md-6'>
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam risus ex, lacinia vitae eleifend eget, condimentum ut ipsum. Aliquam at ipsum orci. Fusce ut ornare mauris.</p>
+                                </div>
+                                <div class='col-md-3'>
+                                  
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              </div>
       </section>
+
     </section>
     <!--main content end-->
   </section>

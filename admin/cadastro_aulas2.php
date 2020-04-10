@@ -101,45 +101,55 @@
             <section style="margin-top: -17px;" class="panel">
               <div class="panel-body">
                 <h3 align="center">Selecionar Aluno</h3>
-                <form action="cadastro_aulas3.php" method="GET">
+                
 
                   <?php
 
-                    $url='';
-                    $url2='';
+                    if (isset($_GET['id_prof']) and $_GET['id_prof']!=='') {
+                      echo "<form action='cadastro_aulas5.php' method='GET'>";
+                    }else{
+                      echo "<form action='cadastro_aulas3.php' method='GET'>";
+                    }
 
-                    if (isset($_GET['id_aluno'])) {
+                    $url_aluno='';
+                    $url_prof='';
 
+                    if (isset($_GET['id_aluno']) and $_GET['id_aluno']!=='') {
+                      
                       $id_aluno=$_GET['id_aluno'];
-                      $nome_aluno=$_GET['nome_aluno2'];
+                      $nome_aluno=$_GET['a'.$id_aluno];
+                      $url_aluno='id_aluno='.$id_aluno.'&a'.$id_aluno.'='.$nome_aluno;
 
-                      $url=$url."id_aluno=$id_aluno&nome_aluno2=$nome_aluno";
-                    }else{
-                      $url=$url."id_aluno=&nome_aluno2=";
                     }
-                    if (isset($_GET['id_prof'])) {
 
+                    if (isset($_GET['id_prof']) and $_GET['id_prof']!=='') {
+                      
                       $id_prof=$_GET['id_prof'];
-                      $nome_prof=$_GET['nome_prof2'];
+                      $nome_prof=$_GET['p'.$id_prof];
+                      $url_prof='id_prof='.$id_prof.'&p'.$id_prof.'='.$nome_prof;
+                      
 
-                      $url2=$url2."id_prof=$id_prof&nome_prof2=$nome_prof";
-                    }else{
-                      $url2=$url2."id_prof=&nome_prof2=";
                     }
 
-                    if (isset($_GET['id_aluno'])) {
+                    if (isset($_GET['id_aluno']) and $_GET['id_aluno']!=='') {
+
                       echo "<h5 align='center'>Aluno selecionado: $nome_aluno ($id_aluno)</h5>";
-                      echo "<a align='center' href='cadastro_aulas.php?".$url."&".$url2."'><h6>Modificar Aluno</h6></a>";
+                      echo "<a align='center' href='cadastro_aulas.php?$url_aluno'><h6>Modificar Aluno</h6></a>";
+                      echo "<input type='hidden' name='id_aluno' value='$id_aluno'>";
+                      echo "<input type='hidden' name='a$id_aluno' value='$nome_aluno'>";
+
                     }
-                    if (isset($_GET['id_prof'])) {
+
+                    if (isset($_GET['id_prof']) and $_GET['id_prof']!=='') {
+
                       echo "<h5 align='center'>Professor selecionado: $nome_prof ($id_prof)</h5>";
-                      echo "<a align='center' href='cadastro_aulas3.php?".$url."&".$url2."'><h6>Modificar Professor</h6></a>";
+                      echo "<a align='center' href='cadastro_aulas3.php?$url_aluno'><h6>Modificar</h6></a>";
                       echo "<input type='hidden' name='id_prof' value='$id_prof'>";
-                      echo "<input type='hidden' name='nome_prof2' value='$nome_prof'>";
+                      echo "<input type='hidden' name='p$id_prof' value='$nome_prof'>";
 
                     }
-
-                  ?><br>
+                    ?>
+                  <br>
 
                 <table class="table table-striped table-advance table-hover">
                 <tbody>
@@ -195,7 +205,7 @@
         while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
 
           echo "<tr style='background-color:#dcdcdc;'>
-                    <td><input type='radio' onclick='check(\"".$dados_login['sisOda_alunos_id']."\")' name='id_aluno' value='".$dados_login['sisOda_alunos_id']."'><input type='radio' style='display:none' id='".$dados_login['sisOda_alunos_id']."' name='nome_aluno2' value='".$dados_login['sisOda_alunos_nome']."'><input type='radio'  id='".$dados_login['sisOda_alunos_id']."' name='saldo_aluno' value='".$dados_login['sisOda_alunos_saldo']."'><input type='radio'  id='".$dados_login['sisOda_alunos_id']."' name='valor_aluno' value='".$dados_login['sisOda_alunos_tipoDePlano']."'></td>";
+                    <td><input type='radio' name='id_aluno' value='".$dados_login['sisOda_alunos_id']."'><input type='hidden' name='a".$dados_login['sisOda_alunos_id']."' value='".$dados_login['sisOda_alunos_nome']."'></td>";
 
           echo "<td>".$dados_login['sisOda_alunos_nome']." ".$dados_login['sisOda_alunos_sobrenome']."</td>";
 

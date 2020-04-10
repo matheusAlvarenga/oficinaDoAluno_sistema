@@ -82,149 +82,9 @@
             </ol>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <i class="fa fa-user"></i>
-              <div class="count">
-                
-                <?php
-
-                  require_once('../db.class.php');
-
-                  $sql = "SELECT `sisOda_alunos_id` FROM sisoda_alunos";
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
-
-                  $resultado_id = mysqli_query($link, $sql);
-                  $cont=mysqli_num_rows($resultado_id);
-
-                  echo "$cont";
-
-                ?>
-
-              </div>
-              <div class="title">Alunos Ativos</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-down"></i>
-              <div class="count">
-
-                <?php
-
-                  require_once('../db.class.php');
-
-                  $sql = "SELECT `sisOda_alunos_id` FROM sisoda_alunos WHERE `sisOda_alunos_saldo` < 0";
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
-
-                  $resultado_id = mysqli_query($link, $sql);
-                  $cont=mysqli_num_rows($resultado_id);
-
-                  echo "$cont";
-
-                ?>
-
-              </div>
-              <div class="title">Alunos com Pendências</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <i class="fa fa-clipboard-list"></i>
-              <div class="count">
-
-                <?php
-
-                  require_once('../db.class.php');
-
-                  date_default_timezone_set('America/Sao_Paulo');
-
-                  $date = date('Y/m/d', time());
-
-                  $sql = "SELECT `sisOda_aulas_id` FROM sisoda_aulas WHERE WEEK(`sisOda_aulas_data`,0) = WEEK('$date',0)";
-
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
-
-                  $resultado_id = mysqli_query($link, $sql);
-                  $cont=mysqli_num_rows($resultado_id);
-
-                  echo "$cont";
-
-                ?>
-
-              </div>
-              <div class="title">Aulas essa Semana</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-          <!--/.col-->
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-chalkboard-teacher"></i>
-              <div class="count">
-
-                <?php
-
-                  require_once('../db.class.php');
-
-                  $sql = "SELECT `sisoda_professores_id` FROM sisoda_professores";
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
-
-                  $resultado_id = mysqli_query($link, $sql);
-                  $cont=mysqli_num_rows($resultado_id);
-
-                  echo "$cont";
-
-                ?>
-
-              </div>
-              <div class="title">Professores</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-        </div>
+        
         <!--/.row-->
         <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-md-12 portlets">
-            <div class="panel panel-default">
-              <div style="height: 20px" class="panel-heading">
-                <h2><strong>Gráficos</strong></h2>
-                <div class="panel-actions">
-                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>
-              </div><br><br><br>
-              <div class="panel-body">
-                
-                <div class="row">
-                  
-                  <div class="col-md-6">
-                    <canvas></canvas>  
-                  </div>
-                  <div class="col-md-6">
-                    
-                  </div>
-
-                </div>
-                <div class="row">
-                  
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-md-12 portlets">
             <div class="panel panel-default">
@@ -288,60 +148,57 @@
       navLinks: true, // can click day/week names to navigate views
       eventLimit: true, // allow "more" link when too many events
       events: [
-        {
-          title: 'All Day Event',
-          start: '2020-02-01',
-        },
-        {
-          title: 'Long Event',
-          start: '2020-02-07',
-          end: '2020-02-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-02-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-02-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-02-11',
-          end: '2020-02-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-02-12T10:30:00',
-          end: '2020-02-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-02-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-02-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-02-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-02-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-02-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-02-28'
-        }
+
+      <?php
+
+        require_once('../db.class.php');
+
+        $objDb = new db();
+        $link = $objDb->conecta_mysql();
+
+        $sql="SELECT * FROM `sisoda_aulas`";
+
+        $resultado_id = mysqli_query($link, $sql);
+
+            if ($resultado_id) {
+
+              while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+
+                $sql2="SELECT `sisoda_professores_nome` FROM `sisoda_professores` WHERE `sisoda_professores_id`='".$dados_login['sisoda_aulas_idProfessor']."'";
+
+                $resultado_id2 = mysqli_query($link, $sql2);
+
+                if ($resultado_id2) {
+
+                  while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                    $data=date_create($dados_login['sisoda_aulas_data']);
+
+                    $data2=date_format($data,'Y-m-d');
+                    $data3=date_format($data,'H:i');
+                    $data4=$data2.'T'.$data3;
+
+                    echo "{";
+
+                    echo "title:'".$dados_login2['sisoda_professores_nome']."',";
+                    echo "url:'aula_ind.php?id=".$dados_login['sisoda_aulas_id']."',";
+                    echo "start:'$data4'";
+
+                    echo "},";
+
+                  }
+
+                }
+
+                
+
+              }
+
+            }
+
+        
+
+      ?>
       ]
     });
 
