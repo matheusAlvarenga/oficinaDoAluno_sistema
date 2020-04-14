@@ -150,7 +150,7 @@
 
             $data2=date_format($data,'d/m/Y');
                               
-            $end=$dados_login['sisOda_alunos_rua'].", ".$dados_login['sisOda_alunos_numero']." - ".$dados_login['sisOda_alunos_bairro']." - ".$dados_login['sisOda_alunos_cidade']." - ".$dados_login['sisOda_alunos_estado'];
+            $end=$dados_login['sisOda_alunos_rua'].", ".$dados_login['sisOda_alunos_numero']." - ".$dados_login['sisOda_alunos_bairro']." - ".$dados_login['sisOda_alunos_cidade']." - ".$dados_login['sisOda_alunos_estado']." - Complemento: ".$dados_login['sisOda_alunos_complemento'];
 
             echo "
               <section style='margin-top:20px;' class='wrapper'>

@@ -131,9 +131,34 @@
                     </div><br><br>
                   </div>
                   <div class="form-group">
-                    <label style="text-align: right; margin-top: 5px;" class="col-sm-2 control-label">Data de Nascimento</label>
+                    <label style="text-align: right; margin-top: 5px;" class="col-sm-2 control-label">Matéria</label>
                     <div class="col-sm-10">
-                      <input type="date" name="data_aluno" class="form-control">
+                      <select class="form-control" name="materia">
+
+                        <option value="">Nenhuma Selecionada</option>
+
+                        <?php
+
+                          require_once('../db.class.php');
+
+                          $objDb = new db();
+                          $link = $objDb->conecta_mysql();
+
+                          $resultado_id=mysqli_query($link, "SELECT * FROM `sisoda_materias`");
+
+                          if ($resultado_id) {
+                            
+                            while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+
+                              echo "<option value='".$dados_login['sisoda_materias_id']."'>".$dados_login['sisoda_materias_nome']."</option>";
+
+                            }
+
+                          }
+
+                        ?>
+
+                      </select>
                     </div><br><br>
                   </div>
                   <div class="form-group">

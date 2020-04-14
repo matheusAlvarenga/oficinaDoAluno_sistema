@@ -3,64 +3,48 @@
   if(!isset($_SESSION['id_admin'])){
     header('Location: ../sem_login.html');
   }
+
 ?>
-
 <?php
-
-  $id=$_GET['id'];
 
   require_once('../db.class.php');
 
   $objDb = new db();
   $link = $objDb->conecta_mysql();
 
-  $resultado_id=mysqli_query($link,"SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='$id'");
+  $id=$_GET['id'];
 
-  if ($resultado_id) {
+  $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_id`='$id'");
+
+  if ($resultado_id2) {
     
-    $dados_login = mysqli_fetch_array($resultado_id);
-    $nome=$dados_login['sisOda_alunos_nome'];
-    $sobrenome=$dados_login['sisOda_alunos_sobrenome'];
-    $data=$dados_login['sisOda_alunos_dataNascimento'];
-    $email=$dados_login['sisoda_alunos_email'];
-    $colegio=$dados_login['sisOda_alunos_colegio'];
-    $ano=$dados_login['sisOda_alunos_anoId'];
-    $cep=$dados_login['sisOda_alunos_cep'];
-    $rua=$dados_login['sisOda_alunos_rua'];
-    $numero=$dados_login['sisOda_alunos_numero'];
-    $bairro=$dados_login['sisOda_alunos_bairro'];
-    $cidade=$dados_login['sisOda_alunos_cidade'];
-    $estado=$dados_login['sisOda_alunos_estado'];
-    $complemento=$dados_login['sisOda_alunos_complemento'];
-    $obs=$dados_login['sisOda_alunos_obs'];
-    $telefone=$dados_login['sisoda_alunos_telefone'];
-    $nome_rep1=$dados_login['sisOda_alunos_nomeRepUm'];
-    $email_rep1=$dados_login['sisOda_alunos_emailRepUm'];
-    $tel_rep1=$dados_login['sisOda_alunos_telRepUm'];
-    $nome_rep2=$dados_login['sisOda_alunos_nomeRepDois'];
-    $email_rep2=$dados_login['sisOda_alunos_emailRepDois'];
-    $tel_rep2=$dados_login['sisOda_alunos_telRepDois'];
-    $rep_fin=$dados_login['sisOda_alunos_financeiro'];
-    $valor=$dados_login['sisOda_alunos_tipoDePlano'];
+    $dados_login2 = mysqli_fetch_array($resultado_id2);
 
-    if ($dados_login['sisoda_alunos_mensal'] == 0) {
-      
-      $mensal='0.00';
+    $nome=$dados_login2['sisoda_professores_nome'];
+    $sobrenome=$dados_login2['sisoda_professores_sobrenome'];
+    $data=$dados_login2['sisoda_professores_data'];
+    $email=$dados_login2['sisoda_professores_email'];
+    $materias=$dados_login2['sisoda_professores_materias'];
+    $cep=$dados_login2['sisoda_professores_cep'];
+    $rua=$dados_login2['sisoda_professores_rua'];
+    $numero=$dados_login2['sisoda_professores_numero'];
+    $bairro=$dados_login2['sisoda_professores_bairro'];
+    $cidade=$dados_login2['sisoda_professores_cidade'];
+    $estado=$dados_login2['sisoda_professores_estado'];
+    $complemento=$dados_login2['sisoda_professores_complemento'];
+    $obs=$dados_login2['sisoda_professores_obs'];
+    $telefone=$dados_login2['sisoda_professores_telefone'];
+    $cpf=$dados_login2['sisoda_professores_cpf'];
+    $banco=$dados_login2['sisoda_professores_banco'];
+    $tipoConta=$dados_login2['sisoda_professores_tipoConta'];
+    $agencia=$dados_login2['sisoda_professores_agencia'];
+    $conta=$dados_login2['sisoda_professores_conta'];
+    $mensal=$dados_login2['sisoda_professores_mensal'];
+    $valor=$dados_login2['sisoda_professores_valor'];
+    $unidade=$dados_login2['sisoda_professores_unidade'];
+    $foto=$dados_login2['sisoda_professores_foto'];
 
-    }else{
-      $mensal=$dados_login['sisoda_alunos_mensal'];
-    }
-
-    $unid=$dados_login['sisOda_alunos_unidade'];
-    $cpf=$dados_login['sisoda_alunos_cpf'];
-    $foto=$dados_login['sisOda_alunos_foto'];
-
-
-  }else{
-    echo "Deu ruim krai";
   }
-
-  
 
 ?>
 <html lang="pt-br">
@@ -73,6 +57,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
   <title>Oficina do Aluno - Dashboard Administrador</title>
+  <link rel="stylesheet" type="text/css" href="css/css.css">
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -175,7 +160,7 @@ function(){
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.php">Ínicio</a></li>
               <li><i class="icon_document_alt"></i>Alunos</li>
-              <li><i class="icon_document_alt"></i>Editar Aluno</li>
+              <li><i class="icon_document_alt"></i>Cadastro de Professores</li>
             </ol>
           </div>
         </div>
@@ -183,190 +168,197 @@ function(){
           <div class="col-lg-12">
             <section style="margin-top: -17px;" class="panel">
               <div class="panel-body">
-                <form style="margin-left: -30px; margin-right: 20px;" class="form-horizontal" method="POST" action="editar_aluno2.php">
+                <form style="margin-left: -30px; margin-right: 20px;" class="form-horizontal" method="POST" action="editar_prof2.php">
+
                   <?php
 
-                  echo "<input type='hidden' value='$id' name='id'>";
-                  echo "<input type='hidden' value='$foto' name='foto'>";
+                    echo "<input type='hidden' name='id' value='$id'>";
+                    echo "<input type='hidden' name='foto' value='$foto'>";
 
                   ?>
+
                   <div class="form-group">
-                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Aluno</h3>
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Professor</h3>
                     <label class="col-sm-2 control-label">Nome</label>
                     <div style="margin-right: -50px;" class="col-sm-4">
-                      <input value=<?php echo "'$nome'"; ?> type="text" maxlength="50" name="nome_aluno" class="form-control" required>
+                      <input value=<?php echo "'$nome'"; ?> type="text" maxlength="50" name="nome_prof" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">Sobrenome</label>
                     <div class="col-sm-4">
-                      <input value=<?php echo "'$sobrenome'"; ?> type="text" maxlength="150" name="sobrenome_aluno" class="form-control" required>
+                      <input value=<?php echo "'$sobrenome'"; ?> type="text" maxlength="150" name="sobrenome_prof" class="form-control" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Data de Nasc.</label>
                     <div style="margin-right: -50px;" class="col-sm-2">
-                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_aluno" class="form-control" required>
+                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_prof" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">E-mail</label>
                     <div class="col-sm-6">
-                      <input value=<?php echo "'$email'"; ?> type="text" name="email_aluno" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
+                      <input value=<?php echo "'$email'"; ?> type="text" name="email_prof" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">Colégio</label>
-                    <div style="margin-right: -40px;" class="col-sm-3">
-                      <input value=<?php echo "'$colegio'"; ?> type="text" name="colegio_aluno" maxlength="100" class="form-control" required>
-                    </div>
-                    <label style="margin-left: -60px;" class="col-sm-2 control-label">Ano</label>
-                    <div class="col-sm-2">
-                      <select name="ano_aluno" class="form-control m-bot15" required>
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Matérias</h3>
+                    <div class="col-sm-1"></div>
+                    <div style="margin-left: 50px;" class="col-sm-10">
+                      <ul class="ks-cboxtags">
+
                         <?php
 
-                          $resultado_id2=mysqli_query($link,"SELECT * FROM `sisoda_ano`");
+                          $array_mat=explode(',', $materias);
 
-                          while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+                          $sql = "SELECT * FROM sisoda_materias";
 
-                            if ($dados_login2['sisoda_ano_id']==$ano) {
-                              
-                              echo "<option value='".$dados_login2['sisoda_ano_id']."' selected>".$dados_login2['sisoda_ano_nome']."</option>";
+                          $resultado_id = mysqli_query($link, $sql);
 
+                            if($resultado_id){
+
+                              while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+
+                                  if (in_array($dados_login['sisoda_materias_id'], $array_mat)) {
+                                    
+                                    echo "
+
+                                      <li><input name='materias[]' type='checkbox' id='".$dados_login['sisoda_materias_id']."' value='".$dados_login['sisoda_materias_id']."' checked><label for='".$dados_login['sisoda_materias_id']."'>".$dados_login['sisoda_materias_nome']."</label></li>
+
+                                    ";
+
+                                  }else{
+
+                                    echo "
+
+                                      <li><input name='materias[]' type='checkbox' id='".$dados_login['sisoda_materias_id']."' value='".$dados_login['sisoda_materias_id']."'><label for='".$dados_login['sisoda_materias_id']."'>".$dados_login['sisoda_materias_nome']."</label></li>
+
+                                    ";
+
+                                  }
+
+                                
+
+                              }
                             }else{
-
-                              echo "<option value='".$dados_login2['sisoda_ano_id']."'>".$dados_login2['sisoda_ano_nome']."</option>";
-
+                              echo "Erro";
                             }
 
-                          }
-
                         ?>
-                      </select>
-                    </div>
-                    <label class="col-sm-1 control-label">Cep</label>
-                    <div style="margin-right: -26px;" class="col-sm-2">
-                      <input value=<?php echo "'$cep'"; ?> onblur="getEndereco()" type="text" id="cep" name="cep_aluno" maxlength="9" class="form-control" required>
+                      </ul>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label style="margin-left: 0px;" class="col-sm-2 control-label">Rua</label>
-                    <div class="col-sm-6">
-                      <input value=<?php echo "'$rua'"; ?> type="text" id="rua" name="rua_aluno" maxlength="100" class="form-control">
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Endereço</h3>
+                    <div class="row">
+                      <label style="margin-left: 0px;" class="col-sm-2 control-label">CEP</label>
+                      <div class="col-sm-9">
+                        <input value=<?php echo "'$cep'"; ?> onblur="getEndereco()" type="text" id="cep" name="cep" maxlength="100" class="form-control">
+                      </div>
+                    </div><br>
+                    <div class="row">
+                      <label style="margin-left: 0px;" class="col-sm-2 control-label">Rua</label>
+                      <div class="col-sm-6">
+                        <input value=<?php echo "'$rua'"; ?> type="text" id="rua" name="rua_prof" maxlength="100" class="form-control">
+                      </div>
+                      <label style="margin-left: -6px;" class="col-sm-1 control-label">Número</label>
+                      <div class="col-sm-2">
+                        <input value=<?php echo "'$numero'"; ?> type="text" onblur="focusNum()" name="num_prof" id="num" maxlength="11" class="form-control">
+                      </div>
                     </div>
-                    <label style="margin-left: -6px;" class="col-sm-1 control-label">Número</label>
-                    <div class="col-sm-2">
-                      <input value=<?php echo "'$numero'"; ?> type="text" onblur="focusNum()" name="num_aluno" id="num" maxlength="11" class="form-control">
-                    </div>
+                    
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Bairro</label>
                     <div style="margin-right: -26px;" class="col-sm-3">
-                      <input value=<?php echo "'$bairro'"; ?> type="text" id="bairro" name="bairro_aluno" maxlength="50" class="form-control" required>
+                      <input value=<?php echo "'$bairro'"; ?> type="text" id="bairro" name="bairro_prof" maxlength="50" class="form-control" required>
                     </div>
                     <label style="margin-left: 10px;" class="col-sm-1 control-label">Cidade</label>
                     <div class="col-sm-3">
-                      <input value=<?php echo "'$cidade'"; ?> type="text" id="cidade" name="cidade_aluno" maxlength="50" class="form-control">
+                      <input value=<?php echo "'$cidade'"; ?> type="text" id="cidade" name="cidade_prof" maxlength="50" class="form-control">
                     </div>
                     <label style="margin-left: 10px;" class="col-sm-1 control-label">Estado</label>
                     <div class="col-sm-1">
-                      <input value=<?php echo "'$estado'"; ?> type="text" id="uf" name="estado_aluno" maxlength="2" class="form-control">
+                      <input value=<?php echo "'$estado'"; ?> type="text" id="uf" name="estado_prof" maxlength="2" class="form-control">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Complemento</label>
                     <div style="" class="col-sm-9">
-                      <input value=<?php echo "'$complemento'"; ?> type="text" id="compl" name="complemento_aluno" maxlength="150" class="form-control">
+                      <input value=<?php echo "'$complemento'"; ?> type="text" id="compl" name="complemento_prof" maxlength="150" class="form-control">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Observações</label>
                     <div style="" class="col-sm-5">
-                      <input value=<?php echo "'$obs'"; ?> type="text" name="obs_aluno" maxlength="200" class="form-control">
+                      <input value=<?php echo "'$obs'"; ?> type="text" name="obs_prof" maxlength="200" class="form-control">
                     </div>
                     <label class="col-sm-1 control-label">Telefone</label>
                     <div style="" class="col-sm-3">
-                      <input value=<?php echo "'$telefone'"; ?> type="text" name="tel_aluno" maxlength="200" class="form-control">
+                      <input value=<?php echo "'$telefone'"; ?> type="text" name="tel_prof" maxlength="200" class="form-control">
                     </div>
                   </div>
                   <br>
                   <div class="form-group">
-                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Responsável 1</h3>
-                    <label class="col-sm-2 control-label">Nome</label>
-                    <div style="margin-right: -26px;" class="col-sm-3">
-                      <input value=<?php echo "'$nome_rep1'"; ?> id="rep1" type="text" name="nome_rep1_aluno" maxlength="200" class="form-control" required>
-                    </div>
-                    <label style="margin-left: -20px; margin-right: -10px;" class="col-sm-1 control-label">E-mail</label>
-                    <div class="col-sm-3">
-                      <input value=<?php echo "'$email_rep1'"; ?> type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email_rep1_aluno" maxlength="100" class="form-control">
-                    </div>
-                    <label style="margin-left: -36px;" class="col-sm-1 control-label">Número</label>
-                    <div class="col-sm-2">
-                      <input value=<?php echo "'$tel_rep1'"; ?> type="text" name="tel_rep1_aluno" maxlength="9" class="form-control">
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Responsável 2</h3>
-                    <label class="col-sm-2 control-label">Nome</label>
-                    <div style="margin-right: -26px;" class="col-sm-3">
-                      <input value=<?php echo "'$nome_rep2'"; ?> id="rep2" onblur="responsaveis()" type="text" name="nome_rep2_aluno" maxlength="200" class="form-control" required>
-                    </div>
-                    <label style="margin-left: -20px; margin-right: -10px;" class="col-sm-1 control-label">E-mail</label>
-                    <div class="col-sm-3">
-                      <input value=<?php echo "'$email_rep2'"; ?> type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email_rep2_aluno" maxlength="100" class="form-control">
-                    </div>
-                    <label style="margin-left: -36px;" class="col-sm-1 control-label">Número</label>
-                    <div class="col-sm-2">
-                      <input value=<?php echo "'$tel_rep2'"; ?> type="text" name="tel_rep2_aluno" maxlength="9" class="form-control">
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Institucionais</h3>
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Bancárias </h3>
                     <div class="row">
-                      <label class="col-sm-2 control-label">Resp. Finânceiro</label>
-                      <div style="margin-right: -26px;" class="col-sm-2">
-                        <select id="fin" name="financeiro_aluno" class="form-control m-bot15" required>
+                      <label class="col-sm-2 control-label">CPF</label>
+                      <div style="" class="col-sm-4">
+                        <input value=<?php echo "'$cpf'"; ?> id="rep1" type="text" name="cpf_prof" maxlength="200" class="form-control" required>
+                      </div>
+                      <label style="" class="col-sm-1 control-label">Banco</label>
+                      <div class="col-sm-4">
+                        <input value=<?php echo "'$banco'"; ?> type="text" name="banco_prof" maxlength="100" class="form-control">
+                      </div>
+                    </div><br>
+                    <div class="row">
+                      <label class="col-sm-2 control-label">Tipo de Conta</label>
+                      <div style="" class="col-sm-3">
+                        <input value=<?php echo "'$tipoConta'"; ?> id="rep1" type="text" name="tipo_prof" maxlength="200" class="form-control" required>
+                      </div>
+                      <label class="col-sm-1 control-label">Agência</label>
+                      <div style="" class="col-sm-2">
+                        <input value=<?php echo "'$agencia'"; ?> id="rep1" type="text" name="ag_prof" maxlength="200" class="form-control" required>
+                      </div>
+                      <label style="" class="col-sm-1 control-label">Conta</label>
+                      <div class="col-sm-2">
+                        <input value=<?php echo "'$conta'"; ?> type="text" name="cc_prof" maxlength="100" class="form-control">
+                      </div>
+                    </div><br>
+                      
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Extras</h3>
+                    <div class="row">
+                      <label class="col-sm-2 control-label">Valor Mensal</label>
+                      <div style="margin-right: -26px;" class="col-sm-3">
+                        <input value=<?php echo "'$mensal'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="mensal_prof" maxlength="100" class="form-control">
+                      </div>
+                      <label style="margin-left: -40px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
+                      <div class="col-sm-3">
+                        <input value=<?php echo "'$valor'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="valor_prof" maxlength="100" class="form-control">
+                      </div>
+                      <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
+                      <div class="col-sm-1">
+                        <select name="unidade_prof" class="form-control m-bot15" required>
                           <?php
 
-                            if ($rep_fin == 1) {
-                              echo "<option value='1'>$nome_rep1</option>";
-                              echo "<option value='2'>$nome_rep2</option>";
+                            if ($unidade == 1) {
+
+                              echo "<option value='1'>1</option>";
+                              echo "<option value='2'>2</option>";
+
                             }else{
-                              echo "<option value='1'>$nome_rep1</option>";
-                              echo "<option value='2' selected>$nome_rep2</option>";
+
+                              echo "<option value='1'>1</option>";
+                              echo "<option value='2' selected>2</option>";
+
                             }
 
                           ?>
                         </select>
-                      </div>
-                      <label style="margin-left: -15px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
-                      <div class="col-sm-2">
-                        <input value=<?php echo "'$valor'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="valor_aluno" maxlength="100" class="form-control">
-                      </div>
-                      <label style="margin-left: -55px;" class="col-sm-2 control-label">Valor Mensal</label>
-                      <div class="col-sm-2">
-                        <input value=<?php echo "'$mensal'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="mensal_aluno" class="form-control">
                       </div>
                     </div><br>
                       <div class="row">
-                        <label class="col-sm-3 control-label">CPF do Resp. Finânceiro</label>
-                        <div style="margin-right:17px;" class="col-sm-4">
-                          <input value=<?php echo "'$cpf'"; ?> type="text" name="cpf_financeiro_aluno" maxlength="100" class="form-control">
-                        </div>
-                        <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
-                      <div class="col-sm-2">
-                        <select name="unidade_aluno" class="form-control m-bot15" required>
-                          <?php
-
-                            if ($unid == 1) {
-                              echo "<option value='1'>1</option>";
-                              echo "<option value='2'>2</option>";
-                            }else{
-                              echo "<option value='1'>1</option>";
-                              echo "<option value='2' selected>2</option>";
-                            }
-
-                          ?>
-                        </select>
-                      </div>
+                        
                       </div><br><br>
                       <div class="row">
                         <div class="form-group">

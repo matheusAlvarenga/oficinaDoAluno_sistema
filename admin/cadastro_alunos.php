@@ -251,29 +251,33 @@ function(){
                     <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Institucionais</h3>
                     <div class="row">
                       <label class="col-sm-2 control-label">Resp. Finânceiro</label>
-                      <div style="margin-right: -26px;" class="col-sm-3">
+                      <div style="margin-right: -26px;" class="col-sm-2">
                         <select id="fin" name="financeiro_aluno" class="form-control m-bot15" required>
                           <option value="1"></option>
                           <option value="2"></option>
                         </select>
                       </div>
-                      <label style="margin-left: -40px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
-                      <div class="col-sm-3">
+                      <label style="margin-left: -15px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
+                      <div class="col-sm-2">
                         <input type="text" pattern="[0-9]+.[0-9]{2}" name="valor_aluno" maxlength="100" class="form-control">
                       </div>
-                      <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
-                      <div class="col-sm-1">
+                      <label style="margin-left: -55px;" class="col-sm-2 control-label">Valor Mensal</label>
+                      <div class="col-sm-2">
+                        <input type="text" name="mensal_aluno" class="form-control">
+                      </div>
+                    </div><br>
+                      <div class="row">
+                        <label class="col-sm-3 control-label">CPF do Resp. Finânceiro</label>
+                        <div style="margin-right:17px;" class="col-sm-4">
+                          <input type="text" name="cpf_financeiro_aluno" maxlength="100" class="form-control">
+                        </div>
+                        <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
+                      <div class="col-sm-2">
                         <select name="unidade_aluno" class="form-control m-bot15" required>
                           <option value="1">1</option>
                           <option value="2">2</option>
                         </select>
                       </div>
-                    </div><br>
-                      <div class="row">
-                        <label class="col-sm-3 control-label">CPF do Resp. Finânceiro</label>
-                        <div style="margin-right: -26px;" class="col-sm-8">
-                          <input type="text" name="cpf_financeiro_aluno" maxlength="100" class="form-control">
-                        </div>
                       </div><br><br>
                       <div class="row">
                         <div class="form-group">

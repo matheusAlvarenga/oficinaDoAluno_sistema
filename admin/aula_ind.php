@@ -82,47 +82,140 @@
 
         <?php
 
+          $id=$_GET['id'];
+
           require_once('../db.class.php');
 
-        ?>
+          $objDb = new db();
+          $link = $objDb->conecta_mysql();
+
+          $resultado_id=mysqli_query($link,"SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_id`='$id'");
+
+          if ($resultado_id) {
+            
+            $dados_login = mysqli_fetch_array($resultado_id);
+
+            if (isset($dados_login['sisoda_aulas_id'])) {
+
+              $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$dados_login['sisoda_aulas_idAluno']."'");
+
+              if ($resultado_id2) {
+                
+                while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                  $id_aluno=$dados_login2['sisOda_alunos_id'];
+                  $nome_aluno=$dados_login2['sisOda_alunos_nome'];
+                  $sobrenome_aluno=$dados_login2['sisOda_alunos_sobrenome'];
+
+                }
+
+              }
+
+              $resultado_id3=mysqli_query($link, "SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_id`='".$dados_login['sisoda_aulas_idProfessor']."'");
+
+              if ($resultado_id3) {
+                
+                while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+
+                  $id_prof=$dados_login3['sisoda_professores_id'];
+                  $nome_prof=$dados_login3['sisoda_professores_nome'];
+                  $sobrenome_prof=$dados_login3['sisoda_professores_sobrenome'];
+
+                }
+
+              }
+
+              $materias=explode(',', $dados_login['sisoda_aulas_materia']);
+              $str_materias='';
+
+              foreach ($materias as $key => $value) {
+                
+                $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_materias` WHERE `sisoda_materias_id`='$value'");
+
+                while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                  $str_materias=$str_materias.$dados_login2['sisoda_materias_nome']." ";
+
+                }
+
+              }
+
+              if ($dados_login['sisoda_aulas_paga']==1) {
+                $paga='Sim';
+              }else{
+                $paga='Não';
+              }
+
+              if ($dados_login['sisoda_aulas_recebida']==1) {
+                $recebida='Sim';
+              }else{
+                $recebida='Não';
+              }
+
+              if ($dados_login['sisoda_aulas_comentarioAluno']==NULL) {
+                $comentario_aluno='O feedback do aluno não foi feito ainda.';
+              }else{
+                $comentario_aluno=$dados_login['sisoda_aulas_comentarioAluno'];
+              }
+
+              if ($dados_login['sisoda_aulas_comentarioProfessor']==NULL) {
+                $comentario_professor='O feedback do professor não foi feito ainda.';
+              }else{
+                $comentario_professor=$dados_login['sisoda_aulas_comentarioProfessor'];
+              }
+
+              $data_aula=date_format(date_create($dados_login['sisoda_aulas_data']),'d/m/Y');
+              $hora_aula=date_format(date_create($dados_login['sisoda_aulas_data']),'H:i');
+              
+              echo "
 
                 <div class='col-xs-5'>
                   <div class='row'>
                     <h3 style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Página da Aula</h3>
                       <div class='row text-center' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
-                        <a href='prof_ind.php?id='><button style='margin-bottom: 15px;' class='btn btn-primary'><h4 style='padding: 0px 0px 0px 0px'>Acessar Professor</h4></button></a>
-                        <a href='aluno_ind.php?id='><button style='margin-bottom: 15px;' class='btn btn-success'><h4 style='padding: 0px 0px 0px 0px'>Acessar Aluno</h4></button></a><br>
-                        <a href='editar_aula.php?id='><button style='margin-bottom: 15px;' class='btn btn-warning'><h4 style='padding: 0px 0px 0px 0px'>Editar Aula</h4></button></a>
-                        <a href='apagar_aula.php?id='><button style='margin-bottom: 15px;' class='btn btn-danger'><h4 style='padding: 0px 0px 0px 0px'>Não Listar</h4></button></a>
+                        <a href='prof_ind.php?id=$id_prof'><button style='margin-bottom: 15px;' class='btn btn-primary'><h4 style='padding: 0px 0px 0px 0px'>Acessar Professor</h4></button></a>
+                        <a href='aluno_ind.php?id=$id_aluno'><button style='margin-bottom: 15px;' class='btn btn-success'><h4 style='padding: 0px 0px 0px 0px'>Acessar Aluno</h4></button></a><br>
+                        <a href='editar_aula.php?id=$id'><button style='margin-bottom: 15px;' class='btn btn-warning'><h4 style='padding: 0px 0px 0px 0px'>Editar Aula</h4></button></a>
+                        <a href='apagar_aula.php?id=$id'><button style='margin-bottom: 15px;' class='btn btn-danger'><h4 style='padding: 0px 0px 0px 0px'>Não Listar</h4></button></a>
                     </div>
                     <div style='overflow-x: hidden; overflow-y: scroll; height: 54%;'>
                       <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
                       <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Dados da Aula</h3>
                         <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px;'>
-                          <p style="font-size: 13px; margin-bottom: -5px;" align="center">Aluno</p>
-                          <p style="font-size: 21px;" align="center"><a href="#">Matheus Alvarenga</a></p>
-                          <p style="font-size: 13px; margin-bottom: -5px;" align="center">Professor</p>
-                          <p style="font-size: 21px; margin-bottom: 10px;" align="center"><a href="#">Livia dos Reis</a></p>
-                          <p style="font-size: 13px; margin-bottom: -5px;" align="center">Data</p>
-                          <p style="font-size: 25px;" align="center">24/04/2020 às 16:30</p>
+                          <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Aluno</p>
+                          <p style='font-size: 21px;' align='center'><a href='aluno_ind.php?id=$id_aluno'>$nome_aluno $sobrenome_aluno</a></p>
+                          <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Professor</p>
+                          <p style='font-size: 21px; margin-bottom: 10px;' align='center'><a href='prof_ind.php?id=$id_prof'>$nome_prof $sobrenome_prof</a></p>
+                          <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Data</p>
+                          <p style='font-size: 25px;' align='center'>$data_aula às $hora_aula</p>
 
                         </div>
                         <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
-                          <p>Matéria: Biologia</p>
-                          <p>Tópicos Abordados: Lorem Lipsum</p>
-                          <p>Unidade: 2 </p>
+                          <p>Matéria: $str_materias</p>
+                          <p>Tópicos Abordados: ".$dados_login['sisoda_aulas_topicos']."</p>
+                          <p>Unidade: ".$dados_login['sisoda_aulas_unidade']." </p>
 
                         </div>
                         <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
                           <h4>Finânceiro</h4>
-                          <p>Aula Recebida? Não</p>
-                          <p>Aula Paga? Sim</p>
+                          <p>Aula Recebida? $recebida</p>
+                          <p>Aula Paga? $paga</p>
 
                         </div>
                       </div>
                     </div>
                 </div>
              </div>
+
+              ";
+
+            }
+            
+          }
+
+        ?>
+
+                
              <div style='border-right: 2px lightgrey solid; height: 76%; margin-left: -5px;' class='col-xs-1'>
                   
                 </div>
@@ -132,15 +225,22 @@
              <div class='col-xs-5'>
                   <div class='row'>
                     <div style='overflow-x: hidden; overflow-y: scroll; height: 43%;border-bottom: 1px lightgrey solid; '>
+
+              <?php
+
+
+
+              ?>
+
                       <div class='row' style='margin-bottom: 10px; font-size: 17px;'>
                       <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Feedback do Aluno</h3>
-                        <p align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam risus ex, lacinia vitae eleifend eget, condimentum ut ipsum. Aliquam at ipsum orci. Fusce ut ornare mauris.</p>
+                        <p align='center'><?php echo $comentario_aluno; ?></p>
                       </div>
                     </div>
                     <div style='overflow-x: hidden; overflow-y: scroll; height: 43%;border-bottom: 1px lightgrey solid; '>
                       <div class='row' style='margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
                       <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Feedback do Professor</h3>
-                        <p align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam risus ex, lacinia vitae eleifend eget, condimentum ut ipsum. Aliquam at ipsum orci. Fusce ut ornare mauris.</p>
+                        <p align='center'><?php echo $comentario_professor; ?></p>
                       </div>
                     </div>
                   </div>
@@ -153,14 +253,14 @@
   </section>
   <!-- container section start -->
   <!-- javascripts -->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery-ui-1.10.4.min.js"></script>
-  <script src="js/jquery-1.8.3.min.js"></script>
-  <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src='js/jquery.js'></script>
+  <script src='js/jquery-ui-1.10.4.min.js'></script>
+  <script src='js/jquery-1.8.3.min.js'></script>
+  <script type='text/javascript' src='js/jquery-ui-1.9.2.custom.min.js'></script>
   <!-- bootstrap -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src='js/bootstrap.min.js'></script>
   <!-- nice scroll -->
-  <script src="js/jquery.scrollTo.min.js"></script>
+  <script src='js/jquery.scrollTo.min.js'></script>
   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
   <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='assets/fullcalendar/fullcalendar/fullcalendar.print.css' media='print' />

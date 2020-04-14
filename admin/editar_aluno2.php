@@ -54,6 +54,9 @@
 
       include("menu.php");
 
+      $id_aluno=$_POST['id'];
+      $foto=$_POST['foto'];
+
     ?>
     <!--sidebar end-->
     <!--main content start-->
@@ -79,11 +82,14 @@
                     <div class="row">
                       <label style="text-align: center; font-size: 20px;" class="col-sm-12 control-label">Foto</label>
                     </div>
+                    <div style="margin-bottom: 20px;" class="text-center">
+                      <img width="250" src=<?php echo "'img/alunos/$foto'"; ?>><br>
+                    </div>
                     <form enctype="multipart/form-data" action="foto_alunos.php" method="post">                    
                       <div class="row">
                         <div class="col-sm-3"></div>
                         <div style="margin-right: -50px;" class="col-sm-6">
-                          <input type="file" name="file" class="form-control" required>
+                          <input type="file" name="file" class="form-control">
                         </div>
                         <div class="col-sm-3"></div>
                       </div><br>
@@ -118,7 +124,7 @@
                         $sisOda_alunos_telRepDois=$_POST['tel_rep2_aluno'];
                         
 
-                        if (!isset($_POST['mensal_aluno'])) {
+                        if ($_POST['mensal_aluno'] == '' or !isset($_POST['mensal_aluno'])) {
                           $sisOda_alunos_mensal=NULL;
                         }else{
                           $sisOda_alunos_mensal=$_POST['mensal_aluno'];
@@ -131,6 +137,7 @@
                         }else{
                         $sisOda_alunos_obs=$_POST['obs_aluno'];
                         }
+
                         $sisoda_alunos_telefone=$_POST['tel_aluno'];
 
 
@@ -138,28 +145,19 @@
                         $objDb = new db();
                         $link = $objDb->conecta_mysql();
 
-                        $sql="INSERT INTO `sisoda_alunos` (`sisOda_alunos_id`, `sisOda_alunos_nome`, `sisOda_alunos_sobrenome`, `sisoda_alunos_cpf`, `sisoda_alunos_email`, `sisOda_alunos_dataNascimento`, `sisOda_alunos_colegio`, `sisOda_alunos_anoId`, `sisOda_alunos_rua`, `sisOda_alunos_numero`, `sisOda_alunos_bairro`, `sisOda_alunos_cidade`, `sisOda_alunos_estado`, `sisOda_alunos_complemento`, `sisOda_alunos_cep`, `sisOda_alunos_nomeRepUm`, `sisOda_alunos_emailRepUm`, `sisOda_alunos_telRepUm`, `sisOda_alunos_nomeRepDois`, `sisOda_alunos_emailRepDois`, `sisOda_alunos_financeiro`, `sisOda_alunos_telRepDois`, `sisOda_alunos_tipoDePlano`, `sisOda_alunos_foto`, `sisOda_alunos_unidade`, `sisOda_alunos_ativo`, `sisOda_alunos_obs`, `sisoda_alunos_telefone`, `sisOda_alunos_saldo`,`sisOda_alunos_mensal`) VALUES (NULL, '$sisOda_alunos_nome', '$sisOda_alunos_sobrenome', '$sisoda_alunos_cpf', '$sisoda_alunos_email', '$sisOda_alunos_dataNascimento', '$sisOda_alunos_colegio', '$sisOda_alunos_anoId', '$sisOda_alunos_rua', '$sisOda_alunos_numero', '$sisOda_alunos_bairro', '$sisOda_alunos_cidade', '$sisOda_alunos_estado', '$sisOda_alunos_complemento', '$sisOda_alunos_cep', '$sisOda_alunos_nomeRepUm', '$sisOda_alunos_emailRepUm', '$sisOda_alunos_telRepUm', '$sisOda_alunos_nomeRepDois', '$sisOda_alunos_emailRepDois', '$sisOda_alunos_financeiro', '$sisOda_alunos_telRepDois', '$sisOda_alunos_tipoDePlano', NULL, '$sisOda_alunos_unidade', '1', '$sisOda_alunos_obs', '$sisoda_alunos_telefone', '0.00','$sisOda_alunos_mensal')";
+                        $sql="UPDATE `sisoda_alunos` SET `sisOda_alunos_nome`='$sisOda_alunos_nome',`sisOda_alunos_sobrenome`='$sisOda_alunos_sobrenome',`sisoda_alunos_email`='$sisoda_alunos_email',`sisOda_alunos_dataNascimento`='$sisOda_alunos_dataNascimento',`sisOda_alunos_colegio`='$sisOda_alunos_colegio',`sisOda_alunos_anoId`='$sisOda_alunos_anoId',`sisOda_alunos_rua`='$sisOda_alunos_rua',`sisOda_alunos_numero`='$sisOda_alunos_numero',`sisOda_alunos_bairro`='$sisOda_alunos_bairro',`sisOda_alunos_cidade`='$sisOda_alunos_cidade',`sisOda_alunos_estado`='$sisOda_alunos_estado',`sisOda_alunos_complemento`='$sisOda_alunos_complemento',`sisOda_alunos_cep`='$sisOda_alunos_cep',`sisOda_alunos_nomeRepUm`='$sisOda_alunos_nomeRepUm',`sisOda_alunos_emailRepUm`='$sisOda_alunos_emailRepUm',`sisOda_alunos_telRepUm`='$sisOda_alunos_telRepUm',`sisOda_alunos_nomeRepDois`='$sisOda_alunos_nomeRepDois',`sisOda_alunos_emailRepDois`='$sisOda_alunos_emailRepDois',`sisOda_alunos_financeiro`='$sisOda_alunos_financeiro',`sisoda_alunos_cpf`='$sisoda_alunos_cpf',`sisOda_alunos_telRepDois`='$sisOda_alunos_telRepDois',`sisOda_alunos_tipoDePlano`='$sisOda_alunos_tipoDePlano',`sisoda_alunos_mensal`='$sisOda_alunos_mensal',`sisOda_alunos_unidade`='$sisOda_alunos_unidade',`sisOda_alunos_obs`='$sisOda_alunos_obs',`sisoda_alunos_telefone`='$sisoda_alunos_telefone' WHERE `sisOda_alunos_id`='$id_aluno'";
 
                           $resultado_id = mysqli_query($link, $sql);
 
                           if($resultado_id){
 
-                            $sql2="SELECT `sisOda_alunos_id` FROM `sisoda_alunos` WHERE `sisOda_alunos_nome` = '$sisOda_alunos_nome' and `sisOda_alunos_sobrenome`= '$sisOda_alunos_sobrenome' and `sisoda_alunos_cpf` = '$sisoda_alunos_cpf' and `sisoda_alunos_email` = '$sisoda_alunos_email' and `sisOda_alunos_dataNascimento` = '$sisOda_alunos_dataNascimento'";
-                            $resultado_id2 = mysqli_query($link, $sql2);
-
-                            if($resultado_id2){
-                              while($dados_login = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
-
-                                echo "<input type='hidden' name='id_aluno' value='".$dados_login['sisOda_alunos_id']."'>";
-
-                              }
-                            }
-
                             echo "Deu certo";
+                            echo "<input type='hidden' name='id_aluno' value='$id_aluno'>";
 
                           }else{
 
                             echo "Não deu certo";
+                            echo "$sql";
 
                           }
 
@@ -167,8 +165,11 @@
                       ?>
                       <div class="row">
                         <div class="col-sm-3"></div>
-                        <div style="margin-right: -50px;" class="col-sm-6">
-                          <input type="submit" name="cadastrar" class="form-control btn btn-primary" required>
+                        <div class="col-sm-3">
+                          <input type="submit" name="cadastrar" class="form-control btn btn-primary" value="Alterar Foto" required>
+                        </div>
+                        <div class="col-sm-3">
+                          <a class="form-control btn btn-primary" href=<?php echo "'aluno_ind.php?id=$id_aluno'"; ?>>Manter Foto</a>
                         </div>
                         <div class="col-sm-3"></div>
                       </div>

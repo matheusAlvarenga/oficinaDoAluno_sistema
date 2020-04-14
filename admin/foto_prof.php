@@ -16,9 +16,9 @@ if (isset($_POST['cadastrar'])) {
     if (!empty($foto["name"])) {
         
         // Largura máxima em pixels
-        $largura = 500;
+        $largura = 1500;
         // Altura máxima em pixels
-        $altura = 500;
+        $altura = 1500;
         // Tamanho máximo do arquivo em bytes
         $tamanho = 100000;
  
@@ -67,7 +67,7 @@ if (isset($_POST['cadastrar'])) {
         
             $resultado_id = mysqli_query($link, $sql);
             if($resultado_id){
-            	header('Location: index.php');
+            	echo "<script>window.location.href='prof_ind.php?id=$nome'</script>";
             }
             else
             {

@@ -4,6 +4,8 @@
     header('Location: ../sem_login.html');
   }
 
+  $foto=$_POST['foto'];
+
 ?>
 <html lang="pt-br">
 
@@ -66,7 +68,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.php">Ínicio</a></li>
               <li><i class="icon_document_alt"></i>Alunos</li>
-              <li><i class="icon_document_alt"></i>Cadastro de Alunos</li>
+              <li><i class="icon_document_alt"></i>Cadastro de Professores</li>
             </ol>
           </div>
         </div>
@@ -75,11 +77,14 @@
             <section style="margin-top: -17px;" class="panel">
               <div class="panel-body">
                <div class="form-group">
-                  <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Foto do Aluno</h3>
+                  <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Foto do Professor</h3>
                     <div class="row">
                       <label style="text-align: center; font-size: 20px;" class="col-sm-12 control-label">Foto</label>
                     </div>
-                    <form enctype="multipart/form-data" action="foto_alunos.php" method="post">                    
+                    <div style="margin-bottom: 20px;" class="text-center">
+                      <img width="250" src=<?php echo "'img/prof/$foto'"; ?>><br>
+                    </div>
+                    <form enctype="multipart/form-data" action="foto_prof.php" method="post">                    
                       <div class="row">
                         <div class="col-sm-3"></div>
                         <div style="margin-right: -50px;" class="col-sm-6">
@@ -89,86 +94,89 @@
                       </div><br>
                       <?php
 
+                        $id=$_POST['id'];
+
                         require_once('../db.class.php');
 
-                        $sisOda_alunos_nome=$_POST['nome_aluno'];
-                        $sisOda_alunos_sobrenome=$_POST['sobrenome_aluno'];
-                        $sisoda_alunos_cpf=$_POST['cpf_financeiro_aluno'];
-                        $sisoda_alunos_email=$_POST['email_aluno'];
-                        $sisOda_alunos_dataNascimento=$_POST['dataNascimento_aluno'];
-                        $sisOda_alunos_colegio=$_POST['colegio_aluno'];
-                        $sisOda_alunos_anoId=$_POST['ano_aluno'];
-                        $sisOda_alunos_rua=$_POST['rua_aluno'];
-                        $sisOda_alunos_numero=$_POST['num_aluno'];
-                        $sisOda_alunos_bairro=$_POST['bairro_aluno'];
-                        $sisOda_alunos_cidade=$_POST['cidade_aluno'];
-                        $sisOda_alunos_estado=$_POST['estado_aluno'];
-                        if ($_POST['complemento_aluno'] == '') {
-                          $sisOda_alunos_complemento=NULL;
-                        }else{
-                        $sisOda_alunos_complemento=$_POST['complemento_aluno'];
-                        }
-                        $sisOda_alunos_cep=$_POST['cep_aluno'];
-                        $sisOda_alunos_nomeRepUm=$_POST['nome_rep1_aluno'];
-                        $sisOda_alunos_emailRepUm=$_POST['email_rep1_aluno'];
-                        $sisOda_alunos_telRepUm=$_POST['tel_rep1_aluno'];
-                        $sisOda_alunos_nomeRepDois=$_POST['nome_rep2_aluno'];
-                        $sisOda_alunos_emailRepDois=$_POST['email_rep2_aluno'];
-                        $sisOda_alunos_financeiro=$_POST['financeiro_aluno'];
-                        $sisOda_alunos_telRepDois=$_POST['tel_rep2_aluno'];
-                        
+                       $sisoda_professores_materias=$_POST['materias'];
 
-                        if (!isset($_POST['mensal_aluno'])) {
-                          $sisOda_alunos_mensal=NULL;
-                        }else{
-                          $sisOda_alunos_mensal=$_POST['mensal_aluno'];
-                        }
+                       $materias=implode(',', $sisoda_professores_materias);
 
-                        $sisOda_alunos_tipoDePlano=$_POST['valor_aluno'];
-                        $sisOda_alunos_unidade=$_POST['unidade_aluno'];
-                        if ($_POST['obs_aluno'] == '') {
-                          $sisOda_alunos_obs=NULL;
-                        }else{
-                        $sisOda_alunos_obs=$_POST['obs_aluno'];
-                        }
-                        $sisoda_alunos_telefone=$_POST['tel_aluno'];
+                       $sisoda_professores_nome=$_POST['nome_prof'];
+                       $sisoda_professores_sobrenome=$_POST['sobrenome_prof'];
+                       $sisoda_professores_data=$_POST['dataNascimento_prof'];
+                       $sisoda_professores_email=$_POST['email_prof'];
+                       $sisoda_professores_rua=$_POST['rua_prof'];
+                       $sisoda_professores_numero=$_POST['num_prof'];
+                       $sisoda_professores_bairro=$_POST['bairro_prof'];
+                       $sisoda_professores_cidade=$_POST['cidade_prof'];
+                       $sisoda_professores_estado=$_POST['estado_prof'];
+                       $sisoda_professores_unidade=$_POST['estado_prof'];
 
+                       if ($_POST['complemento_prof'] == '') {
+                         
+                          $sisoda_professores_complemento=$_POST['complemento_prof'];
 
+                       }else{
 
+                          $sisoda_professores_complemento=NULL;
+
+                       }
+
+                       $sisoda_professores_cep=$_POST['cep'];
+                       $sisoda_professores_obs=$_POST['obs_prof'];
+
+                       if ($_POST['obs_prof'] == '') {
+                         
+                          $sisoda_professores_obs=$_POST['obs_prof'];
+
+                       }else{
+
+                          $sisoda_professores_obs=NULL;
+
+                       }
+
+                       $sisoda_professores_telefone=$_POST['tel_prof'];
+                       $sisoda_professores_banco=$_POST['banco_prof'];
+                       $sisoda_professores_tipoConta=$_POST['tipo_prof'];
+                       $sisoda_professores_agencia=$_POST['ag_prof'];
+                       $sisoda_professores_conta=$_POST['cc_prof'];
+                       $sisoda_professores_cpf=$_POST['cpf_prof'];
+                       $sisoda_professores_valor=$_POST['valor_prof'];
+                       $sisoda_professores_mensal=$_POST['mensal_prof'];
+                       $sisoda_professores_unidade=$_POST['unidade_prof'];
+                
                         $objDb = new db();
                         $link = $objDb->conecta_mysql();
 
-                        $sql="INSERT INTO `sisoda_alunos` (`sisOda_alunos_id`, `sisOda_alunos_nome`, `sisOda_alunos_sobrenome`, `sisoda_alunos_cpf`, `sisoda_alunos_email`, `sisOda_alunos_dataNascimento`, `sisOda_alunos_colegio`, `sisOda_alunos_anoId`, `sisOda_alunos_rua`, `sisOda_alunos_numero`, `sisOda_alunos_bairro`, `sisOda_alunos_cidade`, `sisOda_alunos_estado`, `sisOda_alunos_complemento`, `sisOda_alunos_cep`, `sisOda_alunos_nomeRepUm`, `sisOda_alunos_emailRepUm`, `sisOda_alunos_telRepUm`, `sisOda_alunos_nomeRepDois`, `sisOda_alunos_emailRepDois`, `sisOda_alunos_financeiro`, `sisOda_alunos_telRepDois`, `sisOda_alunos_tipoDePlano`, `sisOda_alunos_foto`, `sisOda_alunos_unidade`, `sisOda_alunos_ativo`, `sisOda_alunos_obs`, `sisoda_alunos_telefone`, `sisOda_alunos_saldo`,`sisOda_alunos_mensal`) VALUES (NULL, '$sisOda_alunos_nome', '$sisOda_alunos_sobrenome', '$sisoda_alunos_cpf', '$sisoda_alunos_email', '$sisOda_alunos_dataNascimento', '$sisOda_alunos_colegio', '$sisOda_alunos_anoId', '$sisOda_alunos_rua', '$sisOda_alunos_numero', '$sisOda_alunos_bairro', '$sisOda_alunos_cidade', '$sisOda_alunos_estado', '$sisOda_alunos_complemento', '$sisOda_alunos_cep', '$sisOda_alunos_nomeRepUm', '$sisOda_alunos_emailRepUm', '$sisOda_alunos_telRepUm', '$sisOda_alunos_nomeRepDois', '$sisOda_alunos_emailRepDois', '$sisOda_alunos_financeiro', '$sisOda_alunos_telRepDois', '$sisOda_alunos_tipoDePlano', NULL, '$sisOda_alunos_unidade', '1', '$sisOda_alunos_obs', '$sisoda_alunos_telefone', '0.00','$sisOda_alunos_mensal')";
+                        $sql="UPDATE `sisoda_professores` SET `sisoda_professores_nome`='$sisoda_professores_nome',`sisoda_professores_sobrenome`='$sisoda_professores_sobrenome',`sisoda_professores_data`='$sisoda_professores_data',`sisoda_professores_email`='$sisoda_professores_email',`sisoda_professores_rua`='$sisoda_professores_rua',`sisoda_professores_numero`='$sisoda_professores_numero',`sisoda_professores_bairro`='$sisoda_professores_bairro',`sisoda_professores_cidade`='$sisoda_professores_cidade',`sisoda_professores_estado`='$sisoda_professores_estado',`sisoda_professores_complemento`='$sisoda_professores_complemento',`sisoda_professores_cep`='$sisoda_professores_cep',`sisoda_professores_materias`='$materias',`sisoda_professores_banco`='$sisoda_professores_banco',`sisoda_professores_tipoConta`='$sisoda_professores_tipoConta',`sisoda_professores_agencia`='$sisoda_professores_agencia',`sisoda_professores_conta`='$sisoda_professores_conta',`sisoda_professores_cpf`='$sisoda_professores_cpf',`sisoda_professores_telefone`='$sisoda_professores_telefone',`sisoda_professores_obs`='$sisoda_professores_obs',`sisoda_professores_unidade`='$sisoda_professores_unidade',`sisoda_professores_mensal`='$sisoda_professores_mensal',`sisoda_professores_valor`='$sisoda_professores_valor' WHERE `sisoda_professores_id`='$id'";
+
 
                           $resultado_id = mysqli_query($link, $sql);
 
                           if($resultado_id){
 
-                            $sql2="SELECT `sisOda_alunos_id` FROM `sisoda_alunos` WHERE `sisOda_alunos_nome` = '$sisOda_alunos_nome' and `sisOda_alunos_sobrenome`= '$sisOda_alunos_sobrenome' and `sisoda_alunos_cpf` = '$sisoda_alunos_cpf' and `sisoda_alunos_email` = '$sisoda_alunos_email' and `sisOda_alunos_dataNascimento` = '$sisOda_alunos_dataNascimento'";
-                            $resultado_id2 = mysqli_query($link, $sql2);
-
-                            if($resultado_id2){
-                              while($dados_login = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
-
-                                echo "<input type='hidden' name='id_aluno' value='".$dados_login['sisOda_alunos_id']."'>";
-
-                              }
-                            }
-
-                            echo "Deu certo";
-
-                          }else{
-
-                            echo "Não deu certo";
+                            $last_id = $link->insert_id;
+                            echo "<input type='hidden' name='id_prof' value='$id'>";
 
                           }
+                          else{
+
+                            echo "Deu Erro<br>";
+                            echo "$sql";
+
+                          }
+
 
 
                       ?>
                       <div class="row">
                         <div class="col-sm-3"></div>
-                        <div style="margin-right: -50px;" class="col-sm-6">
-                          <input type="submit" name="cadastrar" class="form-control btn btn-primary" required>
+                        <div class="col-sm-3">
+                          <input type="submit" name="cadastrar" class="form-control btn btn-primary" value="Alterar foto">
+                        </div>
+                        <div class="col-sm-3">
+                          <a href=<?php echo "'prof_ind.php?id=$id'"; ?> class="form-control btn btn-primary">Manter Foto</a>
                         </div>
                         <div class="col-sm-3"></div>
                       </div>

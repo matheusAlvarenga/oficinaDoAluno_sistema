@@ -123,6 +123,8 @@
                                 ";
                               }
 
+              $foto=$dados_login['sisoda_professores_foto'];
+
               if ($dados_login['sisoda_professores_login']==NULL) {
                 $login='Ainda não criado.';
               }else{
@@ -379,7 +381,7 @@
                       </div>
                       <div class='modal-body text-center'>
 
-                        <img src='img/alunos/'>
+                        <img style="margin-left: -100px;" width="750" src=<?php echo "'img/prof/$foto'"; ?>>
 
                       </div>
                     </div>

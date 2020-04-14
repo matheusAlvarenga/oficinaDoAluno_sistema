@@ -124,10 +124,10 @@
 
   $nome=$_GET['nome_prof'];
   $cpf=$_GET['cpf'];
-  $data=$_GET['data_prof'];
+  $mat=$_GET['materia'];
   $email=$_GET['email_prof'];
 
-  if ($nome == NULL and $cpf == NULL and $data == NULL and $email == NULL) {
+  if ($nome == NULL and $cpf == NULL and $mat == NULL and $email == NULL) {
     echo "
 
     <script>
@@ -141,7 +141,7 @@
   }
   else{
 
-    $sql = "SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_nome` LIKE '%$nome%' AND `sisoda_professores_email` LIKE '%$email%' AND `sisoda_professores_data` LIKE '%$data%' AND `sisoda_professores_cpf` LIKE '%$cpf%' ORDER BY `sisoda_professores_id` ASC
+    $sql = "SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_nome` LIKE '%$nome%' AND `sisoda_professores_email` LIKE '%$email%' AND `sisoda_professores_materias` LIKE '%$mat%' AND `sisoda_professores_cpf` LIKE '%$cpf%' ORDER BY `sisoda_professores_id` ASC
 ";}}
 
     $objDb = new db();

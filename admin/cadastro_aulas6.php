@@ -17,7 +17,8 @@
 
 	// ADICIONAR AULA NA TABELA
 
-        $sql="INSERT INTO `sisoda_aulas`(`sisoda_aulas_idAluno`, `sisoda_aulas_idProfessor`, `sisoda_aulas_data`, `sisoda_aulas_materia`, `sisoda_aulas_topicos`, `sisoda_aulas_unidade`, `sisoda_aulas_paga`, `sisoda_aulas_recebida`) VALUES ('$id_aluno','$id_prof','$data','$materias2','$topicos','$unid','0','0')";
+        $sql="INSERT INTO `sisoda_aulas`(`sisoda_aulas_idAluno`, `sisoda_aulas_idProfessor`, `sisoda_aulas_data`, `sisoda_aulas_materia`, `sisoda_aulas_topicos`, `sisoda_aulas_unidade`, `sisoda_aulas_paga`, `sisoda_aulas_recebida`, `sisoda_aulas_valorProfessor`, `sisoda_aulas_valorAluno`) VALUES ('$id_aluno','$id_prof','$data','$materias2','$topicos','$unid','0','0','$valor_prof','$valor_aluno')";
+
         $objDb = new db();
         $link = $objDb->conecta_mysql();
 
@@ -36,8 +37,11 @@
 
     // CHECAR SE ELA PODE SER PAGA PELO ALUNO
 
-        if ($saldo_aluno > $valor_aluno) {
-            
+        echo "Saldo: $saldo_aluno<br>";
+        echo "Valor: $valor_aluno<br>";
+
+        if ($saldo_aluno >= $valor_aluno) {
+
             $aula_id = $link->insert_id;
 
             $sql2="UPDATE `sisoda_aulas` SET `sisoda_aulas_recebida`='1' WHERE `sisoda_aulas_id`='$aula_id'";
@@ -53,61 +57,60 @@
 
     // ATUALIZAR O SALDO
 
-        $sql3="SELECT `sisOda_alunos_tipoDePlano` FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='$id_aluno'";
+        // ATUALIZAR SALDO DE TODOS OS ALUNOS
 
-        $resultado_id3 = mysqli_query($link, $sql3);
+                    // VALORES DOS PAGAMENTOS
 
-            if($resultado_id3){
+                    $resultado_id11 = mysqli_query($link,"SELECT SUM(`sisoda_pagamentos_valor`) FROM `sisoda_pagamentos` WHERE `sisoda_pagamentos_idAluno`='$id_aluno'");
+                    $row11= mysqli_fetch_array($resultado_id11);
 
-                while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+                    $valor_total_pag_aluno=$row11[0];
 
-                    $valor_aula_aluno=$dados_login3['sisOda_alunos_tipoDePlano'];
+                    // VALORES DAS PENDÊNCIAS
 
-                }
+                    $resultado_id12 = mysqli_query($link,"SELECT SUM(`sisoda_pendencias_valor`) FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno'");
+                    $row12= mysqli_fetch_array($resultado_id12);
 
-            }
+                    $valor_total_pend_aluno=$row12[0];
 
-        $resultado_id4 = mysqli_query($link,"SELECT COUNT(1) FROM `sisoda_aulas` WHERE `sisoda_aulas_idAluno`='$id_aluno'");
-        $row = mysqli_fetch_array($resultado_id4);
-        $num_aulas = $row[0];
+                    // VALORES DAS MENSALIDADES
 
-        $valor_total_aulas_aluno=$num_aulas*$valor_aula_aluno;
+                    $resultado_id13 = mysqli_query($link,"SELECT SUM(`sisoda_mensalidade_valor`) FROM `sisoda_mensalidade` WHERE `sisoda_mensalidade_idAluno`='$id_aluno'");
+                    $row13= mysqli_fetch_array($resultado_id13);
 
-        echo "Valor das Aulas: $valor_total_aulas_aluno<br>";
+                    $valor_total_mens_aluno=$row13[0];
 
-        // VALOR DAS PENDÊNCIAS
+                    // VALORES DAS AULAS
 
-        $resultado_id5 = mysqli_query($link,"SELECT SUM(`sisoda_pendencias_valor`) FROM `sisoda_pendencias` WHERE `sisoda_pendencias_idAluno`='$id_aluno'");
-        $row2= mysqli_fetch_array($resultado_id5);
+                    $resultado_id14 = mysqli_query($link,"SELECT SUM(`sisoda_aulas_valorAluno`) FROM `sisoda_aulas` WHERE `sisoda_aulas_idAluno`='$id_aluno'");
 
-        $valor_total_pend_aluno=$row2[0];
+                    echo "SELECT SUM(`sisoda_aulas_valor`) FROM `sisoda_aulas` WHERE `sisoda_aulas_idAluno`='$id_aluno'";
 
-        echo "Valor das Pendencias: $valor_total_pend_aluno<br>";
+                    $row14= mysqli_fetch_array($resultado_id14);
 
-        // VALOR DOS PAGAMENTOS
+                    $valor_total_aulas_aluno=$row14[0];
 
-        $resultado_id6 = mysqli_query($link,"SELECT SUM(`sisoda_pagamentos_valor`) FROM `sisoda_pagamentos` WHERE `sisoda_pagamentos_idAluno`='$id_aluno'");
-        $row3= mysqli_fetch_array($resultado_id6);
+                    // CALCULAR O SALDO FINAL
 
-        $valor_total_pag_aluno=$row3[0];
+                    $saldo_final_aluno=$valor_total_pag_aluno-$valor_total_aulas_aluno-$valor_total_mens_aluno-$valor_total_pend_aluno;
 
-        echo "Valor dos Pagamentos: $valor_total_pag_aluno<br>";
+                    echo "Valor pagamento: $valor_total_pag_aluno<br>";
+                    echo "Valor mensalidade: $valor_total_mens_aluno<br>";
+                    echo "Valor pendencia: $valor_total_pend_aluno<br>";
+                    echo "Valor aulas: $valor_total_aulas_aluno<br>";
+                    echo "Valor total: $saldo_final_aluno<br>";
 
-        // ATT VALOR DO SALDO
+                    // ATUALIZAR SALDO NA TABELA
 
-        echo "Saldo Anterior: $saldo_aluno<br>";
+                    $resultado_id15=mysqli_query($link,"UPDATE `sisoda_alunos` SET `sisOda_alunos_saldo`='$saldo_final_aluno' WHERE `sisOda_alunos_id`='$id_aluno'");
 
-        $saldo_final_aluno=$valor_total_pag_aluno-$valor_total_aulas_aluno-$valor_total_pend_aluno;
+                    echo "UPDATE `sisoda_alunos` SET `sisOda_alunos_saldo`='$saldo_final_aluno' WHERE `sisOda_alunos_id`='$id_aluno'";
 
-        echo "Saldo Final: $saldo_final_aluno";
+                    if ($resultado_id15) {
+                        
+                        echo "Saldo Atualizado";
 
-        $resultado_id7 = mysqli_query($link,"UPDATE `sisoda_alunos` SET `sisOda_alunos_saldo`='$saldo_final_aluno' WHERE `sisOda_alunos_id`='$id_aluno'");
-
-        if ($resultado_id7) {
-            
-            echo "<h4 align='center'>Saldo Aluno Alterada</h4>";
-
-        }
+                    }
 
     // PROFESSOR
 
@@ -125,7 +128,9 @@
 
         echo $valor_prof;
 
-        if ($saldo_prof_inv > $valor_prof) {
+        if ($saldo_prof_inv >= $valor_prof) {
+
+            $aula_id = $link->insert_id;
 
             $sql8="UPDATE `sisoda_aulas` SET `sisoda_aulas_paga`='1' WHERE `sisoda_aulas_id`='$aula_id'";
 
@@ -142,48 +147,40 @@
 
     // ATUALIZAR O SALDO
 
-        $resultado_id9 = mysqli_query($link,"SELECT SUM(`sisoda_pagamentos_prof_valor`) FROM `sisoda_pagamentos_prof` WHERE `sisoda_pagamentos_prof_idProfessor`='$id_prof'");
-        $row9= mysqli_fetch_array($resultado_id9);
+        $resultado_id5 = mysqli_query($link,"SELECT SUM(`sisoda_pagamentos_prof_valor`) FROM `sisoda_pagamentos_prof` WHERE `sisoda_pagamentos_prof_idProfessor`='$id_prof'");
+                $row5= mysqli_fetch_array($resultado_id5);
 
-        $valor_total_pag_prof=$row9[0];
+                $valor_total_pag_prof=$row5[0];
 
-        echo "Valor dos Pagamentos: $valor_total_pag_prof<br>";
+                // VALORES DAS AULAS
 
-        $sql10="SELECT `sisOda_professores_valor` FROM `sisoda_professores` WHERE `sisOda_professores_id`='$id_prof'";
+                $resultado_id6 = mysqli_query($link,"SELECT SUM(`sisoda_aulas_valorProfessor`) FROM `sisoda_aulas` WHERE `sisoda_aulas_idProfessor`='$id_prof'");
+                $row6= mysqli_fetch_array($resultado_id6);
 
-        $resultado_id10 = mysqli_query($link, $sql10);
+                $valor_total_aulas_prof=$row6[0];
 
-            if($resultado_id10){
+                // VALORES DAS MENSALIDADES
 
-                while($dados_login10 = mysqli_fetch_array($resultado_id10, MYSQLI_ASSOC)){
+                $resultado_id7 = mysqli_query($link,"SELECT SUM(`sisoda_mensalidade_prof_valor`) FROM `sisoda_mensalidade_prof` WHERE `sisoda_mensalidade_prof_idProf`='$id_prof'");
+                $row7= mysqli_fetch_array($resultado_id7);
 
-                    $valor_aula_prof=$dados_login10['sisOda_professores_valor'];
+                $valor_total_mens_prof=$row7[0];
 
+                // CALCULAR SALDO FINAL PROFESSOR
+
+                $saldo_final_prof=$valor_total_aulas_prof+$valor_total_mens_prof-$valor_total_pag_prof;
+
+                echo "Valor Aulas: $valor_total_aulas_prof";
+                echo "Valor Mens: $valor_total_mens_prof";
+                echo "Valor Pag: $valor_total_pag_prof";
+
+                echo "Saldo Final: $saldo_final_prof";
+
+                // ATUALIZAR SALDO NA TABELA
+
+                $resultado_id8=mysqli_query($link,"UPDATE `sisoda_professores` SET `sisoda_professores_saldo`='$saldo_final_prof' WHERE `sisoda_professores_id`='$id_prof'");
+
+                if ($resultado_id8) {
+                    echo "Saldo Atualizado";
                 }
-
-            }
-
-        $resultado_id11 = mysqli_query($link,"SELECT COUNT(1) FROM `sisoda_aulas` WHERE `sisoda_aulas_idProfessor`='$id_prof'");
-        $row11 = mysqli_fetch_array($resultado_id11);
-        $num_aulas_prof = $row11[0];
-
-        $valor_total_aulas_prof=$num_aulas_prof*$valor_aula_prof;
-
-        echo "Valor das Aulas: $valor_total_aulas_prof<br>";
-
-        // ATT VALOR DO SALDO
-
-        echo "Saldo Anterior: $saldo_prof<br>";
-
-        $saldo_final_prof=$valor_total_aulas_prof-$valor_total_pag_prof;
-
-        echo "Saldo Final: $saldo_final_prof";
-
-        $resultado_id12 = mysqli_query($link,"UPDATE `sisoda_professores` SET `sisOda_professores_saldo`='$saldo_final_prof' WHERE `sisoda_professores_id`='$id_prof'");
-
-        if ($resultado_id12) {
-            
-            echo "<h4 align='center'>Saldo Professor Alterada</h4>";
-
-        }
 ?>
