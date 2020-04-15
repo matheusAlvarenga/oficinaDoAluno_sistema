@@ -22,7 +22,41 @@ if ($_POST['restaurar']) {
         $resultado_id2 = mysqli_query($link, $sql2);
 
         if($resultado_id2){
-            
+            $resultado_id3=mysqli_query($link, "SELECT * FROM `sisoda_pagamentos_prof_off` WHERE `sisoda_pagamentos_prof_idAluno`='$value'")
+
+            if ($resultado_id3) {
+                
+                while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
+
+                    $resultado_id4=mysqli_query($link, "INSERT INTO `sisoda_pagamentos_prof` SELECT * FROM `sisoda_pagamentos_prof_off` WHERE `sisoda_pagamentos_prof_id`='".$dados_login3['sisoda_pagamentos_prof_id']."'");
+
+                    if ($resultado_id4) {
+                        
+                        $resultado_id5=mysqli_query($link, "DELETE FROM `sisoda_pagamentos_prof_off` WHERE sisoda_pagamentos_prof_id='".$dados_login3['sisoda_pagamentos_prof_id']."'");
+
+                    }
+
+                }
+
+            }
+
+            $resultado_id6=mysqli_query($link, "SELECT * FROM `sisoda_mensalidades_prof_off` WHERE `sisoda_mensalidades_prof_idAluno`='$value'")
+
+            if ($resultado_id6) {
+                
+                while($dados_login6 = mysqli_fetch_array($resultado_id6, MYSQLI_ASSOC)){
+
+                    $resultado_id7=mysqli_query($link, "INSERT INTO `sisoda_mensalidades_prof` SELECT * FROM `sisoda_mensalidades_prof_off` WHERE `sisoda_mensalidades_prof_id`='".$dados_login6['sisoda_mensalidades_prof_id']."'");
+
+                    if ($resultado_id7) {
+                        
+                        $resultado_id8=mysqli_query($link, "DELETE FROM `sisoda_mensalidades_prof_off` WHERE sisoda_mensalidades_prof_id='".$dados_login6['sisoda_mensalidades_prof_id']."'");
+
+                    }
+
+                }
+
+            }
         }
         else{
             echo "

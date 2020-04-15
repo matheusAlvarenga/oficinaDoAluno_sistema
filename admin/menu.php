@@ -62,7 +62,6 @@
             <ul class="sub">
               <li><a class="" href="alunos_ln.php">Alunos NL</a></li>
               <li><a class="" href="prof_ln.php">Professores NL</a></li>
-              <li><a class="" href="aulas_ln.php">Aulas NL</a></li>
             </ul>
           </li>
           <li class="sub-menu">

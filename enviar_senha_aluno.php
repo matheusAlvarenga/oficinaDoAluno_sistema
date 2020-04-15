@@ -5,16 +5,16 @@
 	$objDb = new db();
     $link = $objDb->conecta_mysql();
 
-	$user = $_POST['user'];
 	$email = $_POST['email'];
 
-	$resultado_id=mysqli_query($link, "SELECT * FROM `sisoda_professores` WHERE `sisoda_professores_email`='$email' AND `sisoda_professores_login`='$user'");
+	$resultado_id=mysqli_query($link, "SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_email`='$email'");
 
 	if ($resultado_id) {
 
 		while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
 
-			$senha=$dados_login['sisoda_professores_senha'];
+			$nome=$dados_login['sisoda_alunos_nome'];
+			$senha=$dados_login['sisoda_alunos_senha'];
 
 		}
 		
@@ -210,7 +210,7 @@
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, sans-serif"><![endif]-->
 <div style="color:#0D0D0D;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 <div style="font-size: 12px; line-height: 1.2; color: #0D0D0D; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14px;">
-<p style="font-size: 28px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 34px; margin: 0;"><span style="font-size: 28px;"><strong><span style="font-size: 28px;">Olá $user,</span></strong></span><br/><span style="font-size: 28px;">sua senha é:</span></p>
+<p style="font-size: 28px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 34px; margin: 0;"><span style="font-size: 28px;"><strong><span style="font-size: 28px;">Olá $nome,</span></strong></span><br/><span style="font-size: 28px;">sua senha é:</span></p>
 <p style="font-size: 14px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 17px; margin: 0;"> </p>
 <p style="font-size: 28px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 34px; margin: 0;"><span style="font-size: 28px;">$senha</span></p>
 <p style="font-size: 14px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 17px; margin: 0;"> </p>
@@ -230,7 +230,7 @@
 <!--[if mso]></td></tr></table><![endif]-->
 <div align="center" class="button-container" style="padding-top:25px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 25px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46.5pt; width:171pt; v-text-anchor:middle;" arcsize="7%" stroke="false" fillcolor="#f58220"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Tahoma, sans-serif; font-size:16px"><![endif]-->
-<a href="login-prof.php"><div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f58220;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:auto; width:auto;;border-top:1px solid #f58220;border-right:1px solid #f58220;border-bottom:1px solid #f58220;border-left:1px solid #f58220;padding-top:15px;padding-bottom:15px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">VOLTAR AO SISTEMA</span></span></div></a>
+<a href="login-aluno.php"><div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f58220;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:auto; width:auto;;border-top:1px solid #f58220;border-right:1px solid #f58220;border-bottom:1px solid #f58220;border-left:1px solid #f58220;padding-top:15px;padding-bottom:15px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">VOLTAR AO SISTEMA</span></span></div></a>
 <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
 </div>
 <table border="0" cellpadding="0" cellspacing="0" class="divider" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;" valign="top" width="100%">

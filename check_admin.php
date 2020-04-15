@@ -26,19 +26,39 @@
         else
         {
 
-        	if (isset($_COOKIE['tent_admin'])) {
-        		if ($_COOKIE['tent_admin'] == 2) {
-        			setcookie("tent_admin", "1", time()+1800);
-        		}
-        		else{
-        			setcookie("tent_admin", "0", time()+1800);
-        		}
-        	}else{
-        		setcookie("tent_admin", "2", time()+1800);
-        	}
-        	
-        	header('Location: login_errado_admin.php');
+            $resultado_id2=mysqli_query($link, "SELECT * FROM sisoda_sec WHERE sisoda_sec_login = '$user' AND sisoda_sec_senha = '$pass'");
+
+            if ($resultado_id2) {
+                
+                $dados_login2 = mysqli_fetch_array($resultado_id2);
+
+                if(isset($dados_login2['sisoda_sec_id'])){
+
+                    session_start();
+                    $_SESSION['id_sec']=$dados_login2['sisoda_sec_id'];
+                    $_SESSION['nome_sec']=$dados_login2['sisoda_sec_nome'];
+
+                    header('Location: secretaria/');
+
+            }else{
+
+                if (isset($_COOKIE['tent_admin'])) {
+                    if ($_COOKIE['tent_admin'] == 2) {
+                        setcookie("tent_admin", "1", time()+1800);
+                    }
+                    else{
+                        setcookie("tent_admin", "0", time()+1800);
+                    }
+                }else{
+                    setcookie("tent_admin", "2", time()+1800);
+                }
+                
+                header('Location: login_errado_admin.php');
+
+            }
         }
+
+    }
 
     }else{
         

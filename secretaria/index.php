@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_admin'])){
+  if(!isset($_SESSION['id_sec'])){
     header('Location: ../sem_login.html');
   }
 
