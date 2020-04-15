@@ -66,7 +66,7 @@
             </ul>
           </li>
           <li class="sub-menu">
-            <a href="" class="">
+            <a href="financeiro.php" class="">
               <i class="fa fa-cash-register"></i>
               <span>Finânceiro</span>
             </a>
