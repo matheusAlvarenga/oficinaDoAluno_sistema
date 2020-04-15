@@ -2,7 +2,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-          <li class="active">
+          <li>
             <a class="" href="index.php">
               <i class="icon_house_alt"></i>
               <span>Dashboard</span>

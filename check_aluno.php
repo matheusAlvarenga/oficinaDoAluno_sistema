@@ -18,8 +18,8 @@
         if(isset($dados_login['sisOda_alunos_id'])){
 
         	session_start();
-        	$_SESSION['id_admin']=$dados_login['sisOda_alunos_id'];
-        	$_SESSION['nome_admin']=$dados_login['sisOda_alunos_nome'];
+        	$_SESSION['id_aluno']=$dados_login['sisOda_alunos_id'];
+        	$_SESSION['nome_aluno']=$dados_login['sisOda_alunos_nome'];
 
         	header('Location: aluno/');
         }
