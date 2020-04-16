@@ -22,7 +22,8 @@
 
     $nome=$dados_login2['sisoda_professores_nome'];
     $sobrenome=$dados_login2['sisoda_professores_sobrenome'];
-    $data=$dados_login2['sisoda_professores_data'];
+    $data=date_create($dados_login2['sisoda_professores_data']);
+    $data2=date_format($data, 'Y-m-d');
     $email=$dados_login2['sisoda_professores_email'];
     $materias=$dados_login2['sisoda_professores_materias'];
     $cep=$dados_login2['sisoda_professores_cep'];
@@ -191,7 +192,7 @@ function(){
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Data de Nasc.</label>
                     <div style="margin-right: -50px;" class="col-sm-2">
-                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_prof" class="form-control" required>
+                      <input value=<?php echo "'$data2'"; ?> type="date" name="dataNascimento_prof" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">E-mail</label>
                     <div class="col-sm-6">

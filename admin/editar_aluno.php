@@ -21,7 +21,8 @@
     $dados_login = mysqli_fetch_array($resultado_id);
     $nome=$dados_login['sisOda_alunos_nome'];
     $sobrenome=$dados_login['sisOda_alunos_sobrenome'];
-    $data=$dados_login['sisOda_alunos_dataNascimento'];
+    $data=date_create($dados_login['sisOda_alunos_dataNascimento']);
+    $data3=date_format($data,'Y-m-d');
     $email=$dados_login['sisoda_alunos_email'];
     $colegio=$dados_login['sisOda_alunos_colegio'];
     $ano=$dados_login['sisOda_alunos_anoId'];
@@ -204,7 +205,7 @@ function(){
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Data de Nasc.</label>
                     <div style="margin-right: -50px;" class="col-sm-2">
-                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_aluno" class="form-control" required>
+                      <input value=<?php echo "'$data3'"; ?> type="date" name="dataNascimento_aluno" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">E-mail</label>
                     <div class="col-sm-6">

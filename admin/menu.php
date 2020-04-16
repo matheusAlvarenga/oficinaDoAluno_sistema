@@ -64,12 +64,6 @@
               <li><a class="" href="prof_ln.php">Professores NL</a></li>
             </ul>
           </li>
-          <li class="sub-menu">
-            <a href="financeiro.php" class="">
-              <i class="fa fa-cash-register"></i>
-              <span>Finânceiro</span>
-            </a>
-          </li>
         </ul>
         <!-- sidebar menu end-->
       </div>

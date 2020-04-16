@@ -122,15 +122,6 @@
                         $sisOda_alunos_emailRepDois=$_POST['email_rep2_aluno'];
                         $sisOda_alunos_financeiro=$_POST['financeiro_aluno'];
                         $sisOda_alunos_telRepDois=$_POST['tel_rep2_aluno'];
-                        
-
-                        if ($_POST['mensal_aluno'] == '' or !isset($_POST['mensal_aluno'])) {
-                          $sisOda_alunos_mensal=NULL;
-                        }else{
-                          $sisOda_alunos_mensal=$_POST['mensal_aluno'];
-                        }
-
-                        $sisOda_alunos_tipoDePlano=$_POST['valor_aluno'];
                         $sisOda_alunos_unidade=$_POST['unidade_aluno'];
                         if ($_POST['obs_aluno'] == '') {
                           $sisOda_alunos_obs=NULL;
@@ -145,7 +136,7 @@
                         $objDb = new db();
                         $link = $objDb->conecta_mysql();
 
-                        $sql="UPDATE `sisoda_alunos` SET `sisOda_alunos_nome`='$sisOda_alunos_nome',`sisOda_alunos_sobrenome`='$sisOda_alunos_sobrenome',`sisoda_alunos_email`='$sisoda_alunos_email',`sisOda_alunos_dataNascimento`='$sisOda_alunos_dataNascimento',`sisOda_alunos_colegio`='$sisOda_alunos_colegio',`sisOda_alunos_anoId`='$sisOda_alunos_anoId',`sisOda_alunos_rua`='$sisOda_alunos_rua',`sisOda_alunos_numero`='$sisOda_alunos_numero',`sisOda_alunos_bairro`='$sisOda_alunos_bairro',`sisOda_alunos_cidade`='$sisOda_alunos_cidade',`sisOda_alunos_estado`='$sisOda_alunos_estado',`sisOda_alunos_complemento`='$sisOda_alunos_complemento',`sisOda_alunos_cep`='$sisOda_alunos_cep',`sisOda_alunos_nomeRepUm`='$sisOda_alunos_nomeRepUm',`sisOda_alunos_emailRepUm`='$sisOda_alunos_emailRepUm',`sisOda_alunos_telRepUm`='$sisOda_alunos_telRepUm',`sisOda_alunos_nomeRepDois`='$sisOda_alunos_nomeRepDois',`sisOda_alunos_emailRepDois`='$sisOda_alunos_emailRepDois',`sisOda_alunos_financeiro`='$sisOda_alunos_financeiro',`sisoda_alunos_cpf`='$sisoda_alunos_cpf',`sisOda_alunos_telRepDois`='$sisOda_alunos_telRepDois',`sisOda_alunos_tipoDePlano`='$sisOda_alunos_tipoDePlano',`sisoda_alunos_mensal`='$sisOda_alunos_mensal',`sisOda_alunos_unidade`='$sisOda_alunos_unidade',`sisOda_alunos_obs`='$sisOda_alunos_obs',`sisoda_alunos_telefone`='$sisoda_alunos_telefone' WHERE `sisOda_alunos_id`='$id_aluno'";
+                        $sql="UPDATE `sisoda_alunos` SET `sisOda_alunos_nome`='$sisOda_alunos_nome',`sisOda_alunos_sobrenome`='$sisOda_alunos_sobrenome',`sisoda_alunos_email`='$sisoda_alunos_email',`sisOda_alunos_dataNascimento`='$sisOda_alunos_dataNascimento',`sisOda_alunos_colegio`='$sisOda_alunos_colegio',`sisOda_alunos_anoId`='$sisOda_alunos_anoId',`sisOda_alunos_rua`='$sisOda_alunos_rua',`sisOda_alunos_numero`='$sisOda_alunos_numero',`sisOda_alunos_bairro`='$sisOda_alunos_bairro',`sisOda_alunos_cidade`='$sisOda_alunos_cidade',`sisOda_alunos_estado`='$sisOda_alunos_estado',`sisOda_alunos_complemento`='$sisOda_alunos_complemento',`sisOda_alunos_cep`='$sisOda_alunos_cep',`sisOda_alunos_nomeRepUm`='$sisOda_alunos_nomeRepUm',`sisOda_alunos_emailRepUm`='$sisOda_alunos_emailRepUm',`sisOda_alunos_telRepUm`='$sisOda_alunos_telRepUm',`sisOda_alunos_nomeRepDois`='$sisOda_alunos_nomeRepDois',`sisOda_alunos_emailRepDois`='$sisOda_alunos_emailRepDois',`sisOda_alunos_financeiro`='$sisOda_alunos_financeiro',`sisoda_alunos_cpf`='$sisoda_alunos_cpf',`sisOda_alunos_telRepDois`='$sisOda_alunos_telRepDois',`sisOda_alunos_unidade`='$sisOda_alunos_unidade',`sisOda_alunos_obs`='$sisOda_alunos_obs',`sisoda_alunos_telefone`='$sisoda_alunos_telefone' WHERE `sisOda_alunos_id`='$id_aluno'";
 
                           $resultado_id = mysqli_query($link, $sql);
 

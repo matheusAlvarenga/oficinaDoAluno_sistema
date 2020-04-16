@@ -142,7 +142,7 @@
 
                 <?php 
 
-                    echo $_SESSION['nome_admin'];
+                    echo $_SESSION['nome_sec'];
 
                  ?>
 

@@ -21,7 +21,10 @@
     $dados_login = mysqli_fetch_array($resultado_id);
     $nome=$dados_login['sisOda_alunos_nome'];
     $sobrenome=$dados_login['sisOda_alunos_sobrenome'];
-    $data=$dados_login['sisOda_alunos_dataNascimento'];
+    
+    $data=date_create($dados_login['sisOda_alunos_dataNascimento']);
+    $data3=date_format($data,'Y-m-d');
+
     $email=$dados_login['sisoda_alunos_email'];
     $colegio=$dados_login['sisOda_alunos_colegio'];
     $ano=$dados_login['sisOda_alunos_anoId'];
@@ -183,7 +186,7 @@ function(){
           <div class="col-lg-12">
             <section style="margin-top: -17px;" class="panel">
               <div class="panel-body">
-                <form style="margin-left: -30px; margin-right: 20px;" class="form-horizontal" method="POST" action="editar_aluno2.php">
+                <form style="margin-right: 20px;" class="form-horizontal" method="POST" action="editar_aluno2.php">
                   <?php
 
                   echo "<input type='hidden' value='$id' name='id'>";
@@ -204,7 +207,7 @@ function(){
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Data de Nasc.</label>
                     <div style="margin-right: -50px;" class="col-sm-2">
-                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_aluno" class="form-control" required>
+                      <input value=<?php echo "'$data3'"; ?> type="date" name="dataNascimento_aluno" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">E-mail</label>
                     <div class="col-sm-6">
@@ -337,18 +340,8 @@ function(){
                           ?>
                         </select>
                       </div>
-                      <label style="margin-left: -15px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
-                      <div class="col-sm-2">
-                        <input value=<?php echo "'$valor'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="valor_aluno" maxlength="100" class="form-control">
-                      </div>
-                      <label style="margin-left: -55px;" class="col-sm-2 control-label">Valor Mensal</label>
-                      <div class="col-sm-2">
-                        <input value=<?php echo "'$mensal'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="mensal_aluno" class="form-control">
-                      </div>
-                    </div><br>
-                      <div class="row">
                         <label class="col-sm-3 control-label">CPF do Resp. Finânceiro</label>
-                        <div style="margin-right:17px;" class="col-sm-4">
+                        <div style="margin-right:17px;" class="col-sm-2">
                           <input value=<?php echo "'$cpf'"; ?> type="text" name="cpf_financeiro_aluno" maxlength="100" class="form-control">
                         </div>
                         <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
