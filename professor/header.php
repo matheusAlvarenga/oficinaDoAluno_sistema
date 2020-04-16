@@ -20,7 +20,7 @@
 
             $date = date('Y-m-d');
 
-            $sql="SELECT * FROM `sisoda_aulas` WHERE DATE(`sisoda_aulas_data`)=CURDATE() AND `sisoda_aulas_idAluno`='".$_SESSION['id_aluno']."'";
+            $sql="SELECT * FROM `sisoda_aulas` WHERE DATE(`sisoda_aulas_data`)=CURDATE() AND `sisoda_aulas_idProfessor`='".$_SESSION['id_prof']."'";
 
             $resultado_id = mysqli_query($link, $sql);
 
@@ -59,10 +59,25 @@
 
                 }
 
+              $materias=explode(',', $dados_login['sisoda_aulas_materia']);
+              $str_materias='';
+
+              foreach ($materias as $key => $value) {
+                
+                $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_materias` WHERE `sisoda_materias_id`='$value'");
+
+                while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                  $str_materias=$str_materias.$dados_login2['sisoda_materias_nome']." ";
+
+                }
+
+              }
+
                 echo "<li>
                         <a href='aula_ind.php?id=".$dados_login['sisoda_aulas_id']."'>
                           Aluno: ".$nome_aluno."<br>
-                          Professor: ".$nome_aluno."<br>
+                          Matéria: ".$str_materias."<br>
                           Horário: ".$data2."
                           <span class='small italic pull-right'></span>
                         </a>
@@ -90,7 +105,7 @@
 
                 <?php 
 
-                    echo $_SESSION['nome_aluno'];
+                    echo $_SESSION['nome_prof'];
 
                  ?>
 

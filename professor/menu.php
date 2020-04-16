@@ -9,7 +9,7 @@
             </a>
           </li>
           <li>
-            <a class="" href="aluno_ind.php">
+            <a class="" href="prof_ind.php">
               <i class="icon_document_alt"></i>
               <span>Minha Página</span>
             </a>
@@ -23,12 +23,6 @@
             <ul class="sub">
               <li><a class="" href="pesq_aulas.php">Pesquisar Aulas</a></li>
             </ul>
-          </li>
-          <li>
-            <a class="adicionar_pag.php" href="index.php">
-              <i class="fa fa-cash-register"></i>
-              <span>Adc. Pagamentos</span>
-            </a>
           </li>
         </ul>
         <!-- sidebar menu end-->

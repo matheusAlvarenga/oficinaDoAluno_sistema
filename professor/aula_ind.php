@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
+  if(!isset($_SESSION['id_prof']) or $_SESSION['id_prof']==''){
     header('Location: ../sem_login.html');
   }
 ?>
@@ -152,18 +152,12 @@
                 $recebida='Não';
               }
 
-              if ($dados_login['sisoda_aulas_comentarioAluno']==NULL) {
-                $comentario_aluno='O feedback do aluno não foi feito ainda.';
+              if ($dados_login['sisoda_aulas_comentarioProfessor']==NULL) {
+                $comentario_prof='O feedback do professor não foi feito ainda.';
                 $btn="<a href='#myModal' data-toggle='modal'><button style='margin-bottom: 15px;' class='btn btn-danger'><h4 style='padding: 0px 0px 0px 0px'>Adicionar Comentário</h4></button></a>";
               }else{
-                $comentario_aluno=$dados_login['sisoda_aulas_comentarioAluno'];
+                $comentario_prof=$dados_login['sisoda_aulas_comentarioProfessor'];
                  $btn="<a href='#myModal' data-toggle='modal'><button style='margin-bottom: 15px;' class='btn btn-danger'><h4 style='padding: 0px 0px 0px 0px'>Alterar Comentário</h4></button></a>";
-              }
-
-              if ($dados_login['sisoda_aulas_comentarioProfessor']==NULL) {
-                $comentario_professor='O feedback do professor não foi feito ainda.';
-              }else{
-                $comentario_professor=$dados_login['sisoda_aulas_comentarioProfessor'];
               }
 
               $data_aula=date_format(date_create($dados_login['sisoda_aulas_data']),'d/m/Y');
@@ -183,9 +177,9 @@
                       <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Dados da Aula</h3>
                         <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px;'>
                           <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Aluno</p>
-                          <p style='font-size: 21px;' align='center'><a href='aluno_ind.php?id=$id_aluno'>$nome_aluno $sobrenome_aluno</a></p>
+                          <p style='font-size: 21px;' align='center'>$nome_aluno $sobrenome_aluno</p>
                           <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Professor</p>
-                          <p style='font-size: 21px; margin-bottom: 10px;' align='center'><a href='prof_ind.php?id=$id_prof'>$nome_prof $sobrenome_prof</a></p>
+                          <p style='font-size: 21px; margin-bottom: 10px;' align='center'>$nome_prof $sobrenome_prof</p>
                           <p style='font-size: 13px; margin-bottom: -5px;' align='center'>Data</p>
                           <p style='font-size: 25px;' align='center'>$data_aula às $hora_aula</p>
 
@@ -194,12 +188,6 @@
                           <p>Matéria: $str_materias</p>
                           <p>Tópicos Abordados: ".$dados_login['sisoda_aulas_topicos']."</p>
                           <p>Unidade: ".$dados_login['sisoda_aulas_unidade']." </p>
-
-                        </div>
-                        <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px; font-size: 17px;'>
-                          <h4>Finânceiro</h4>
-                          <p>Aula Recebida? $recebida</p>
-                          <p>Aula Paga? $paga</p>
 
                         </div>
                       </div>
@@ -233,8 +221,8 @@
               ?>
 
                       <div class='row' style='margin-bottom: 10px; font-size: 17px;'>
-                      <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Feedback do Aluno</h3>
-                        <p align='center'><?php echo $comentario_aluno; ?></p>
+                      <h3 align='center' style='border-bottom: 2px lightgrey solid; padding-bottom: 10px;'>Feedback do Professor</h3>
+                        <p align='center'><?php echo $comentario_prof; ?></p>
                       </div>
                     </div>
                   </div>

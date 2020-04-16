@@ -7,7 +7,7 @@ if (isset($_POST['cadastrar'])) {
     
     // Recupera os dados dos campos
     $id = $_POST['id_aluno'];
-    $foto = $_FILES["foto"];
+    $foto = $_FILES["file"];
 
     function addFoto($foto, $coluna, $nome){
     $objDb = new db();
@@ -16,9 +16,9 @@ if (isset($_POST['cadastrar'])) {
     if (!empty($foto["name"])) {
         
         // Largura máxima em pixels
-        $largura = 500;
+        $largura = 1500;
         // Altura máxima em pixels
-        $altura = 500;
+        $altura = 1500;
         // Tamanho máximo do arquivo em bytes
         $tamanho = 100000;
  
@@ -64,15 +64,14 @@ if (isset($_POST['cadastrar'])) {
         
             // Insere os dados no banco
             $sql = "UPDATE sisOda_alunos SET $coluna = '$nome_imagem' WHERE sisOda_alunos_id='$nome'";
-            echo $sql;
         
             $resultado_id = mysqli_query($link, $sql);
             if($resultado_id){
-            	echo "Foi";
+            	echo "<script>window.location.href='aluno_ind.php?id=$nome'</script>";
             }
             else
             {
-            	echo "Num deu";
+            	print_r($error);
             }
         }
     }

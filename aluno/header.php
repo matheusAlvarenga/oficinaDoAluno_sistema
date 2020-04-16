@@ -45,7 +45,7 @@
 
                 $data2=date_format($data,'H:i');
 
-                $sql2="SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$dados_login['sisoda_aulas_idAluno']."'";
+                $sql2="SELECT `sisoda_professores_nome` FROM `sisoda_professores` WHERE `sisoda_professores_id`='".$dados_login['sisoda_aulas_idProfessor']."'";
 
                 $resultado_id2 = mysqli_query($link, $sql2);
 
@@ -53,7 +53,22 @@
 
                   while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
 
-                    $nome_aluno=$dados_login2['sisOda_alunos_nome'];
+                    $nome_aluno=$dados_login2['sisoda_professores_nome'];
+
+                  }
+
+                }
+
+                $materias=explode(',', $dados_login['sisoda_aulas_materia']);
+                $str_materias='';
+
+                foreach ($materias as $key => $value) {
+                  
+                  $resultado_id2=mysqli_query($link, "SELECT * FROM `sisoda_materias` WHERE `sisoda_materias_id`='$value'");
+
+                  while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
+
+                    $str_materias=$str_materias.$dados_login2['sisoda_materias_nome']." ";
 
                   }
 
@@ -61,8 +76,8 @@
 
                 echo "<li>
                         <a href='aula_ind.php?id=".$dados_login['sisoda_aulas_id']."'>
-                          Aluno: ".$nome_aluno."<br>
                           Professor: ".$nome_aluno."<br>
+                          Materia: ".$str_materias."<br>
                           Horário: ".$data2."
                           <span class='small italic pull-right'></span>
                         </a>

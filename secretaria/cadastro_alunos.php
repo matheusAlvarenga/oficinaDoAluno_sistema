@@ -1,9 +1,8 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_admin'])){
+  if(!isset($_SESSION['id_sec']) or $_SESSION['id_sec']==''){
     header('Location: ../sem_login.html');
   }
-
 ?>
 <html lang="pt-br">
 
@@ -94,149 +93,18 @@ function(){
 <body>
   <!-- container section start -->
   <section id="container" class="">
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-      <!--logo start-->
-      <a style="margin-top: 8px" href="index.html" class="logo"><img height="45" src="img/logo.png"></a>
-      <!--logo end-->
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-          <!-- alert notification start-->
-          <li id="alert_notificatoin_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <i class="icon-bell-l"></i>
-              <span class="badge bg-important">7</span> 
-            </a>
-            <ul class="dropdown-menu extended notification">
-              <div class="notify-arrow notify-arrow-blue"></div>
-              <li>
-                <p class="blue">You have 4 new notifications</p>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-primary"><i class="icon_profile"></i></span>
-                  Friend Request
-                  <span class="small italic pull-right">5 mins</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-warning"><i class="icon_pin"></i></span>
-                  John location.
-                  <span class="small italic pull-right">50 mins</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-danger"><i class="icon_book_alt"></i></span>
-                  Project 3 Completed.
-                  <span class="small italic pull-right">1 hr</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="label label-success"><i class="icon_like"></i></span>
-                  Mick appreciated your work.
-                  <span class="small italic pull-right"> Today</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">See all notifications</a>
-              </li>
-            </ul>
-          </li>
-          <!-- alert notification end-->
-          <!-- user login dropdown start-->
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="profile-ava">
-                <img style="margin-top: -5px;" height="35" alt="" src="img/avatar1_small.jpg">
-              </span>
-              <span style="margin-top: -5px;" class="username">
-                
+    <?php
 
-                <?php 
+    include('header.php');
 
-                    echo $_SESSION['nome_admin'];
-
-                 ?>
-
-
-              </span>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-              <div class="log-arrow-up"></div> 
-              <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
-              </li>
-            </ul>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
+    ?>
     <!--header end-->
     <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="">
-            <a class="" href="index.php">
-              <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li class="sub-menu active">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Alunos</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="lista_alunos.php">Listagem de Alunos</a></li>
-              <li><a class="" href="cadastro_alunos.php">Cadastro de Alunos</a></li>
-              <li><a class="" href="form_validation.html">Adicinar Pagamento</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_desktop"></i>
-              <span>Professores</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="general.html">Listagem de Prof.</a></li>
-              <li><a class="" href="buttons.html">Cadastro de Prof.</a></li>
-              <li><a class="" href="buttons.html">Categorias de Prof.</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Aulas</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="basic_table.html">Listagem de Aulas</a></li>
-              <li><a class="" href="basic_table.html">Cadastro de Aulas</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="" class="">
-              <i class="fa fa-cash-register"></i>
-              <span>Fechar Pagamentos</span>
-            </a>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+    <?php
+
+      include("menu.php");
+
+    ?>
     <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">
@@ -283,31 +151,34 @@ function(){
                     <div style="margin-right: -40px;" class="col-sm-3">
                       <input type="text" name="colegio_aluno" maxlength="100" class="form-control" required>
                     </div>
-                    <label class="col-sm-1 control-label">RG</label>
-                    <div style="margin-right: -50px;" class="col-sm-3">
-                      <input type="text" name="rg_aluno" maxlength="10" class="form-control" required>
-                    </div>
-                    <label style="margin-left: -100px;" class="col-sm-2 control-label">Ano</label>
+                    <label style="margin-left: -60px;" class="col-sm-2 control-label">Ano</label>
                     <div class="col-sm-2">
                       <select name="ano_aluno" class="form-control m-bot15" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="1">1º Ano</option>
+                        <option value="2">2º Ano</option>
+                        <option value="3">3º Ano</option>
+                        <option value="4">4º Ano</option>
+                        <option value="5">5º Ano</option>
+                        <option value="6">6º Ano</option>
+                        <option value="7">7º Ano</option>
+                        <option value="8">8º Ano</option>
+                        <option value="9">9º Ano</option>
+                        <option value="10">1º Ano do Ensino Médio</option>
+                        <option value="11">2º Ano do Ensino Médio</option>
+                        <option value="12">3º Ano do Ensino Médio</option>
                       </select>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">Cep</label>
+                    <label class="col-sm-1 control-label">Cep</label>
                     <div style="margin-right: -26px;" class="col-sm-2">
                       <input onblur="getEndereco()" type="text" id="cep" name="cep_aluno" maxlength="9" class="form-control" required>
                     </div>
-                    <label style="margin-left: -36px;" class="col-sm-1 control-label">Rua</label>
-                    <div class="col-sm-4">
+                  </div>
+                  <div class="form-group">
+                    <label style="margin-left: 0px;" class="col-sm-2 control-label">Rua</label>
+                    <div class="col-sm-6">
                       <input type="text" id="rua" name="rua_aluno" maxlength="100" class="form-control">
                     </div>
-                    <label style="margin-left: -36px;" class="col-sm-1 control-label">Número</label>
+                    <label style="margin-left: -6px;" class="col-sm-1 control-label">Número</label>
                     <div class="col-sm-2">
                       <input type="text" onblur="focusNum()" name="num_aluno" id="num" maxlength="11" class="form-control">
                     </div>
@@ -377,32 +248,46 @@ function(){
                   <br>
                   <div class="form-group">
                     <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Institucionais</h3>
-                    <label class="col-sm-2 control-label">Resp. Finânceiro</label>
-                    <div style="margin-right: -26px;" class="col-sm-3">
-                      <select id="fin" name="financeiro_aluno" class="form-control m-bot15" required>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                      </select>
-                    </div>
-                    <label style="margin-left: -40px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
-                    <div class="col-sm-3">
-                      <input type="text" pattern="[0-9]+.[0-9]{2}" name="valor_aluno" maxlength="100" class="form-control">
-                    </div>
-                    <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
-                    <div class="col-sm-1">
-                      <select name="unidade_aluno" class="form-control m-bot15" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                      </select>
-                    </div>
+                    <div class="row">
+                      <label class="col-sm-2 control-label">Resp. Finânceiro</label>
+                      <div style="margin-right: -26px;" class="col-sm-2">
+                        <select id="fin" name="financeiro_aluno" class="form-control m-bot15" required>
+                          <option value="1"></option>
+                          <option value="2"></option>
+                        </select>
+                      </div>
+                      <label style="margin-left: -15px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
+                      <div class="col-sm-2">
+                        <input type="text" pattern="[0-9]+.[0-9]{2}" name="valor_aluno" maxlength="100" class="form-control">
+                      </div>
+                      <label style="margin-left: -55px;" class="col-sm-2 control-label">Valor Mensal</label>
+                      <div class="col-sm-2">
+                        <input type="text" name="mensal_aluno" class="form-control">
+                      </div>
+                    </div><br>
+                      <div class="row">
+                        <label class="col-sm-3 control-label">CPF do Resp. Finânceiro</label>
+                        <div style="margin-right:17px;" class="col-sm-4">
+                          <input type="text" name="cpf_financeiro_aluno" maxlength="100" class="form-control">
+                        </div>
+                        <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
+                      <div class="col-sm-2">
+                        <select name="unidade_aluno" class="form-control m-bot15" required>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                        </select>
+                      </div>
+                      </div><br><br>
+                      <div class="row">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label"></label>
+                          <div class="col-sm-9">
+                            <input type="submit" class="form-control btn btn-primary">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"></label>
-                    <div class="col-sm-9">
-                      <input type="submit" class="form-control btn btn-primary">
-                    </div>
-                  </div>
-                </form>
               </div>
             </section>
           </div>

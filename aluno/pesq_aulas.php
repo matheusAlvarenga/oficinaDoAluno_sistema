@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
-    header('Location: ../sem_login.html');
+    header('Location: ../sem_login_aluno.html');
   }
 ?>
 <html lang="pt-br">
@@ -153,7 +153,7 @@
             while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
 
               echo "<tr style='background-color:#dcdcdc;'>
-                    <td><a href='aluno_ind.php?id=".$dados_login2['sisOda_alunos_id']."' target='blank'>".$dados_login2['sisOda_alunos_nome']." ".$dados_login2['sisOda_alunos_sobrenome']."</a></td>";
+                    <td>".$dados_login2['sisOda_alunos_nome']." ".$dados_login2['sisOda_alunos_sobrenome']."</td>";
 
             }
           }
@@ -164,7 +164,7 @@
           if ($resultado_id3) {
             while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
 
-              echo "<td><a href='prof_ind.php?id=".$dados_login3['sisoda_professores_id']."' target='blank'>".$dados_login3['sisoda_professores_nome']." ".$dados_login3['sisoda_professores_sobrenome']."</a></td>";
+              echo "<td>".$dados_login3['sisoda_professores_nome']." ".$dados_login3['sisoda_professores_sobrenome']."</td>";
 
             }
           }

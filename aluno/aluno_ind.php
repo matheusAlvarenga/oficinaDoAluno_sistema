@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
-    header('Location: ../sem_login.html');
+    header('Location: ../sem_login_aluno.html');
   }
 ?>
 <html lang="pt-br">
@@ -404,7 +404,7 @@
                       </div>
                       <div class='modal-body text-center'>
 
-                        <img src='img/alunos/".$dados_login['sisOda_alunos_foto']."'>
+                        <img src='../admin/img/alunos/".$dados_login['sisOda_alunos_foto']."'>
 
                       </div>
                     </div>

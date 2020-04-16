@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
+  if(!isset($_SESSION['id_prof']) or $_SESSION['id_prof']==''){
     header('Location: ../sem_login.html');
   }
 ?>
@@ -158,9 +158,9 @@
 
         $hoje=date('Y-m-d');
 
-        $id_aluno=$_SESSION['id_aluno'];
+        $id_prof=$_SESSION['id_prof'];
 
-        $sql="SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_data` > '$hoje' AND `sisoda_aulas_idAluno`='$id_aluno'";
+        $sql="SELECT * FROM `sisoda_aulas` WHERE DATE(`sisoda_aulas_data`) >= '$hoje' AND `sisoda_aulas_idProfessor`='$id_prof'";
 
         $resultado_id = mysqli_query($link, $sql);
 
@@ -168,7 +168,7 @@
 
               while($dados_login = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
 
-                $sql2="SELECT `sisoda_professores_nome` FROM `sisoda_professores` WHERE `sisoda_professores_id`='".$dados_login['sisoda_aulas_idProfessor']."'";
+                $sql2="SELECT `sisOda_alunos_nome` FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$dados_login['sisoda_aulas_idAluno']."'";
 
                 $resultado_id2 = mysqli_query($link, $sql2);
 
@@ -184,7 +184,7 @@
 
                     echo "{";
 
-                    echo "title:'".$dados_login2['sisoda_professores_nome']."',";
+                    echo "title:'".$dados_login2['sisOda_alunos_nome']."',";
                     echo "url:'aula_ind.php?id=".$dados_login['sisoda_aulas_id']."',";
                     echo "start:'$data4'";
 

@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
+  if(!isset($_SESSION['id_prof']) or $_SESSION['id_prof']==''){
     header('Location: ../sem_login.html');
   }
 ?>
@@ -132,9 +132,9 @@
 
   require_once('../db.class.php');
 
-    $id=$_SESSION['id_aluno'];
+    $id=$_SESSION['id_prof'];
 
-    $sql = "SELECT * FROM sisoda_aulas WHERE sisoda_aulas_idAluno='$id'";
+    $sql = "SELECT * FROM sisoda_aulas WHERE sisoda_aulas_idProfessor='$id'";
     $objDb = new db();
     $link = $objDb->conecta_mysql();
 
@@ -153,7 +153,7 @@
             while($dados_login2 = mysqli_fetch_array($resultado_id2, MYSQLI_ASSOC)){
 
               echo "<tr style='background-color:#dcdcdc;'>
-                    <td><a href='aluno_ind.php?id=".$dados_login2['sisOda_alunos_id']."' target='blank'>".$dados_login2['sisOda_alunos_nome']." ".$dados_login2['sisOda_alunos_sobrenome']."</a></td>";
+                    <td>".$dados_login2['sisOda_alunos_nome']." ".$dados_login2['sisOda_alunos_sobrenome']."</td>";
 
             }
           }
@@ -164,7 +164,7 @@
           if ($resultado_id3) {
             while($dados_login3 = mysqli_fetch_array($resultado_id3, MYSQLI_ASSOC)){
 
-              echo "<td><a href='prof_ind.php?id=".$dados_login3['sisoda_professores_id']."' target='blank'>".$dados_login3['sisoda_professores_nome']." ".$dados_login3['sisoda_professores_sobrenome']."</a></td>";
+              echo "<td>".$dados_login3['sisoda_professores_nome']." ".$dados_login3['sisoda_professores_sobrenome']."</td>";
 
             }
           }
@@ -202,7 +202,7 @@
           echo "
 
                     <td>
-                      <div class='btn-group text-centers'>
+                      <div class='btn-group'>
                         <a class='btn btn-primary' href='aula_ind.php?id=".$dados_login['sisoda_aulas_id']."'><i class='icon_zoom-in_alt'></i></a>
                       </div>
                     </td>

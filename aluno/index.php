@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['id_aluno']) or $_SESSION['id_aluno']==''){
-    header('Location: ../sem_login.html');
+    header('Location: ../sem_login_aluno.html');
   }
 ?>
 <html lang="pt-br">

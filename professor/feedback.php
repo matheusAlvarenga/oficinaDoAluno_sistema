@@ -9,7 +9,7 @@
 	$objDb = new db();
     $link = $objDb->conecta_mysql();
 
-    $resultado_id=mysqli_query($link, "UPDATE `sisoda_aulas` SET `sisoda_aulas_comentarioAluno`='$feed' WHERE `sisoda_aulas_id`='$id'");
+    $resultado_id=mysqli_query($link, "UPDATE `sisoda_aulas` SET `sisoda_aulas_comentarioProfessor`='$feed' WHERE `sisoda_aulas_id`='$id'");
 
     if ($resultado_id) {
     	

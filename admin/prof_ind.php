@@ -395,19 +395,51 @@
                             <h4 class='modal-title'>Feedbacks</h4>
                           </div>
                           <div class='modal-body text-center'>
+                            <?php 
+
+                              $query=mysqli_query($link, "SELECT * FROM `sisoda_aulas` WHERE `sisoda_aulas_idProfessor`='$id' AND `sisoda_aulas_comentarioAluno` IS NOT NULL");
+                              if ($query) {
+
+                                while($aula = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+
+                                  $data=date_format(date_create($aula['sisoda_aulas_data']),'d/m/Y');
+                                  $hora=date_format(date_create($aula['sisoda_aulas_data']),'H:i');
+                                
+                                  $query2=mysqli_query($link, "SELECT `sisOda_alunos_nome` FROM `sisoda_alunos` WHERE `sisOda_alunos_id`='".$aula['sisoda_aulas_idAluno']."'");
+
+                                  if ($query2) {
+                                    
+                                    while($aluno = mysqli_fetch_array($query2, MYSQLI_ASSOC)){
+
+                                      $nome_aluno=$aluno['sisOda_alunos_nome'];
+
+                                    }
+
+                                  }
+
+                                  echo "
+
                             <div class='row' style='border-bottom: 1px lightgrey solid; margin-bottom: 10px; padding-left: 20px;'>
-                                <h4><a href=''>Aula com o aluno Matheus</a></h4>
-                                <h4>24/04/2020 às 20:30</h4>
+                                <h4><a href=''>Aula com o aluno $nome_aluno</a></h4>
+                                <h4>$data às $hora</h4>
                                 <div class='col-md-3'>
                                   
                                 </div>
                                 <div class='col-md-6'>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam risus ex, lacinia vitae eleifend eget, condimentum ut ipsum. Aliquam at ipsum orci. Fusce ut ornare mauris.</p>
+                                  <p>".$aula['sisoda_aulas_comentarioAluno']."</p>
                                 </div>
                                 <div class='col-md-3'>
                                   
                                 </div>
                             </div>
+
+                                  ";
+
+                                }
+
+                              }
+
+                            ?>
                           </div>
                         </div>
                       </div>
