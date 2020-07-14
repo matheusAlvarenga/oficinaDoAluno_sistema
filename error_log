@@ -1,0 +1,100 @@
+[17-Apr-2020 15:55:34 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2005): Unknown MySQL server host 'localhost:3306' (0) in /home2/ofici820/public_html/sistema/db.class.php on line 20
+[17-Apr-2020 15:55:34 America/Fortaleza] PHP Warning:  mysqli_set_charset() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/db.class.php on line 23
+[17-Apr-2020 15:55:34 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/check_admin.php on line 12
+[17-Apr-2020 15:56:11 America/Fortaleza] PHP Warning:  mysqli_connect(): (HY000/2005): Unknown MySQL server host 'oficinadoaluno.com.br:3306' (0) in /home2/ofici820/public_html/sistema/db.class.php on line 20
+[17-Apr-2020 15:56:11 America/Fortaleza] PHP Warning:  mysqli_set_charset() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/db.class.php on line 23
+[17-Apr-2020 15:56:11 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/check_admin.php on line 12
+[17-Apr-2020 15:56:22 America/Fortaleza] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'ofici820_sistema'@'192.185.214.11' (using password: YES) in /home2/ofici820/public_html/sistema/db.class.php on line 20
+[17-Apr-2020 15:56:22 America/Fortaleza] PHP Warning:  mysqli_set_charset() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/db.class.php on line 23
+[17-Apr-2020 15:56:22 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home2/ofici820/public_html/sistema/check_admin.php on line 12
+[04-May-2020 13:39:47 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:39:47 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:41:10 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:41:10 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:42:21 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:42:21 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:42:57 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:42:57 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:43:19 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:43:19 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:43:19 America/Fortaleza] PHP Warning:  require_once(../dados_pag.php): failed to open stream: No such file or directory in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 13:43:19 America/Fortaleza] PHP Fatal error:  require_once(): Failed opening required '../dados_pag.php' (include_path='.:/opt/php71/lib/php') in /home2/ofici820/public_html/sistema/notificacoes.php on line 5
+[04-May-2020 17:03:46 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 36
+[04-May-2020 17:04:53 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 36
+[04-May-2020 17:05:52 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:06:09 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:07:27 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:07:32 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:07:36 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:07:44 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 39
+[04-May-2020 17:08:26 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:08:37 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:08:42 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:10:05 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:11:34 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:11:38 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:11:38 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:11:41 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 42
+[04-May-2020 17:12:44 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:12:45 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:13:07 America/Fortaleza] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home2/ofici820/public_html/sistema/notificacoes.php on line 61
+[04-May-2020 17:13:18 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:14:25 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:14:28 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:14:59 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:16:44 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:18:08 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:20:55 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:21:33 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:21:36 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:21:52 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:22:15 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:23:06 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:23:08 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:24:56 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:24:59 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:24:59 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:24:59 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:24:59 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:25:02 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:25:28 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:25:30 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:25:32 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:25:32 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[04-May-2020 17:26:22 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home2/ofici820/public_html/sistema/notificacoes.php on line 44
+[18-May-2020 01:57:55 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 01:57:55 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 01:57:55 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 02:00:19 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 02:00:19 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 02:00:19 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:02 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:02 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:02 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:07 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:07 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 04:16:07 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:00 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:00 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:00 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:03 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:03 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 06:16:03 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 08:16:25 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 08:16:25 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 08:16:25 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:15:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:15:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:15:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:32:42 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:32:42 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 10:32:42 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:30:51 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:30:51 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:30:51 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:32:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:32:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 12:32:11 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 14:30:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 14:30:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): Not Found in /home2/ofici820/public_html/sistema/notificacoes.php on line 19
+[18-May-2020 14:30:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/notificacoes.php on line 19

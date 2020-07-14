@@ -1,0 +1,44 @@
+[04-May-2020 11:46:34 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:46:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:46:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:46:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:46:36 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:46:37 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:46:37 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:46:37 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:07 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:47:08 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:47:08 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:08 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:08 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:09 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:09 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:47:09 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:49:04 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:49:05 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:49:05 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:49:05 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:50:42 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:50:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:50:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:50:43 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 29
+[04-May-2020 11:52:19 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 12
+[04-May-2020 11:59:35 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 7
+[04-May-2020 11:59:36 America/Fortaleza] PHP Warning:  preg_replace(): No ending delimiter ',' found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 7
+[04-May-2020 12:52:31 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function datetime() in /home2/ofici820/public_html/sistema/aluno/salvar_pedido.php:8
+Stack trace:
+#0 {main}
+  thrown in /home2/ofici820/public_html/sistema/aluno/salvar_pedido.php on line 8
+[04-May-2020 12:52:31 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function datetime() in /home2/ofici820/public_html/sistema/aluno/salvar_pedido.php:8
+Stack trace:
+#0 {main}
+  thrown in /home2/ofici820/public_html/sistema/aluno/salvar_pedido.php on line 8
+[04-May-2020 15:59:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 15:59:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 15:59:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 15:59:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 15:59:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 15:59:35 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 16:00:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 16:00:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): Unauthorized in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39
+[04-May-2020 16:00:15 America/Fortaleza] PHP Warning:  simplexml_load_string(): ^ in /home2/ofici820/public_html/sistema/aluno/pagseguro.php on line 39

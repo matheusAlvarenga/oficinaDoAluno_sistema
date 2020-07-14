@@ -6,13 +6,13 @@
         private $host = 'localhost';
 
         //usuario
-        private $usuario = 'root';
+        private $usuario = 'ofici820_sistema';
 
         //senha
-        private $senha = '';
+        private $senha = 'oficina';
 
         //banco de dados
-        private $database = 'sistema_oda';
+        private $database = 'ofici820_sisOda';
 
         public function conecta_mysql(){
 
