@@ -3,7 +3,7 @@
     class db {
 
         //host
-        private $host = 'localhost';
+        private $host = 'www.oficinadoaluno.com.br:3306';
 
         //usuario
         private $usuario = 'ofici820_sistema';
