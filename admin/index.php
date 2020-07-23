@@ -90,9 +90,9 @@
         $objDb = new db();
         $link = $objDb->conecta_mysql();
         
-        $dia=date(d);
-        $mes=date(m);
-        $ano=date(Y);
+        $dia=date('d');
+        $mes=date('m');
+        $ano=date('Y');
         
         $resultado=mysqli_query($link, "SELECT `sisoda_mes_pago` FROM `sisoda_mes` WHERE MONTH(`sisoda_mes_data`)='$mes' AND YEAR(`sisoda_mes_data`)='$ano'");
         
