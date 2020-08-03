@@ -145,14 +145,12 @@
                        $sisoda_professores_agencia=$_POST['ag_prof'];
                        $sisoda_professores_conta=$_POST['cc_prof'];
                        $sisoda_professores_cpf=$_POST['cpf_prof'];
-                       $sisoda_professores_valor=$_POST['valor_prof'];
-                       $sisoda_professores_mensal=$_POST['mensal_prof'];
                        $sisoda_professores_unidade=$_POST['unidade_prof'];
                 
                         $objDb = new db();
                         $link = $objDb->conecta_mysql();
 
-                        $sql="UPDATE `sisoda_professores` SET `sisoda_professores_nome`='$sisoda_professores_nome',`sisoda_professores_sobrenome`='$sisoda_professores_sobrenome',`sisoda_professores_data`='$sisoda_professores_data',`sisoda_professores_email`='$sisoda_professores_email',`sisoda_professores_rua`='$sisoda_professores_rua',`sisoda_professores_numero`='$sisoda_professores_numero',`sisoda_professores_bairro`='$sisoda_professores_bairro',`sisoda_professores_cidade`='$sisoda_professores_cidade',`sisoda_professores_estado`='$sisoda_professores_estado',`sisoda_professores_complemento`='$sisoda_professores_complemento',`sisoda_professores_cep`='$sisoda_professores_cep',`sisoda_professores_materias`='$materias',`sisoda_professores_banco`='$sisoda_professores_banco',`sisoda_professores_tipoConta`='$sisoda_professores_tipoConta',`sisoda_professores_agencia`='$sisoda_professores_agencia',`sisoda_professores_conta`='$sisoda_professores_conta',`sisoda_professores_cpf`='$sisoda_professores_cpf',`sisoda_professores_telefone`='$sisoda_professores_telefone',`sisoda_professores_obs`='$sisoda_professores_obs',`sisoda_professores_unidade`='$sisoda_professores_unidade',`sisoda_professores_mensal`='$sisoda_professores_mensal',`sisoda_professores_valor`='$sisoda_professores_valor' WHERE `sisoda_professores_id`='$id'";
+                        $sql="UPDATE `sisoda_professores` SET `sisoda_professores_nome`='$sisoda_professores_nome',`sisoda_professores_sobrenome`='$sisoda_professores_sobrenome',`sisoda_professores_data`='$sisoda_professores_data',`sisoda_professores_email`='$sisoda_professores_email',`sisoda_professores_rua`='$sisoda_professores_rua',`sisoda_professores_numero`='$sisoda_professores_numero',`sisoda_professores_bairro`='$sisoda_professores_bairro',`sisoda_professores_cidade`='$sisoda_professores_cidade',`sisoda_professores_estado`='$sisoda_professores_estado',`sisoda_professores_complemento`='$sisoda_professores_complemento',`sisoda_professores_cep`='$sisoda_professores_cep',`sisoda_professores_materias`='$materias',`sisoda_professores_banco`='$sisoda_professores_banco',`sisoda_professores_tipoConta`='$sisoda_professores_tipoConta',`sisoda_professores_agencia`='$sisoda_professores_agencia',`sisoda_professores_conta`='$sisoda_professores_conta',`sisoda_professores_cpf`='$sisoda_professores_cpf',`sisoda_professores_telefone`='$sisoda_professores_telefone',`sisoda_professores_obs`='$sisoda_professores_obs',`sisoda_professores_unidade`='$sisoda_professores_unidade' WHERE `sisoda_professores_id`='$id'";
 
 
                           $resultado_id = mysqli_query($link, $sql);

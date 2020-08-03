@@ -21,7 +21,8 @@
 
     $nome=$dados_login2['sisoda_professores_nome'];
     $sobrenome=$dados_login2['sisoda_professores_sobrenome'];
-    $data=$dados_login2['sisoda_professores_data'];
+    $data=date_create($dados_login2['sisoda_professores_data']);
+    $data2=date_format($data,'Y-m-d');
     $email=$dados_login2['sisoda_professores_email'];
     $materias=$dados_login2['sisoda_professores_materias'];
     $cep=$dados_login2['sisoda_professores_cep'];
@@ -190,7 +191,7 @@ function(){
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Data de Nasc.</label>
                     <div style="margin-right: -50px;" class="col-sm-2">
-                      <input value=<?php echo "'$data'"; ?> type="date" name="dataNascimento_prof" class="form-control" required>
+                      <input value=<?php echo "'$data2'"; ?> type="date" name="dataNascimento_prof" class="form-control" required>
                     </div>
                     <label style="margin-left: -50px;" class="col-sm-2 control-label">E-mail</label>
                     <div class="col-sm-6">
@@ -325,40 +326,6 @@ function(){
                   </div>
                   <br>
                   <div class="form-group">
-                    <h3 style="margin-top: 0px; margin-bottom:20px;" align="center">Informações Extras</h3>
-                    <div class="row">
-                      <label class="col-sm-2 control-label">Valor Mensal</label>
-                      <div style="margin-right: -26px;" class="col-sm-3">
-                        <input value=<?php echo "'$mensal'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="mensal_prof" maxlength="100" class="form-control">
-                      </div>
-                      <label style="margin-left: -40px; margin-right: -10px;" class="col-sm-2 control-label">Valor Por Aula</label>
-                      <div class="col-sm-3">
-                        <input value=<?php echo "'$valor'"; ?> type="text" pattern="[0-9]+.[0-9]{2}" name="valor_prof" maxlength="100" class="form-control">
-                      </div>
-                      <label style="margin-left: -16px;" class="col-sm-1 control-label">Unidade</label>
-                      <div class="col-sm-1">
-                        <select name="unidade_prof" class="form-control m-bot15" required>
-                          <?php
-
-                            if ($unidade == 1) {
-
-                              echo "<option value='1'>1</option>";
-                              echo "<option value='2'>2</option>";
-
-                            }else{
-
-                              echo "<option value='1'>1</option>";
-                              echo "<option value='2' selected>2</option>";
-
-                            }
-
-                          ?>
-                        </select>
-                      </div>
-                    </div><br>
-                      <div class="row">
-                        
-                      </div><br><br>
                       <div class="row">
                         <div class="form-group">
                           <label class="col-sm-2 control-label"></label>

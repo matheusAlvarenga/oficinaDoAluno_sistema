@@ -115,7 +115,7 @@
 
   if (isset($_GET['id'])) {
         $id=$_GET['id'];
-        $sql = "SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_id` = '$id' ORDER BY `sisOda_alunos_id` ASC";
+        $sql = "SELECT * FROM `sisoda_alunos_off` WHERE `sisOda_alunos_id` = '$id' ORDER BY `sisOda_alunos_id` ASC";
   }else{
 
   $nome=$_GET['nome_aluno'];
@@ -137,7 +137,7 @@
   }
   else{
 
-    $sql = "SELECT * FROM `sisoda_alunos` WHERE `sisOda_alunos_nome` LIKE '%$nome%' AND `sisoda_alunos_email` LIKE '%$email%' AND `sisOda_alunos_dataNascimento` LIKE '%$data%' AND `sisoda_alunos_telefone` LIKE '%$tel%' ORDER BY `sisOda_alunos_id` ASC
+    $sql = "SELECT * FROM `sisoda_alunos_off` WHERE `sisOda_alunos_nome` LIKE '%$nome%' AND `sisoda_alunos_email` LIKE '%$email%' AND `sisOda_alunos_dataNascimento` LIKE '%$data%' AND `sisoda_alunos_telefone` LIKE '%$tel%' ORDER BY `sisOda_alunos_id` ASC
 ";}}
 
     $objDb = new db();
